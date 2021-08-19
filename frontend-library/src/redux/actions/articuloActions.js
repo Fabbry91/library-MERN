@@ -30,18 +30,29 @@ export const getOneArticulo = (id) => {
 export const startAddArticulo = (art) => {
     return async (dispatch) => {
 
-        const arti = art.url[0];
-        const fileUrl = await fileUpload(arti);
-        const newArt = { ...art, url: fileUrl }
-
-        dispatch(startLoadingRedux());
-        if (!art._id) {
-            await axios.post('articulo', newArt);
-            dispatch(createArticulo(newArt));
+        if (art.url.length === 1) {
+            const arti = art.url[0];
+            const fileUrl = await fileUpload(arti);
+            const newArt = { ...art, url: fileUrl }
+            dispatch(startLoadingRedux());
+            if (!art._id) {
+                await axios.post('articulo', newArt);
+                dispatch(createArticulo(newArt));
+            } else {
+                await axios.put(`articulo/${newArt._id}`, newArt);
+                dispatch(editarArticulo(newArt._id, newArt));
+            }
         } else {
-            await axios.put(`articulo/${newArt._id}`, newArt);
-            dispatch(editarArticulo(newArt._id, newArt));
+            dispatch(startLoadingRedux());
+            if (!art._id) {
+                await axios.post('articulo', art);
+                dispatch(createArticulo(art));
+            } else {
+                await axios.put(`articulo/${art._id}`, art);
+                dispatch(editarArticulo(art._id, art));
+            }
         }
+
         dispatch(getAllArticulo());
 
     }

@@ -63,13 +63,30 @@ const updateArticulo = async (req, res = response) => {
             });
         }
 
-        const nuevoArticulo = {
-            ...req.body,
+        if (Object.keys(req.body.url).length === 0) {
+            //console.log('entro')            
+            const articuloActualizado = await Articulo.findOneAndUpdate({ _id: articuloId }, {
+                $set: {
+                    description: req.body.description,
+                    nameArticulo: req.body.nameArticulo,
+                    precioCompra: req.body.precioCompra,
+                    precioVenta: req.body.precioVenta,
+                    rubros: req.body.rubros,
+                    stock: req.body.stock,
+                }
+            }, { new: true });
+
+            res.status(200).json(articuloActualizado);
+
+        } else {
+            console.log('no entro')
+            const nuevoArticulo = {
+                ...req.body,
+            }
+            const articuloActualizado = await Articulo.findByIdAndUpdate(articuloId, nuevoArticulo, { new: true });
+            res.status(200).json(articuloActualizado);
         }
 
-        const articuloActualizado = await Articulo.findByIdAndUpdate(articuloId, nuevoArticulo, { new: true });
-
-        res.status(200).json(articuloActualizado);
     } catch (error) {
         res.status(500).json({
             ok: false,

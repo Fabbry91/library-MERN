@@ -26,7 +26,8 @@ export const StoreGo = () => {
         dispatch(startDeleteArticulo(id))
     }
 
-    const verForm = () => {
+    const handleNewButon = () => {
+        setIdArt(null)
         setValue("description", ``)
         setValue("nameArticulo", ``)
         setValue("precioCompra", ``)
@@ -38,6 +39,7 @@ export const StoreGo = () => {
 
     const handleEdit = (art) => {
         //console.log("el art", art);
+        setMostrar(true)
         setValue("description", `${art.description}`)
         setValue("nameArticulo", `${art.nameArticulo}`)
         setValue("precioCompra", `${art.precioCompra}`)
@@ -48,8 +50,7 @@ export const StoreGo = () => {
     }
 
     const onSubmit = (data, e) => {
-        console.log(data)
-
+        //console.log(data)
         if (idArt) {
             const editArt = { ...data, _id: idArt }
             dispatch(startAddArticulo(editArt))
@@ -75,7 +76,6 @@ export const StoreGo = () => {
                                 <>
                                     <div className="d-flex justify-content-between mb-2">
                                         <span className="h5">Nuevo articulos.</span>
-                                        <button type="button" className="btn btn-primary" onClick={() => { setMostrar(false) }}></button>
                                     </div>
                                     <form onSubmit={handleSubmit(onSubmit)}>
 
@@ -241,7 +241,7 @@ export const StoreGo = () => {
                     <div className="col-12 col-md-8 col-lg-8">
                         <div className="d-flex justify-content-between gap-2">
                             <div className="d-grid gap-2 d-md-flex justify-content-md-start">
-                                <button type="button" onClick={() => { verForm() }} className="btn btn-primary btn-md">Nuevo Articulo</button>
+                                <button type="button" onClick={handleNewButon} className="btn btn-primary btn-md">Nuevo Articulo</button>
                             </div>
                             <form className="d-flex">
                                 <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
@@ -272,11 +272,11 @@ export const StoreGo = () => {
                                             {articulos &&
                                                 articulos.map((a, index) => (
                                                     <tr key={index}>
-                                                        <td>{a.nameArticulo}</td>
-                                                        <td>{a.precioCompra}</td>
-                                                        <td>{a.precioVenta}</td>
-                                                        <td>{a.stock}</td>
-                                                        <td>{a.rubros}</td>
+                                                        <td style={{textTransform: 'capitalize'}}>{a.nameArticulo}</td>
+                                                        <td>$ {a.precioCompra}</td>
+                                                        <td>$ {a.precioVenta}</td>
+                                                        <td>{a.stock} und.</td>
+                                                        <td style={{textTransform: 'capitalize'}}>{a.rubros}</td>
                                                         <td>
                                                             <div className="row">
                                                                 <div>
