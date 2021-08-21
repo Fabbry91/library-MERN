@@ -6,9 +6,10 @@ import { startLogout } from '../../redux/actions/authAction';
 export const Navbar = () => {
 
     const dispatch = useDispatch();
-
+    const user = useSelector(state => state.auth)
     const cart = useSelector(state => state.cart.cart)
     const [totalItems, setTotalItems] = useState(0)
+    // console.log(user)
 
     useEffect(() => {
         let items = 0;
@@ -26,7 +27,7 @@ export const Navbar = () => {
     }
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-info border border-info rounded-2 p-3 sticky-top mb-1">
+        <nav className="navbar navbar-expand-lg navbar-light bg-info border border-info rounded-2 p-3 sticky-top">
             <div className="container-fluid">
                 <Link className="navbar-brand" to="/">
                     <img src={process.env.PUBLIC_URL + "/assets/img/go.png"} alt="logo" width="70 px" />
@@ -40,12 +41,6 @@ export const Navbar = () => {
                             <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/login">Login</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/register">Register</Link>
-                        </li>
-                        <li className="nav-item">
                             <Link className="nav-link" to="/admin">Articulos</Link>
                         </li>
                         <li className="nav-item">
@@ -57,22 +52,39 @@ export const Navbar = () => {
                         <li className="nav-item">
                             <Link className="nav-link" to="/404">Error</Link>
                         </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/user">User</Link>
-                        </li>
                     </ul>
 
                     <div className="d-flex">
-                        <Link className="nav-link bg-warning rounded-circle me-3 position-relative" to="/shopping-cart">
-                            <i className="bi bi-cart3 text-dark" style={{ fontSize: 20 }}>
-                                { totalItems > 0 &&
-                                    <span class="position-absolute center-0 start-100 translate-middle badge rounded-circle bg-danger h6">
-                                        {totalItems}
-                                    </span>
-                                }
-                            </i>
-                        </Link>
-                        <button className="btn" onClick={handleLogout} >Logout</button>
+                        {Object.keys(user).length !== 0 ?
+                            (
+                                <>
+                                    <Link className="nav-link position-relative text-dark" to="/user">
+                                        <i className="bi bi-person-circle text-dark p-2 position-absolute top-50 start-0 translate-middle" style={{ fontSize: 30 }} />
+                                        {user.name}
+                                    </Link>
+                                    <Link className="nav-link position-relative" to="/shopping-cart">
+                                        <i className="bi bi-cart3 text-dark position-absolute top-50 start-0 translate-middle-y" style={{ fontSize: 25 }}>
+                                            {totalItems > 0 &&
+                                                <span className="badge-up position-absolute center-0 start-100 translate-middle badge rounded-circle" style={{ fontSize: 12 }}>
+                                                    {totalItems}
+                                                </span>
+                                            }
+                                        </i>
+                                    </Link>
+                                </>) :
+                            (
+                                <>
+                                    <Link className="nav-link position-relative text-dark" to="/login">Ingresar</Link>
+                                    <Link className="nav-link position-relative" to="/login">
+                                        <i className="bi bi-cart3 text-dark position-absolute top-50 start-0 translate-middle-y" style={{ fontSize: 25 }}>
+                                       </i>
+                                    </Link>
+                                </>)
+                        }
+
+                        {Object.keys(user).length !== 0 &&
+                            <button className="btn" onClick={handleLogout} >Logout</button>
+                        }
                     </div>
 
                 </div>

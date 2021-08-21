@@ -1,21 +1,24 @@
 import axios from '../../services/AxiosConection'
 import { types } from '../types';
+import { finishLoadingRedux, startLoadingRedux } from './uiActions';
 
 
 
 export const getUser = (email) => {
     return async (dispatch) => {
-
+        dispatch(startLoadingRedux());
         const { data } = await axios.get(`user/email/${email}`);
         dispatch(setOneArticulo(data));
-
+        dispatch(finishLoadingRedux());
     }
 }
 
 export const startAddOrder = (order) => {
     return async (dispatch) => {
+        dispatch(startLoadingRedux());
         const { data } = await axios.post('order', order).then(res => res)
-        dispatch(createOrden(data)); 
+        dispatch(createOrden(data));
+        dispatch(finishLoadingRedux());
     }
 }
 

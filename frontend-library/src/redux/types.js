@@ -46,5 +46,12 @@ export const types = {
     setUserOrder:'[UsOrder] setUsOrder',
     addUserOrder:'[UsOrder] addUsOrder',
     editUserOrder:'[UsOrder] editUsOrder',
+    deleteUserOrder:'[UsOrder] deleteUsOrder',
+
+    addUser:'[USER] Add User',
+    deleteUser:'[USER] Delete User',
+    loadUser:'[USER] Load User',
+    loadOneUser:'[USER] Load One User',
+    editUser:'[USER] Edit User',
 
 }

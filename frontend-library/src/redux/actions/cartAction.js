@@ -2,7 +2,7 @@ import axios from '../../services/AxiosConection'
 import { types } from '../types';
 
 export const addToCart = (id) => {
-    return async (dispatch) => {
+    return async (dispatch) => {        
         const { data } = await axios.get(`articulo/${id}`);
         dispatch(addCart(data));
     }

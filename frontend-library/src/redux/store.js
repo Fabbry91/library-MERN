@@ -7,6 +7,7 @@ import { rubroReducer } from './reducer/rubroReducer';
 import { uiReducer } from './reducer/uiReducer';
 import { cartReducer } from './reducer/cartReducer';
 import { orderReducer } from './reducer/orderReducer';
+import { userReducer } from './reducer/userReducer';
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
@@ -16,7 +17,8 @@ const reducers = combineReducers({
     art: articuloReducer,
     rub: rubroReducer,
     cart: cartReducer,
-    ord: orderReducer
+    ord: orderReducer,
+    user: userReducer,
 });
 
 export const store = createStore(

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { startRegisterEmailPassword } from '../../redux/actions/authAction'
 
 
-export const Register = () => {
+export const Register = ({ history }) => {
 
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [passError, setPassError] = useState();
@@ -16,14 +16,8 @@ export const Register = () => {
     const onSubmit = (data, e) => {
 
         const {
-            nombre,
-            email,
             password,
             password1,
-            telefono,
-            calle,
-            numero,
-            ciudad
         } = data
 
         if (password !== password1) {
@@ -31,7 +25,7 @@ export const Register = () => {
         }
         setPassError();
         dispatch(startRegisterEmailPassword(data));
-        //console.log()
+        history.replace("/login")
         e.target.reset()
     }
 
@@ -46,12 +40,12 @@ export const Register = () => {
                     <h2 className="fw-bold text-center py5">Registrate</h2>
 
                     <div className="text-center">
-                        <form onSubmit={handleSubmit(onSubmit)}>
+                        <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
 
                             <div className="mb-3">
                                 <input type="email"
                                     className="form-control"
-                                    placeholder="usuario@example.com"
+                                    placeholder="Ingresa tu email"
                                     name="email"
                                     {...register("email", {
                                         required: {
@@ -162,11 +156,12 @@ export const Register = () => {
                                     {...register("telefono", {
                                         required: {
                                             value: true,
-                                            message: 'Email es requerido'
+                                            message: 'Campo es requerido'
                                         },
-                                        minLength: {
-                                            value: 8,
-                                            message: "Debe tener como minimo 6 caracteres"
+                                        pattern: {
+                                            value: /^[0-9]*$/,
+                                            message:
+                                                "El formato de e-mail es invalido."
                                         }
                                     })}
                                 />
@@ -191,8 +186,8 @@ export const Register = () => {
                                             {...register("calle", {
                                                 required: {
                                                     value: true,
-                                                    message: 'Campo requerido'
-                                                }
+                                                    message: 'Calle es requerido'
+                                                },
                                             })}
                                         />
                                         <span className="text-danger text-small d-block mb-2">
@@ -206,7 +201,30 @@ export const Register = () => {
                                             className="form-control"
                                             placeholder="Numero"
                                             name="numero"
+                                            min="0"
+                                            {...register("numero")}
                                         />
+                                        <span className="text-danger text-small d-block m-1">
+                                            {errors.numero && errors.numero.message}
+                                        </span>
+                                    </div>
+
+                                    <div className="mb-3">
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            placeholder="Codigo Postal"
+                                            name="cp"
+                                            {...register("cp", {
+                                                required: {
+                                                    value: true,
+                                                    message: 'Codigo Postal es requerido'
+                                                }
+                                            })}
+                                        />
+                                        <span className="text-danger text-small d-block mb-2 text-center">
+                                            {errors.cp && errors.cp.message}
+                                        </span>
                                     </div>
 
                                     <div className="mb-3">
@@ -231,9 +249,9 @@ export const Register = () => {
                                         <input
                                             type="text"
                                             className="form-control"
-                                            placeholder="Ciudad"
-                                            name="ciudad"
-                                            {...register("ciudad", {
+                                            placeholder="Provincia"
+                                            name="provincia"
+                                            {...register("provincia", {
                                                 required: {
                                                     value: true,
                                                     message: 'Campo es requerido'
@@ -241,7 +259,7 @@ export const Register = () => {
                                             })}
                                         />
                                         <span className="text-danger text-small d-block mb-2">
-                                            {errors.ciudad && errors.ciudad.message}
+                                            {errors.provincia && errors.provincia.message}
                                         </span>
                                     </div>
 

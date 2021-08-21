@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { startFacebookLogin, startGoogleLogin, startLoginEmailPassword } from '../../redux/actions/authAction'
 
-export const Login = () => {
+export const Login = ({history}) => {
 
     const dispatch = useDispatch();
     const { loading } = useSelector(state => state.ui);
@@ -14,15 +14,18 @@ export const Login = () => {
     const onSubmit = (data, e) => {
         const { email, password } = data;
         dispatch(startLoginEmailPassword(email, password));
+        history.replace("/")
         e.target.reset();
     }
 
     const handleGoogleLogin = () => {
         dispatch(startGoogleLogin())
+        history.replace("/")
     }
 
     const handleFacebookLogin = () => {
         dispatch(startFacebookLogin())
+        history.replace("/")
     }
 
     return (
@@ -45,13 +48,13 @@ export const Login = () => {
                     <h2 className="fw-bold text-center py5">Bienvenidos</h2>
 
                     <div className="text-center">
-                        <form onSubmit={handleSubmit(onSubmit)}>
+                        <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
 
                             <div className="mb-4">
                                 <input
                                     type="email"
                                     className="form-control"
-                                    placeholder="name@example.com"
+                                    placeholder="Ingresa tu email"
                                     name="email"
                                     {...register("email", {
                                         required: {
@@ -74,7 +77,7 @@ export const Login = () => {
                                 <input
                                     type="password"
                                     className="form-control"
-                                    placeholder="contraseña"
+                                    placeholder="Contraseña"
                                     name="password"
                                     {...register("password", {
                                         required: {

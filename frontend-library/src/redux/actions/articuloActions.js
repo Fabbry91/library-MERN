@@ -20,7 +20,7 @@ export const getOneArticulo = (id) => {
     return async (dispatch) => {
 
         dispatch(startLoadingRedux());
-        const { data } = await axios.get(`articulo/${id}`);
+        await axios.get(`articulo/${id}`);
         dispatch(setOneArticulo(id));
         dispatch(finishLoadingRedux())
 

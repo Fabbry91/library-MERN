@@ -18,7 +18,7 @@ export const Home = () => {
 
     useEffect(() => {
         dispatch(getAllArticulo())
-    },[dispatch])
+    }, [dispatch])
 
     return (
         <div>
@@ -28,11 +28,13 @@ export const Home = () => {
             <HomeInformation />
             <div className="b-example-divider"></div>
 
-            <div className="container py-5">
+            <div className="container py-5 position-relative">
 
                 {
                     loading ? (
-                        <Loading />
+                        <div className="position-absolute top-50 start-50 translate-middle">
+                            <Loading />
+                        </div>
                     ) : msgError ? (
                         <MsgError />
                     ) : (
@@ -47,10 +49,9 @@ export const Home = () => {
                 }
 
             </div>
-            
+
             <div className="b-example-divider"></div>
             <Footer />
-
         </div>
     )
 }

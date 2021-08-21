@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Navbar } from '../ui/Navbar'
 import { useMercadopago } from 'react-sdk-mercadopago/lib'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Loading } from '../ui/Loading'
+import { Footer } from '../ui/Footer'
 
 export const Checkout = () => {
 
@@ -45,15 +46,16 @@ export const Checkout = () => {
     return (
         <>
             <Navbar />
+            <div className="b-example-divider"></div>
 
             <div className="container my-5">
 
                 <div className="row">
 
-                    <div className="col-7 p-3 align-items-center rounded-3 border shadow-lg">
+                    <div className="col-7 p-3 align-items-center rounded-3 border border-info shadow-lg">
                         <div className="card-header h5 text-center"><span className="">Orden de Pago</span></div>
                         <br />
-                        <table className="table table-success table-striped text-center">
+                        <table className="table table-info table-striped text-center">
                             <thead>
                                 <tr>
                                     <th scope="col">Articulo</th>
@@ -66,7 +68,7 @@ export const Checkout = () => {
                             {!order ?
                                 (
                                     <tbody>
-                                        <td colspan="4" class="table-active"><Loading /></td>
+                                        <td colspan="4" className="table-active"><Loading /></td>
                                     </tbody>
                                 ) :
                                 (
@@ -74,10 +76,10 @@ export const Checkout = () => {
                                     <tbody>
                                         {order.items.map((oi, index) => (
                                             <tr key={index}>
-                                                <td>{oi.title}</td>
-                                                <td>{oi.unit_price}</td>
-                                                <td>{oi.quantity}</td>
-                                                <td>{oi.quantity * oi.unit_price}</td>
+                                                <td style={{ textTransform: 'capitalize' }}>{oi.title}</td>
+                                                <td>${oi.unit_price}</td>
+                                                <td>{oi.quantity} un</td>
+                                                <td>${oi.quantity * oi.unit_price}</td>
                                             </tr>
                                         ))}
                                         <tr>
@@ -93,11 +95,11 @@ export const Checkout = () => {
                     </div>
 
                     <div className="col-5">
-                        <div className="p-3 align-items-center rounded-3 border shadow-lg">
+                        <div className="p-3 align-items-center rounded-3 border border-warning shadow-lg">
                             <div className="card-header h5 text-center"><span className="text-muted">Articulos vendido por</span> <span className="strong h4">GO!</span></div>
                             <br />
                             <div className="text-center">
-                                <div class="cho-container" />
+                                <div className="cho-container" />
                             </div>
                         </div>
                     </div>

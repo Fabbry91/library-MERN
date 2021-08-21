@@ -3,17 +3,18 @@ import { useDispatch } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { Rubro } from '../components/pages/admin/Rubro'
 import { StoreGo } from '../components/pages/admin/StoreGo'
+import { User } from '../components/pages/User'
 import { Checkout } from '../components/pages/Checkout'
 import { Error404 } from '../components/pages/Error404'
 import { Home } from '../components/pages/home/Home'
 import { Login } from '../components/pages/Login'
-import { Order } from '../components/pages/Order'
 import { Product } from '../components/pages/Product'
 import { Register } from '../components/pages/Register'
 import { ShoppingCart } from '../components/pages/ShoppingCart'
 import { Loading } from '../components/ui/Loading'
 import { firebase } from '../firebase/firebase'
 import { login } from '../redux/actions/authAction'
+import { PrivateRoute } from './PrivateRoute'
 
 export const AppRoutes = () => {
 
@@ -34,9 +35,9 @@ export const AppRoutes = () => {
         });
     }, [dispatch, setChecking, setIsLoggedIn])
 
-    if ( checking ) {
+    if (checking) {
         return (
-            <Loading/>
+            <Loading />
         )
     }
 
@@ -44,6 +45,18 @@ export const AppRoutes = () => {
     return (
         <Router>
             <Switch>
+
+                <PrivateRoute
+                    exact
+                    isAuthenticated={isLoggedIn}
+                    path="/shopping-cart"
+                    component={ShoppingCart} />
+                <PrivateRoute
+                    exact
+                    isAuthenticated={isLoggedIn}
+                    path="/user"
+                    component={User} />
+
                 <Route exact path="/" component={Home} />
                 <Route exact path="/404" component={Error404} />
                 <Route exact path="/login" component={Login} />

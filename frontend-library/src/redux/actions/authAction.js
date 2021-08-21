@@ -26,7 +26,7 @@ export const startLoginEmailPassword = (email, password) => {
 export const startRegisterEmailPassword = (user) => {
     return async (dispatch) => {
 
-        const { apellido, calle, ciudad, email, localidad, nombre, password, telefono, tipo } = user
+        const { apellido, cp, numero, calle, provincia, email, localidad, nombre, password, telefono, tipo } = user
 
         const Usuario = {
             apellido: apellido,
@@ -37,13 +37,13 @@ export const startRegisterEmailPassword = (user) => {
             tipo: [tipo],
             domicilio: {
                 calle: calle,
+                numero: numero,
+                cp: cp,
                 localidad: localidad,
-                ciudad: ciudad,
+                provincia: provincia,
             }
         }
-        //console.log(Usuario)
-
-        await axios.post('user', Usuario);
+        //console.log(Usuario)        
 
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(async ({ user }) => {
@@ -53,6 +53,7 @@ export const startRegisterEmailPassword = (user) => {
                 dispatch(
                     login(user.uid, user.displayName, email,)
                 );
+                await axios.post('user', Usuario);
             })
             .catch(e => {
                 console.log(e);

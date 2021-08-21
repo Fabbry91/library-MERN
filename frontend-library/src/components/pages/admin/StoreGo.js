@@ -77,7 +77,7 @@ export const StoreGo = () => {
                                     <div className="d-flex justify-content-between mb-2">
                                         <span className="h5">Nuevo articulos.</span>
                                     </div>
-                                    <form onSubmit={handleSubmit(onSubmit)}>
+                                    <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
 
 
                                         <div className="mb-3">
