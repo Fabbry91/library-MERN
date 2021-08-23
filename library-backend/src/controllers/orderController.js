@@ -5,9 +5,9 @@ const Order = require('../model/order');
 
 const getAllOrders = async (req, res = response) => {
     try {
-        const articulos = await Articulo.find({});
+        const orders = await Order.find({});
 
-        res.status(200).json(articulos);
+        res.status(200).json(orders);
 
     } catch (error) {
         res.status(400).json({
@@ -102,20 +102,19 @@ const deleteOrder = async (req, res = response) => {
 const insertOrder = async (req, res = response) => {
 
     try {
-        const { items, user } = req.body;
+        const { items, user, total } = req.body;
         //console.log(items);
         const repuesta = items.map(p => { return { ...p, stock: p.stock - p.qty } })
         //console.log(repuesta)
         const arts = repuesta.map(p => { return { title: p.nameArticulo, unit_price: p.precioVenta, quantity: p.qty } })
         //console.log(arts)
-        const artOrder = repuesta.map(p => { return { title: p.nameArticulo, unit_price: p.precioVenta, quantity: p.qty, producto: p.producto} })
+        const artOrder = repuesta.map(p => { return { title: p.nameArticulo, unit_price: p.precioVenta, quantity: p.qty } })
 
         for (const q of repuesta) {
             if (q.stock < 0) {
                 res.status(400).json({
                     msg: 'sin stock',
                 })
-                // await Articulo.findOneAndUpdate({ _id: q._id }, { stock: q.stock })
             }
         }
         const preference = {
@@ -135,7 +134,10 @@ const insertOrder = async (req, res = response) => {
             date: Date.now(),
             status: "pending",
             items: artOrder,
+            total: total
         }
+
+        console.log(orden)
 
         const order = new Order(orden);
         const saveOrder = await order.save();
@@ -162,6 +164,5 @@ module.exports = {
     insertOrder,
     updateOrder,
     deleteOrder,
-    //decreaseStock,
     feedback
 }

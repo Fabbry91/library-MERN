@@ -15,6 +15,11 @@ import { Loading } from '../components/ui/Loading'
 import { firebase } from '../firebase/firebase'
 import { login } from '../redux/actions/authAction'
 import { PrivateRoute } from './PrivateRoute'
+import { Dashboard } from '../components/pages/admin/Dashboard'
+import { Facturacion } from '../components/pages/admin/Facturacion'
+import { Ordenes } from '../components/pages/admin/Ordenes'
+import { Informes } from '../components/pages/admin/Informes'
+import { Users } from '../components/pages/admin/Users'
 
 export const AppRoutes = () => {
 
@@ -62,10 +67,19 @@ export const AppRoutes = () => {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
                 <Route path="/producto/:id" component={Product} />
-                <Route exact path="/shopping-cart/:id?" component={ShoppingCart} />
-                <Route exact path="/pay" component={Checkout} />
-                <Route exact path="/admin" component={StoreGo} />
+
+                <PrivateRoute exact path="/shopping-cart/:id?" isAuthenticated={isLoggedIn} component={ShoppingCart} />
+                <PrivateRoute exact path="/pay" isAuthenticated={isLoggedIn} component={Checkout} />
+                
+                <Route exact path="/admin" component={Informes} />
                 <Route exact path="/admin/rubro" component={Rubro} />
+                <Route exact path="/admin/articles" component={StoreGo} />
+                <Route exact path="/admin/ordenes" component={Ordenes} />
+                <Route exact path="/admin/facturacion" component={Facturacion} />
+                <Route exact path="/admin/personas" component={Users} />
+                
+                
+
             </Switch>
         </Router>
     )

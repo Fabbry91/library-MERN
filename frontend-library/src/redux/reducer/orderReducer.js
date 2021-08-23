@@ -14,6 +14,12 @@ export const orderReducer = (state = initialState, action) => {
                 order: [action.payload, ...state.order]
             }
 
+        case types.setUserOrder:
+            return {
+                ...state,
+                order: [...action.payload]
+            }
+
         /* case types.editUserOrder:
              return {
                  ...state,

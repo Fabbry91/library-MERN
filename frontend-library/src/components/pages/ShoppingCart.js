@@ -104,7 +104,7 @@ export const ShoppingCart = ({ history }) => {
 
                                                         <div className="col">
                                                             <button className="btn btn-danger" onClick={() => deleteCart(item._id)}>
-                                                            <i className="bi bi-trash-fill"/>
+                                                                <i className="bi bi-trash-fill" />
                                                             </button>
                                                         </div>
                                                     </div>
@@ -121,7 +121,7 @@ export const ShoppingCart = ({ history }) => {
 
                     <div className="col-5">
                         <div className="p-4 align-items-center rounded-3 border art-vendido shadow-lg mb-3">
-                            <div className="card-header h5 text-center mb-3"><span className="text-muted">Articulos vendido por</span>&nbsp;&nbsp;&nbsp;&nbsp;<span className="strong h4">GO!</span><span className="text-muted" style={{fontSize:13}}>ART</span></div>
+                            <div className="card-header h5 text-center mb-3"><span className="text-muted">Articulos vendido por</span>&nbsp;&nbsp;&nbsp;&nbsp;<span className="strong h4">GO!</span><span className="text-muted" style={{ fontSize: 13 }}>ART</span></div>
                             <br />
                             <div className="row mb-3">
                                 <div className="col-6">
@@ -132,13 +132,13 @@ export const ShoppingCart = ({ history }) => {
                                 </div>
                             </div>
                         </div>
-                        <Order props={history} />
+                        <Order props={[history, totalPrice]} />
                     </div>
 
                 </div>
             </div>
             <div className="b-example-divider"></div>
-            <Footer/>
+            <Footer />
         </>
     )
 }

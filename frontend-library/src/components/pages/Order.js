@@ -8,12 +8,13 @@ import { Link } from 'react-router-dom'
 export const Order = (prop) => {
 
     const { props } = prop
+    const [history, total] = props
 
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart.cart)
     const emailUser = useSelector(state => state.auth.email)
 
-    const [userId, setUserId] = useState("")
+    const [userEmail, setUserEmail] = useState("")
     const [user, setUser] = useState({})
     const [mostrar, setMostrar] = useState(false)
 
@@ -35,17 +36,17 @@ export const Order = (prop) => {
                 nameArticulo: c.nameArticulo,
                 precioVenta: c.precioVenta,
                 qty: c.qty,
-                stock: c.stock,
-                producto: c._id
+                stock: c.stock,                
             }
         })
         const order = {
             items: items,
-            user: { _id: userId }
+            user: userEmail,
+            total: total
         }
         //console.log(order)
         dispatch(startAddOrder(order))
-        props.replace('/pay')
+        history.replace('/pay')
     }
 
     const precarga = (data) => {
@@ -59,7 +60,7 @@ export const Order = (prop) => {
         setValue("cp", `${data.domicilio.cp}`)
         setValue("localidad", `${data.domicilio.localidad}`)
         setValue("provincia", `${data.domicilio.provincia}`)
-        setUserId(data._id)
+        setUserEmail(data.email)
 
     }
 

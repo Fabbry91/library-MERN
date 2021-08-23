@@ -6,7 +6,6 @@ const {
     insertOrder,
     updateOrder,
     deleteOrder,
-   // decreaseStock,
     feedback
 } = require("../controllers/orderController");
 
@@ -15,7 +14,6 @@ router.get("/:id", getOneOrder);
 router.post("/", insertOrder);
 router.put("/:id", updateOrder);
 router.delete("/:id", deleteOrder);
-//router.post("/cart", decreaseStock);
 router.get("/feedback",feedback);
 
 module.exports = router;

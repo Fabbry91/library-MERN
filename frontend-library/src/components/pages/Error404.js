@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Navbar } from '../ui/Navbar'
 
 export const Error404 = () => {
@@ -6,15 +7,14 @@ export const Error404 = () => {
         <>
             <Navbar />
             <div className="container my-5">
-                <div className="p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
-
-                    <h1 className="display-4 fw-bold lh-1">Border hero with cropped image and shadows</h1>
-                    <p className="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-                    <div className="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-                        <button type="button" className="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Primary</button>
-                        <button type="button" className="btn btn-outline-secondary btn-lg px-4">Default</button>
-                    </div>
-
+                <div className="col-12 rounded-3 border border-info shadow-lg position-relative">
+                    <img src={process.env.PUBLIC_URL + "/assets/img/404.png"} className="img-fluid error404" alt="imagen-1" />
+                    <div className="h2 text-center fw-bold position-absolute bottom-0 start-50 translate-middle-x">
+                    <span className="h2 fw-bold">Oh esta pagina no existe!!!</span>
+                    <br/>
+                    <span className="badge rounded-pill bg-light text-dark" style={{fontSize:17}}>Quizás la búsqueda pueda ayudar o volver a la página de <Link to="/">inicio</Link></span>
+                    </div>                    
+                    
                 </div>
             </div>
         </>

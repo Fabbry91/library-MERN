@@ -4,18 +4,14 @@ const orderItem = new Schema({
     title: { type: String, required: true },
     unit_price: { type: Number, required: true },
     quantity: { type: Number, required: true },
-    producto: { type: String, required: true },
 })
 
 const orderSchema = new Schema({
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
+    user: { type: String, required: true },
     preferenceId: { type: String, required: true },
     date: { type: Date, required: true },
     status: { type: String, required: true },
+    total: { type: Number, required: true },
     items: [orderItem],
 });
 

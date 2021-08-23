@@ -4,11 +4,11 @@ import { finishLoadingRedux, startLoadingRedux } from './uiActions';
 
 
 
-export const getUser = (email) => {
+export const getAllOrder = () => {
     return async (dispatch) => {
         dispatch(startLoadingRedux());
-        const { data } = await axios.get(`user/email/${email}`);
-        dispatch(setOneArticulo(data));
+        const { data } = await axios.get(`order`);
+        dispatch(setAllOrder(data));
         dispatch(finishLoadingRedux());
     }
 }
@@ -32,9 +32,9 @@ export const startDeleteArticulo = (id) => {
     }
 }
 
-export const setArticulo = (art) => ({
-    type: types.setArticulos,
-    payload: art,
+export const setAllOrder = (ord) => ({
+    type: types.setUserOrder,
+    payload: ord,
 })
 
 export const setOneArticulo = (id) => ({

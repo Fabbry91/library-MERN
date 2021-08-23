@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllRubro, startAddRubro, startDeleteRubro } from '../../../redux/actions/rubroAction';
 import { Loading } from '../../ui/Loading';
+import { Dashboard } from './Dashboard';
 
 export const Rubro = () => {
 
@@ -32,83 +33,93 @@ export const Rubro = () => {
     return (
         <>
             <Navbar />
-            <div className="b-example-divider"></div>
-            <div className="container py-3">
-                <div className="row flex-lg-row g-3 py-5">
 
-                    <div className="col-12 col-md-8 col-lg-8">
+            <div class="container-fluid">
+                <div class="row">
+                    <Dashboard />
 
-                        <div className="d-flex justify-content-between gap-2 mb-3">
-                            <div className="d-grid gap-2 d-md-flex justify-content-md-start">
-                                <span className="h3">Rubros</span>
-                            </div>
-                            <div className="d-flex">
-                                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                                <button className="btn btn-outline-success" type="submit">Search</button>
-                            </div>
-                        </div>
+                    <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                        <div className="container py-3">
+                            <div className="row flex-lg-row g-3">
 
-                        <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-                            <div className="row">
-                                <div className="col-md col-lg">
-                                    <div className="form-group mb-3">
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="Nuevo Rubro"
-                                            name="nameRubro"
-                                            {...register("nameRubro", {
-                                                required: {
-                                                    value: true,
-                                                    message: 'Nombre es requerido'
-                                                }
-                                            })}
-                                        />
+                                <div className="d-flex justify-content-between gap-2">
+                                    <div className="d-grid gap-2 d-md-flex justify-content-md-start">
+                                        <h2 className="h2">Rubros</h2>
                                     </div>
-                                    <span className="text-danger text-small d-block mb-2">
-                                        {errors.nameRubro && errors.nameRubro.message}
-                                    </span>
-                                </div>
-                                <div className="col-md-2 col-lg-3">
-                                    <div className="mb-3 d-grid gap-2">
-                                        <button
-                                            type="submit"
-                                            className="btn btn-primary btn-md"
-                                            disabled={loading}
-                                        >Crear Rubro</button>
+                                    <div className="d-flex">
+                                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                                        <button className="btn btn-outline-success" type="submit">Search</button>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+                                
+                                <hr />
 
-                        <ul className="list-group">
+                                <div className="col-12 col-md-8 col-lg-8">
 
-                            {loading ?
-                                (<Loading />) :
-                                (rubro.map((rub, index) => (
 
-                                    <li className="card mb-2" key={index}>
-                                        <div className="d-flex flex-row p-2 justify-content-between">
-                                            <span className="h3 p-2 bd-highlight">{rub.nameRubro}</span>
-                                            <div className="p-2 bd-highlights">
-                                                <button className="btn btn-danger" onClick={() => { handleDelete(rub.id) }}>X</button>
+                                    <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+                                        <div className="row">
+                                            <div className="col-md col-lg">
+                                                <div className="form-group mb-3">
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="Nuevo Rubro"
+                                                        name="nameRubro"
+                                                        {...register("nameRubro", {
+                                                            required: {
+                                                                value: true,
+                                                                message: 'Nombre es requerido'
+                                                            }
+                                                        })}
+                                                    />
+                                                </div>
+                                                <span className="text-danger text-small d-block mb-2">
+                                                    {errors.nameRubro && errors.nameRubro.message}
+                                                </span>
+                                            </div>
+                                            <div className="col-md-2 col-lg-3">
+                                                <div className="mb-3 d-grid gap-2">
+                                                    <button
+                                                        type="submit"
+                                                        className="btn btn-primary btn-md"
+                                                        disabled={loading}
+                                                    >Crear Rubro</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </li>
-                                ))
-                                )
-                            }
-                        </ul>
-                    </div>
+                                    </form>
 
-                    <div className="col-md-4 col-lg-4">
-                        <AboutGo />
+                                    <ul className="list-group">
+
+                                        {loading ?
+                                            (<Loading />) :
+                                            (rubro.map((rub, index) => (
+
+                                                <li className="card mb-2" key={index}>
+                                                    <div className="d-flex flex-row p-2 justify-content-between">
+                                                        <span className="h3 p-2 bd-highlight">{rub.nameRubro}</span>
+                                                        <div className="p-2 bd-highlights">
+                                                            <button className="btn btn-danger" onClick={() => { handleDelete(rub.id) }}>X</button>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            ))
+                                            )
+                                        }
+                                    </ul>
+                                </div>
+
+                                <div className="col-md-4 col-lg-4">
+                                    <AboutGo />
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-
             </div>
 
-            <div className="b-example-divider"></div>
         </>
     )
 }

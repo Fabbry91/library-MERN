@@ -3,7 +3,7 @@ import { Navbar } from '../../ui/Navbar'
 import { AboutGo } from './AboutGo'
 import { Dashboard } from './Dashboard'
 
-export const Facturacion = () => {
+export const Informes = () => {
     return (
         <>
             <Navbar />
@@ -29,21 +29,9 @@ export const Facturacion = () => {
                                 <hr />
 
                                 <div className="col-12 col-md-8 col-lg-8">
-                                    <table className="table table-info table-striped mt-4 text-center">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Articulo</th>
-                                                <th scope="col">P Compra</th>
-                                                <th scope="col">P Venta</th>
-                                                <th scope="col">Stock</th>
-                                                <th scope="col">Rubro</th>
-                                                <th scope="col">Accion</th>
-                                            </tr>
-                                        </thead>
 
-                                        <tbody>
-                                        </tbody>
-                                    </table>
+
+                                   
                                 </div>
 
                                 <div className="col-md-4 col-lg-4">
