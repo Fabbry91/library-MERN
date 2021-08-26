@@ -13,22 +13,36 @@ export const getAllOrder = () => {
     }
 }
 
-export const startAddOrder = (order) => {
+
+export const getOrderByEmail = (email) => {
     return async (dispatch) => {
+        console.log(email)
         dispatch(startLoadingRedux());
-        const { data } = await axios.post('order', order).then(res => res)
-        dispatch(createOrden(data));
+        const { data } = await axios.get(`order/email/${email}`);
+        dispatch(setAllOrder(data));
         dispatch(finishLoadingRedux());
     }
 }
 
-export const startDeleteArticulo = (id) => {
+
+export const startAddOrder = (order) => {
+    return async (dispatch) => {
+        
+        dispatch(startLoadingRedux());
+        dispatch(clearOrder())
+        const { data } = await axios.post('order', order).then(res => res)
+        dispatch(createOrden(data));
+        dispatch(finishLoadingRedux());
+        return data.preferenceId
+    }
+}
+
+export const startDeleteOrder = (id, user) => {
     return async (dispatch) => {
 
-        /* dispatch(startLoadingRedux());
-         await axios.delete(`articulo/${id}`);
-         dispatch(deleteArticulo(id));
-         dispatch(getAllArticulo())*/
+        await axios.delete(`order/${id}`);
+        dispatch(deleteOrder(id));
+        dispatch(getOrderByEmail(user))
     }
 }
 
@@ -47,18 +61,11 @@ export const createOrden = (order) => ({
     payload: order,
 })
 
-export const deleteArticulo = (id) => ({
-    type: types.removeArticulos,
+export const deleteOrder = (id) => ({
+    type: types.deleteUserOrder,
     payload: id
 })
 
-export const editarArticulo = (id, articulos) => ({
-    type: types.editArticulos,
-    payload: {
-        id,
-        articulos: {
-            id,
-            ...articulos
-        }
-    }
+export const clearOrder = () => ({
+    type: types.clearUseOrder
 })

@@ -43,10 +43,10 @@ export const types = {
     setOnePay:'[Pay] setOnePay',
     removePay:'[Pay] removePay',
 
-    setUserOrder:'[UsOrder] setUsOrder',
-    addUserOrder:'[UsOrder] addUsOrder',
-    editUserOrder:'[UsOrder] editUsOrder',
-    deleteUserOrder:'[UsOrder] deleteUsOrder',
+    setUserOrder:'[Order] Set Order',
+    addUserOrder:'[Order] Add Order',
+    clearUseOrder:'[Order] Clear Order',
+    deleteUserOrder:'[Order] Delete Order',
 
     addUser:'[USER] Add User',
     deleteUser:'[USER] Delete User',

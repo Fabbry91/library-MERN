@@ -20,6 +20,7 @@ import { Facturacion } from '../components/pages/admin/Facturacion'
 import { Ordenes } from '../components/pages/admin/Ordenes'
 import { Informes } from '../components/pages/admin/Informes'
 import { Users } from '../components/pages/admin/Users'
+import { ViewPay } from '../components/pages/ViewPay'
 
 export const AppRoutes = () => {
 
@@ -77,7 +78,7 @@ export const AppRoutes = () => {
                 <Route exact path="/admin/ordenes" component={Ordenes} />
                 <Route exact path="/admin/facturacion" component={Facturacion} />
                 <Route exact path="/admin/personas" component={Users} />
-                
+                <Route exact path="/viewPay" component={ViewPay} />
                 
 
             </Switch>

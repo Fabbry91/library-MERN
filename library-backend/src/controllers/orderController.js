@@ -37,21 +37,26 @@ const getOneOrder = async (req, res = response) => {
     }
 };
 
-/*const insertOrder = async (req, res = response) => {
-
+const getOrderByEmail = async (req, res = response) => {
+    //console.log(req.params.email)
     try {
+        const order = await Order.find({ email: req.params.id });
+        if (!order) {
+            return res.status(404).json({
+                ok: false,
+                msg: "El email no existe en ordenes"
+            });
+        }
 
-        const articulo = new Articulo(req.body);
-        const saveArticulo = await articulo.save();
-        res.status(201).json(saveArticulo);
+        res.status(200).json(order);
 
     } catch (error) {
-        res.status(400).json({
+        res.status(500).json({
             ok: false,
-            msg: "Sintaxis invalida",
+            msg: "comuniquese con el administrador",
         });
     }
-};*/
+};
 
 const updateOrder = async (req, res = response) => {
     const articuloId = req.params.id;
@@ -81,16 +86,17 @@ const updateOrder = async (req, res = response) => {
 
 const deleteOrder = async (req, res = response) => {
     try {
-        const articulo = await Articulo.findById(req.params.id);
-        if (!articulo) {
+        const order = await Order.findById(req.params.id);
+        if (!order) {
             return res.status(404).json({
                 ok: false,
-                msg: "El articulo no existe"
+                msg: "La orden no existe"
             });
         }
-        await Articulo.findOneAndDelete(req.params.id);
+        //console.log(order)
+        await Order.findByIdAndDelete(req.params.id);
 
-        res.status(200).json({ msg: 'Producto eliminado exitosamente' });
+        res.status(200).json({ msg: 'Orden eliminada exitosamente' });
     } catch (error) {
         res.status(500).json({
             ok: false,
@@ -108,7 +114,7 @@ const insertOrder = async (req, res = response) => {
         //console.log(repuesta)
         const arts = repuesta.map(p => { return { title: p.nameArticulo, unit_price: p.precioVenta, quantity: p.qty } })
         //console.log(arts)
-        const artOrder = repuesta.map(p => { return { title: p.nameArticulo, unit_price: p.precioVenta, quantity: p.qty } })
+        const artOrder = repuesta.map(p => { return { title: p.nameArticulo, unit_price: p.precioVenta, quantity: p.qty, product: p.producto } })
 
         for (const q of repuesta) {
             if (q.stock < 0) {
@@ -137,7 +143,7 @@ const insertOrder = async (req, res = response) => {
             total: total
         }
 
-        console.log(orden)
+        //console.log(orden)
 
         const order = new Order(orden);
         const saveOrder = await order.save();
@@ -164,5 +170,6 @@ module.exports = {
     insertOrder,
     updateOrder,
     deleteOrder,
+    getOrderByEmail,
     feedback
 }

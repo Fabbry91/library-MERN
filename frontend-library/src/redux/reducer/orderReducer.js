@@ -20,21 +20,15 @@ export const orderReducer = (state = initialState, action) => {
                 order: [...action.payload]
             }
 
-        /* case types.editUserOrder:
-             return {
-                 ...state,
-                 order: state.order.map(
-                     order => order._id === action.payload._id
-                         ? action.payload.order
-                         : order)
-             }
- 
-         case types.setUserOrder:
-             return {
-                 ...state,
-                 order: state.order.filter(ord => ord._id === action.payload)
-             }
- */
+        case types.deleteUserOrder:
+            return {
+                ...state,
+                order: state.order.filter(ord => ord.id !== action.payload)
+            }
+
+        case types.clearUserOrder:
+            return state
+
         default:
             return state;
     }

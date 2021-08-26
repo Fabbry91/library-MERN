@@ -3,12 +3,15 @@ import { Navbar } from '../ui/Navbar'
 import { useMercadopago } from 'react-sdk-mercadopago/lib'
 import { useSelector } from 'react-redux'
 import { Loading } from '../ui/Loading'
-import { Footer } from '../ui/Footer'
+import { useLocation } from 'react-router-dom'
 
 export const Checkout = () => {
 
-    const [order] = useSelector(state => state.ord.order)
-    const [totalPrice, setTotalPrice] = useState(0)
+    const order = useSelector(state => state.ord.order)
+    const { state } = useLocation();
+    const { preferenceId } = state
+
+    const orden = order.find((o) => o.preferenceId === preferenceId)
 
     const mercadopago = useMercadopago.v2('APP_USR-4b6e62f4-00c0-4ccf-9b62-fb554c988441', {
         locale: 'es-AR'
@@ -16,10 +19,10 @@ export const Checkout = () => {
 
     useEffect(() => {
 
-        if (mercadopago && order) {
+        if (mercadopago) {
             mercadopago.checkout({
                 preference: {
-                    id: order.preferenceId
+                    id: preferenceId
                 },
                 render: {
                     container: '.cho-container',
@@ -28,19 +31,7 @@ export const Checkout = () => {
             })
         }
 
-    }, [mercadopago, order])
-
-    useEffect(() => {
-        let price = 0;
-        if (order) {
-            order.items.forEach((item) => {
-                price += item.quantity * item.unit_price;
-            });
-        }
-        setTotalPrice(price);
-
-    }, [totalPrice, setTotalPrice, order])
-
+    }, [mercadopago])
 
 
     return (
@@ -65,7 +56,7 @@ export const Checkout = () => {
                                 </tr>
                             </thead>
 
-                            {!order ?
+                            {!orden?.items ?
                                 (
                                     <tbody>
                                         <td colspan="4" className="table-active"><Loading /></td>
@@ -74,7 +65,7 @@ export const Checkout = () => {
                                 (
 
                                     <tbody>
-                                        {order.items.map((oi, index) => (
+                                        {orden?.items.map((oi, index) => (
                                             <tr key={index}>
                                                 <td style={{ textTransform: 'capitalize' }}>{oi.title}</td>
                                                 <td>${oi.unit_price}</td>
@@ -86,7 +77,7 @@ export const Checkout = () => {
                                             <td></td>
                                             <td></td>
                                             <td>Total:</td>
-                                            <td>${totalPrice}</td>
+                                            <td>${orden?.total}</td>
                                         </tr>
                                     </tbody>
                                 )
@@ -98,9 +89,9 @@ export const Checkout = () => {
                         <div className="p-3 align-items-center rounded-3 border border-warning shadow-lg">
                             <div className="card-header h5 text-center"><span className="text-muted">Articulos vendido por</span> <span className="strong h4">GO!</span></div>
                             <br />
-                            <div className="text-center">
+                            {<div className="text-center">
                                 <div className="cho-container" />
-                            </div>
+                            </div>}
                         </div>
                     </div>
 

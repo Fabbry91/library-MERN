@@ -13,14 +13,14 @@ const getFeedback = async (req, res = response) => {
         if (status === "approved") {
 
             const orden = await Order.findOneAndUpdate({ preferenceId: preferenceId }, { status: status });
-            
+
             const { items } = orden;
-            items.forEach(async(i) => {
-                const articulos = await Articulo.findById(i.producto);
-                await Articulo.findByIdAndUpdate(i.producto, { stock: articulos.stock - i.quantity })
+            items.forEach(async (i) => {
+                const articulos = await Articulo.findById(i.product);
+                await Articulo.findByIdAndUpdate(i.product, { stock: articulos.stock - i.quantity })
             })
 
-        }else{
+        } else {
             res.status(400).json({
                 ok: false,
                 msg: status,

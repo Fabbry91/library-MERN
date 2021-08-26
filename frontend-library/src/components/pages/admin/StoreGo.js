@@ -67,17 +67,17 @@ export const StoreGo = () => {
         <>
             <Navbar />
 
-            <div class="container-fluid">
-                <div class="row">
+            <div className="container-fluid">
+                <div className="row">
                     <Dashboard />
 
 
-                    <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                    <div className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                         <div className="container py-3">
 
                             <div className="row flex-lg-row g-3">
 
-                                <h1 class="h2">Articulos</h1>
+                                <h1 className="h2">Articulos</h1>
                                 <hr />
 
                                 <div className="col-12 col-md-8 col-lg-8">

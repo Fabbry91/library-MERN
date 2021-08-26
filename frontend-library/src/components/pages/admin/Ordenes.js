@@ -25,11 +25,11 @@ export const Ordenes = () => {
         <>
             <Navbar />
 
-            <div class="container-fluid">
-                <div class="row">
+            <div className="container-fluid">
+                <div className="row">
                     <Dashboard />
 
-                    <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                    <div className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                         <div className="container py-3">
                             <div className="row flex-lg-row g-3">
 
@@ -47,7 +47,7 @@ export const Ordenes = () => {
 
                                 <div className="col-12 col-md-8 col-lg-8">
 
-                                    <div class="row row-cols-1 row-cols-md-2 g-4">
+                                    <div className="row row-cols-1 row-cols-md-2 g-4">
 
                                         {
                                             loading ? (
@@ -59,19 +59,19 @@ export const Ordenes = () => {
                                                 <>
                                                     {
                                                         order.map(o => (
-                                                            < div class="col" key={o._id}>
-                                                                <div class="card border-info text-primary">
-                                                                    <div class="card-header text-dark">
+                                                            < div className="col" key={o._id}>
+                                                                <div className="card border-info text-primary">
+                                                                    <div className="card-header text-dark">
                                                                         <div className="row">
-                                                                            <div class="col-6">Orden: <span style={{ textTransform: 'uppercase' }}>{o.preferenceId.slice(-3)}</span> </div>
-                                                                            <div class="col-6">Fecha: {o.date.slice(0, 10)}</div>
+                                                                            <div className="col-6">Orden: <span style={{ textTransform: 'uppercase' }}>{o.preferenceId.slice(-3)}</span> </div>
+                                                                            <div className="col-6">Fecha: {o.date.slice(0, 10)}</div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="card-body text-dark">
-                                                                        <span class="card-title">Usuario: {o.user}</span>
+                                                                    <div className="card-body text-dark">
+                                                                        <span className="card-title">Usuario: {o.user}</span>
                                                                         <br />
                                                                         <br />
-                                                                        <ul class="card-text">
+                                                                        <ul className="card-text">
                                                                             {
                                                                                 o.items.map((oi, index) => (
                                                                                     <li key={index} style={{ textTransform: 'capitalize' }}>Art.: {oi.title}  &nbsp;${oi.unit_price} u.  &nbsp;cant: {oi.quantity} </li>
@@ -79,8 +79,8 @@ export const Ordenes = () => {
                                                                             }
                                                                         </ul>
                                                                         <div className="row">
-                                                                            <span class="col-6">Total: $ {o.total}</span>
-                                                                            <span class="col-6" style={{ textTransform: 'capitalize' }}>Estado: {o.status}</span>
+                                                                            <span className="col-6">Total: $ {o.total}</span>
+                                                                            <span className="col-6" style={{ textTransform: 'capitalize' }}>Estado: {o.status}</span>
                                                                         </div>
 
                                                                         <div className="text-center mt-2">

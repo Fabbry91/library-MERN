@@ -34,11 +34,11 @@ export const Rubro = () => {
         <>
             <Navbar />
 
-            <div class="container-fluid">
-                <div class="row">
+            <div className="container-fluid">
+                <div className="row">
                     <Dashboard />
 
-                    <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                    <div className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                         <div className="container py-3">
                             <div className="row flex-lg-row g-3">
 

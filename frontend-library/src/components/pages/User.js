@@ -6,20 +6,25 @@ import { getOneUser, startAddUser } from '../../redux/actions/userAction';
 import { Footer } from '../ui/Footer'
 import { Loading } from '../ui/Loading';
 import { Navbar } from '../ui/Navbar'
+import { getOrderByEmail } from '../../redux/actions/orderAction';
+import { ViewOrder } from './ViewOrder';
 
 export const User = () => {
 
     const dispatch = useDispatch()
     const auth = useSelector(state => state.auth)
+
     const { loading } = useSelector((state) => state.ui)
     const { register, formState: { errors }, handleSubmit, setValue } = useForm();
     const [edit, setEdit] = useState(false)
+
 
     useEffect(() => {
         const getUser = async () => {
             const { data } = await axios.get(`user/email/${auth.email}`);
             precarga(data)
             dispatch(getOneUser(data))
+            dispatch(getOrderByEmail(data.email))
         }
         getUser()
     }, [])
@@ -28,20 +33,14 @@ export const User = () => {
         //console.log(data)
         const us = { ...data }
         dispatch(startAddUser(us))
-        /*if (idArt) {
-            const editArt = { ...data, _id: idArt }
-            dispatch(startAddArticulo(editArt))
-            console.log("editada", editArt)
-        } else {
-            dispatch(startAddArticulo(data));
-        }
         e.target.reset();
-        setMostrar(false)*/
     }
 
     const handleState = () => {
         setEdit(!edit)
     }
+
+
 
     const precarga = (data) => {
         setValue("nombre", `${data.nombre}`)
@@ -62,7 +61,7 @@ export const User = () => {
             <div className="b-example-divider"></div>
             <div className="container my-5">
                 <div className="row">
-                    <div className="col-8 p-4 align-items-center rounded-3 border border-info shadow-lg position-relative">
+                    <div className="col-7 p-4 align-items-center rounded-3 border border-info shadow-lg position-relative">
                         {loading ? (
                             <div className="position-absolute top-50 start-50 translate-middle">
                                 <Loading />
@@ -76,7 +75,7 @@ export const User = () => {
                                         <div className="p-2 flex-shrink-1 bd-highlight">
                                             <button type="button" className="btn btn-warning btn-sm" onClick={handleState}>
                                                 <i className="bi bi-pencil-fill" style={{ fontSize: 15 }} />
-                                                <span style={{fontSize:15}}>Editar</span>
+                                                <span style={{ fontSize: 15 }}>Editar</span>
                                             </button>
                                         </div>
                                     </div>
@@ -279,43 +278,13 @@ export const User = () => {
                         }
                     </div>
 
-                    <div className="col-4">
-                        <div className="p-3  p-2 align-items-center rounded-3 border border-info shadow-lg">
-                            <div className="d-flex bd-highlight">
-                                <div className="p-2 w-100 bd-highlight">
-                                    <h4 className="fw-bold modal-title">Mis Compras</h4>
-                                </div>
-                                <div className="p-2 flex-shrink-1 bd-highlight">
-                                    <img src={process.env.PUBLIC_URL + "/assets/img/go.png"} alt="logo" width="80 px" />
-                                </div>
-                            </div>
-                            <br />
-                            <h5 className="fw-bold">Compras realizadas</h5>
-                            <br />
-                            <ul className="list-group mt-2">
-                                <li className="list-group-item">
-                                    <h6>Telefono</h6>
-                                </li>
-                                <li className="list-group-item">
-                                    <h6>Direccion</h6>
-                                </li>
-                                <li className="list-group-item">
-                                    <h6>CP</h6>
-                                </li>
-                                <li className="list-group-item">
-                                    <h6>Ciudad:</h6>
-                                </li>
-                                <li className="list-group-item">
-                                    <h6>Pais:</h6>
-                                </li>
-                            </ul>
-                        </div>
+                    <div className="col-5">
+                        <ViewOrder />
                     </div>
                 </div>
             </div>
             <div className="b-example-divider"></div>
             <Footer />
-
         </>
     )
 }

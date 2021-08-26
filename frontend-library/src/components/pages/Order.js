@@ -29,14 +29,15 @@ export const Order = (prop) => {
         getUser()
     }, [])
 
-    const onSubmit = () => {
+    const onSubmit = async () => {
 
         const items = cart.map(c => {
             return {
                 nameArticulo: c.nameArticulo,
                 precioVenta: c.precioVenta,
                 qty: c.qty,
-                stock: c.stock,                
+                stock: c.stock,
+                producto: c._id
             }
         })
         const order = {
@@ -45,8 +46,8 @@ export const Order = (prop) => {
             total: total
         }
         //console.log(order)
-        dispatch(startAddOrder(order))
-        history.replace('/pay')
+        const respuesta = await dispatch(startAddOrder(order))
+        history.replace({ pathname: "/pay", state: { preferenceId: `${respuesta}` } })
     }
 
     const precarga = (data) => {
