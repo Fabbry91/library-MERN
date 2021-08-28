@@ -1,5 +1,4 @@
 const { request, response } = require("express");
-const mercadopago = require("mercadopago");
 const Articulo = require('../model/articulo');
 
 const getAll = async (req, res = response) => {

@@ -26,7 +26,7 @@ mercadopago.configure({
 
 app.use('/api/user',require('./routes/userRouter'));
 app.use('/api/rubro', require('./routes/rubroRouter'));
-app.use('/api/kit', require('./routes/kitRouter'));
+app.use('/api/facturacion', require('./routes/facturaRouter'));
 app.use('/api/articulo', require('./routes/articuloRouter'));
 app.use('/api/order', require('./routes/orderRouter'));
 app.use('/api/feedback',require('./routes/feedbackRoute'));

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Navbar } from '../ui/Navbar'
 import { useMercadopago } from 'react-sdk-mercadopago/lib'
 import { useSelector } from 'react-redux'

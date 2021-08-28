@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { startAddFactura } from '../../../redux/actions/facturasAction'
 import { getAllOrder } from '../../../redux/actions/orderAction'
-import { getAllUser } from '../../../redux/actions/userAction'
 import { Loading } from '../../ui/Loading'
 import { Navbar } from '../../ui/Navbar'
 import { AboutGo } from './AboutGo'
@@ -11,15 +11,18 @@ export const Ordenes = () => {
 
     const dispatch = useDispatch()
     const order = useSelector(state => state.ord.order)
-    const user = useSelector(state => state.user.user)
-    console.log(order)
     const { loading } = useSelector((state) => state.ui)
 
     useEffect(() => {
         if (Object.keys(order).length === 0) {
             dispatch(getAllOrder())
         }
-    }, [])
+    }, [order])
+
+
+    const handleOrder = (orden) => {
+        dispatch(startAddFactura(orden))
+    }
 
     return (
         <>
@@ -60,35 +63,50 @@ export const Ordenes = () => {
                                                     {
                                                         order.map(o => (
                                                             < div className="col" key={o._id}>
-                                                                <div className="card border-info text-primary">
-                                                                    <div className="card-header text-dark">
-                                                                        <div className="row">
-                                                                            <div className="col-6">Orden: <span style={{ textTransform: 'uppercase' }}>{o.preferenceId.slice(-3)}</span> </div>
-                                                                            <div className="col-6">Fecha: {o.date.slice(0, 10)}</div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="card-body text-dark">
-                                                                        <span className="card-title">Usuario: {o.user}</span>
-                                                                        <br />
-                                                                        <br />
-                                                                        <ul className="card-text">
-                                                                            {
-                                                                                o.items.map((oi, index) => (
-                                                                                    <li key={index} style={{ textTransform: 'capitalize' }}>Art.: {oi.title}  &nbsp;${oi.unit_price} u.  &nbsp;cant: {oi.quantity} </li>
-                                                                                ))
-                                                                            }
-                                                                        </ul>
-                                                                        <div className="row">
-                                                                            <span className="col-6">Total: $ {o.total}</span>
-                                                                            <span className="col-6" style={{ textTransform: 'capitalize' }}>Estado: {o.status}</span>
-                                                                        </div>
+                                                                {o.statusFactura === 'sin facturar' ?
+                                                                    (<>
+                                                                        <div className="card border-info text-primary">
+                                                                            <div className="card-header text-dark">
+                                                                                <div className="row">
+                                                                                    <div className="col-6">Orden: <span style={{ textTransform: 'uppercase' }}>{o.preferenceId.slice(-3)}</span> </div>
+                                                                                    <div className="col-6">Fecha: {o.date.slice(0, 10)}</div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="card-body text-dark">
+                                                                                <span className="card-title">Usuario: {o.user}</span>
+                                                                                <br />
+                                                                                <br />
+                                                                                <ul className="card-text">
+                                                                                    {
+                                                                                        o.items.map((oi, index) => (
+                                                                                            <li key={index} style={{ textTransform: 'capitalize' }}>Art.: {oi.title}  &nbsp;${oi.unit_price} u.  &nbsp;cant: {oi.quantity} </li>
+                                                                                        ))
+                                                                                    }
+                                                                                </ul>
+                                                                                <div className="row">
+                                                                                    <span className="col-6">Total: $ {o.total}</span>
+                                                                                    <span className="col-6" style={{ textTransform: 'capitalize' }}>Estado: {o.status}</span>
 
-                                                                        <div className="text-center mt-2">
-                                                                            <button className="btn btn-primary "> ok</button>
-                                                                        </div>
-                                                                    </div>
+                                                                                </div>
 
-                                                                </div>
+                                                                                {o.status === 'approved' ?
+                                                                                    (<div className="text-center mt-2">
+                                                                                        <button type="button" className="btn btn-primary" onClick={() => handleOrder(o)}> ok</button>
+                                                                                    </div>) :
+                                                                                    (
+                                                                                        <div className="text-center mt-2">
+                                                                                            <button type="button" className="btn btn-primary" disabled> ok</button>
+                                                                                        </div>
+                                                                                    )
+                                                                                }
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </>
+                                                                    ) : (
+                                                                        <p>No hay elementos a facturar</p>
+                                                                    )
+                                                                }
                                                             </div>
                                                         ))
                                                     }

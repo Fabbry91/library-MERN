@@ -21,17 +21,6 @@ export const types = {
     deleteRubro:'[RUB] Delete Rubro',
     setSelected:'[RUB] Select Rubro',
 
-    setDetailsKit:'[SDK] Set Details Kit',
-    addDetailsKit:'[SDK] Add Details Kit',
-    deleteDetailsKit:'[SDK] Delete Details Kit',
-    clearKit:'[SDK] Clear Details Kit',
-
-    addCartKit:'[KIT] Set Kit',
-    addKit:'[KIT] Add Kit',
-    editKit: '[KIT] Edit Kit',
-    deleteKit:'[KIT] Delete Kit',
-    setSelectedKit:'[KIT] Select Kit',
-
     addCart:'[CART] Add Item',
     deleteCart:'[CART] Delete Item',
     loadCart:'[CART] Load Current Item',
@@ -45,6 +34,7 @@ export const types = {
 
     setUserOrder:'[Order] Set Order',
     addUserOrder:'[Order] Add Order',
+    editUseOrder:'[Order] Edit Order',
     clearUseOrder:'[Order] Clear Order',
     deleteUserOrder:'[Order] Delete Order',
 
@@ -53,5 +43,9 @@ export const types = {
     loadUser:'[USER] Load User',
     loadOneUser:'[USER] Load One User',
     editUser:'[USER] Edit User',
+
+    setFacturas: '[FACT] Set Facturas',
+    setOneFactura:'[FACT] Set One Factura',
+    addFacturas: '[FACT] Add Facturas',
 
 }

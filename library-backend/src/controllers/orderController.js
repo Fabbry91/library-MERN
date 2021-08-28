@@ -59,29 +59,26 @@ const getOrderByEmail = async (req, res = response) => {
 };
 
 const updateOrder = async (req, res = response) => {
-    const articuloId = req.params.id;
+    const orderId = req.params.id;
+
     try {
-        const articulo = await Articulo.findById(req.params.id);
-        if (!articulo) {
+        const orden = await Order.findById(orderId);
+        if (!orden) {
             return res.status(404).json({
                 ok: false,
-                msg: "El articulo no existe"
+                msg: "La orden no existe"
             });
         }
 
-        const nuevoArticulo = {
-            ...req.body,
-        }
+        const ordenActualizada = await Order.findByIdAndUpdate(orderId, { $set: { statusFactura: "facturado" }}, { new: true });
 
-        const articuloActualizado = await Articulo.findByIdAndUpdate(articuloId, nuevoArticulo, { new: true });
-
-        res.status(200).json(articuloActualizado);
-    } catch (error) {
-        res.status(500).json({
-            ok: false,
-            msg: "comuniquese con el administrador",
-        });
-    }
+    res.status(200).json(ordenActualizada);
+} catch (error) {
+    res.status(500).json({
+        ok: false,
+        msg: "comuniquese con el administrador",
+    });
+}
 };
 
 const deleteOrder = async (req, res = response) => {
@@ -140,7 +137,8 @@ const insertOrder = async (req, res = response) => {
             date: Date.now(),
             status: "pending",
             items: artOrder,
-            total: total
+            total: total,
+            statusFactura: "sin facturar"
         }
 
         //console.log(orden)

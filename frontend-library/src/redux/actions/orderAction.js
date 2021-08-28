@@ -46,6 +46,21 @@ export const startDeleteOrder = (id, user) => {
     }
 }
 
+
+export const createOrden = (order) => ({
+    type: types.addUserOrder,
+    payload: order,
+})
+
+
+
+
+
+
+
+
+
+
 export const setAllOrder = (ord) => ({
     type: types.setUserOrder,
     payload: ord,
@@ -56,10 +71,7 @@ export const setOneArticulo = (id) => ({
     payload: id,
 })
 
-export const createOrden = (order) => ({
-    type: types.addUserOrder,
-    payload: order,
-})
+
 
 export const deleteOrder = (id) => ({
     type: types.deleteUserOrder,

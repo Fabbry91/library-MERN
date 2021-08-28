@@ -1,9 +1,14 @@
 const { Router } = require('express');
 const router = Router();
 
-router.get("/", facturaController.getAll);
-router.get("/:id", facturaController.getOne);
-router.post("/byquery/", facturaController.getByQuery);
-router.post("/", facturaController.insertFactura)
+const {
+    getOne,
+    getAll,
+    insertFactura,
+} = require('../controllers/facturaController');
+
+router.get("/",getAll);
+router.get("/:id",getOne);
+router.post("/",insertFactura)
 
 module.exports = router;

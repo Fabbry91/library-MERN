@@ -10,7 +10,6 @@ const {
 
 router.get("/", getAll);
 router.get("/:id", getOne);
-//router.post("/decreasestock", decreaseStockArticulo);
 router.post("/",insertArticulo);
 router.put("/:id", updateArticulo);
 router.delete("/:id", deleteArticulo);

@@ -8,6 +8,7 @@ import { uiReducer } from './reducer/uiReducer';
 import { cartReducer } from './reducer/cartReducer';
 import { orderReducer } from './reducer/orderReducer';
 import { userReducer } from './reducer/userReducer';
+import { facturaReducer } from './reducer/facturaReducer';
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
@@ -19,6 +20,7 @@ const reducers = combineReducers({
     cart: cartReducer,
     ord: orderReducer,
     user: userReducer,
+    fact: facturaReducer,
 });
 
 export const store = createStore(

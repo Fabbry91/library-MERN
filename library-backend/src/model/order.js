@@ -18,6 +18,7 @@ const orderSchema = new Schema({
     status: { type: String, required: true },
     total: { type: Number, required: true },
     items: [orderItem],
+    statusFactura:{ type: String, required: true },
 });
 
 // con decimal 128 obtengo un objeto json que no es correcto y lo transformo como set
