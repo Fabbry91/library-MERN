@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { getOneArticulo } from '../../redux/actions/articuloActions'
 import { addToCart } from '../../redux/actions/cartAction';
 import { Footer } from '../ui/Footer';
@@ -15,7 +15,7 @@ export const Product = (props) => {
     const prodId = props.match.params.id;
 
     useEffect(() => {
-        window.scrollTo(0, 0);
+        window.scroll(0, 0);
     }, []);
 
     useEffect(() => {

@@ -95,14 +95,25 @@ const updateUsuario = async (req, res = response) => {
                 msg: "El user no existe"
             });
         }
-
-        const nuevouser = {
-            ...req.body,
-        }
-
-        const userActualizado = await User.findByIdAndUpdate(userId, nuevouser, { new: true });
+        const userActualizado = await User.findByIdAndUpdate(userId, {
+            $set: {
+                apellido:req.body.apellido,
+                nombre:req.body.nombre,
+                telefono:req.body.telefono,
+                tipo:req.body.tipo,
+                email:req.body.email,
+                domicilio: {
+                    localidad:req.body.domicilio.localidad,
+                    calle:req.body.domicilio.calle,
+                    numero:req.body.domicilio.numero,
+                    cp:req.body.domicilio.cp,
+                    provincia:req.body.domicilio.provincia,
+                }
+            }
+        }, { new: true });
 
         res.status(200).json(userActualizado);
+
     } catch (error) {
         res.status(500).json({
             ok: false,

@@ -29,7 +29,6 @@ export const startAddOrder = (order) => {
     return async (dispatch) => {
         
         dispatch(startLoadingRedux());
-        dispatch(clearOrder())
         const { data } = await axios.post('order', order).then(res => res)
         dispatch(createOrden(data));
         dispatch(finishLoadingRedux());
@@ -53,14 +52,6 @@ export const createOrden = (order) => ({
 })
 
 
-
-
-
-
-
-
-
-
 export const setAllOrder = (ord) => ({
     type: types.setUserOrder,
     payload: ord,
@@ -76,8 +67,4 @@ export const setOneArticulo = (id) => ({
 export const deleteOrder = (id) => ({
     type: types.deleteUserOrder,
     payload: id
-})
-
-export const clearOrder = () => ({
-    type: types.clearUseOrder
 })

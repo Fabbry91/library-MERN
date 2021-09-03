@@ -7,8 +7,8 @@ export const types = {
     uiSetError: '[UI] Set Error',
     uiRemoveError: '[UI] Remove Error',
 
-    uiStartLoading: '[UI] Start Loading',
-    uiFinishLoading: '[UI] Finish Loading',
+    uiStartLoading: '[UI] Loading',
+    uiFinishLoading: '[UI] End Loading',
 
     setArticulos: '[ART] Set Articulos',
     setOneArticulo:'[ART] Set One Articulos',
@@ -26,17 +26,10 @@ export const types = {
     loadCart:'[CART] Load Current Item',
     adjusItemCart:'[CART] Adjust Item Qty',
 
-    setPay:'[Pay] setPay',
-    addPay:'[Pay] addPay',
-    editPay:'[Pay] editPay',
-    setOnePay:'[Pay] setOnePay',
-    removePay:'[Pay] removePay',
-
-    setUserOrder:'[Order] Set Order',
-    addUserOrder:'[Order] Add Order',
-    editUseOrder:'[Order] Edit Order',
-    clearUseOrder:'[Order] Clear Order',
-    deleteUserOrder:'[Order] Delete Order',
+    setUserOrder:'[ORD] Set Order',
+    addUserOrder:'[ORD] Add Order',
+    editUseOrder:'[ORD] Edit Order',
+    deleteUserOrder:'[ORD] Delete Order',
 
     addUser:'[USER] Add User',
     deleteUser:'[USER] Delete User',

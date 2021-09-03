@@ -47,6 +47,7 @@ export const Order = (prop) => {
         }
         //console.log(order)
         const respuesta = await dispatch(startAddOrder(order))
+        //console.log(respuesta)
         history.replace({ pathname: "/pay", state: { preferenceId: `${respuesta}` } })
     }
 

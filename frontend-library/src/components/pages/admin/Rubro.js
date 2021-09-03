@@ -1,20 +1,37 @@
-import React, { useEffect } from 'react'
-import { Navbar } from '../../ui/Navbar'
-import { AboutGo } from './AboutGo'
+import React, { useEffect, useState } from 'react'
+import Pagination from "react-js-pagination"
+import SearchField from "react-search-field"
+
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllRubro, startAddRubro, startDeleteRubro } from '../../../redux/actions/rubroAction';
+
+import { Navbar } from '../../ui/Navbar'
+import { AboutGo } from './AboutGo'
 import { Loading } from '../../ui/Loading';
 import { Dashboard } from './Dashboard';
 
 export const Rubro = () => {
 
+    const dispatch = useDispatch();
     const { register, formState: { errors }, handleSubmit } = useForm()
 
     const { rubro } = useSelector(state => state.rub)
     const { loading } = useSelector(state => state.ui);
 
-    const dispatch = useDispatch();
+    const [verSerch, setVerSerch] = useState(false);
+    const [search, setSearch] = useState([]);
+
+    //Paginación
+    const rubXpag = 5;
+    const [activePage, setCurrentPage] = useState(1);
+    const indexOfLastRub = activePage * rubXpag;
+    const indexOfFirstRub = indexOfLastRub - rubXpag;
+    const currentRub = rubro.slice(indexOfFirstRub, indexOfLastRub);
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber)
+    };
 
     const onSubmit = (data, e) => {
         dispatch(startAddRubro(data));
@@ -28,6 +45,20 @@ export const Rubro = () => {
     const handleDelete = (id) => {
         //console.log(id);
         dispatch(startDeleteRubro(id));
+    }
+
+    // Metodo Search
+    const onChangeHandler = (valor, e) => {
+        if (valor === '') {
+            setVerSerch(false)
+        } else {
+            const result = rubro.filter((post) => {
+                const postName = post.nameRubro.toLowerCase();
+                return postName.includes(valor)
+            })
+            setSearch(result)
+            setVerSerch(true)
+        }
     }
 
     return (
@@ -47,11 +78,13 @@ export const Rubro = () => {
                                         <h2 className="h2">Rubros</h2>
                                     </div>
                                     <div className="d-flex">
-                                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                                        <button className="btn btn-outline-success" type="submit">Search</button>
+                                        <SearchField
+                                            placeholder="Buscar..."
+                                            onChange={onChangeHandler}
+                                        />
                                     </div>
                                 </div>
-                                
+
                                 <hr />
 
                                 <div className="col-12 col-md-8 col-lg-8">
@@ -93,21 +126,75 @@ export const Rubro = () => {
                                     <ul className="list-group">
 
                                         {loading ?
-                                            (<Loading />) :
-                                            (rubro.map((rub, index) => (
+                                            (<Loading />)
+                                            :
+                                            (
+                                                <>
+                                                    {verSerch === false ?
+                                                        (
+                                                            currentRub &&
+                                                            currentRub.map((rub, index) => (
 
-                                                <li className="card mb-2" key={index}>
-                                                    <div className="d-flex flex-row p-2 justify-content-between">
-                                                        <span className="h3 p-2 bd-highlight">{rub.nameRubro}</span>
-                                                        <div className="p-2 bd-highlights">
-                                                            <button className="btn btn-danger" onClick={() => { handleDelete(rub.id) }}>X</button>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            ))
+                                                                <li className="card mb-2" key={index}>
+                                                                    <div className="d-flex flex-row p-1 justify-content-between">
+                                                                        <span className="h4 bd-highlight">{rub.nameRubro}</span>
+                                                                        <div className="p-1 bd-highlights">
+                                                                            <button className="btn btn-danger" onClick={() => { handleDelete(rub.id) }}>
+                                                                                <i className="bi bi-trash-fill" />
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            ))
+
+                                                        )
+
+                                                        :
+
+                                                        (
+                                                            search.length <= 0 ?
+                                                                (
+                                                                    <li className="card mb-2">
+                                                                        <div className="d-flex flex-row p-1 justify-content-center">
+                                                                            <span className="h4 bd-highlight">No existe Rubro con ese nombre</span>
+                                                                        </div>
+                                                                    </li>
+                                                                )
+                                                                :
+                                                                (
+                                                                    search.map((rub, index) => (
+
+                                                                        <li className="card mb-2" key={index}>
+                                                                            <div className="d-flex flex-row p-1 justify-content-between">
+                                                                                <span className="h4 bd-highlight">{rub.nameRubro}</span>
+                                                                                <div className="p-1 bd-highlights">
+                                                                                    <button className="btn btn-danger" onClick={() => { handleDelete(rub.id) }}>
+                                                                                        <i className="bi bi-trash-fill" />
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    ))
+                                                                )
+
+                                                        )
+                                                    }
+                                                </>
                                             )
                                         }
                                     </ul>
+
+                                    <div className="pagination justify-content-center">
+                                        <Pagination
+                                            itemClass="page-item"
+                                            linkClass="page-link"
+                                            activePage={activePage}
+                                            itemsCountPerPage={5}
+                                            totalItemsCount={rubro.length}
+                                            pageRangeDisplayed={5}
+                                            onChange={handlePageChange}
+                                        />
+                                    </div>
                                 </div>
 
                                 <div className="col-md-4 col-lg-4">

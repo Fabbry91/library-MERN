@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllFacturas, setOneFactura } from '../../../redux/actions/facturasAction'
+
+import Pagination from "react-js-pagination"
+import SearchField from "react-search-field"
+
+import { getAllFacturas } from '../../../redux/actions/facturasAction'
 import { Navbar } from '../../ui/Navbar'
 import { AboutGo } from './AboutGo'
 import { Dashboard } from './Dashboard'
@@ -12,7 +16,19 @@ export const Facturacion = () => {
     const facturas = useSelector(state => state.fact.facturas)
     const [totalPrice, setTotalPrice] = useState()
     const [oneFact, setOneFact] = useState({})
-    const { loading } = useSelector((state) => state.ui)
+    const [verSerch, setVerSerch] = useState(false);
+    const [search, setSearch] = useState([]);
+
+    //Paginación
+    const factXpag = 5;
+    const [activePage, setCurrentPage] = useState(1);
+    const indexOfLastFact = activePage * factXpag;
+    const indexOfFirstFact = indexOfLastFact - factXpag;
+    const currentFact = facturas?.slice(indexOfFirstFact, indexOfLastFact);
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber)
+    };
 
     useEffect(() => {
         if (Object.keys(facturas).length === 0) {
@@ -33,6 +49,20 @@ export const Facturacion = () => {
         setOneFact(factura)
     }
 
+    // Metodo Search
+    const onChangeHandler = (valor, e) => {
+        if (valor === '') {
+            setVerSerch(false)
+        } else {
+            const result = facturas.filter((post) => {
+                const postName = post.pedido?.user?.toLowerCase();
+                return postName.includes(valor)
+            })
+            setSearch(result)
+            setVerSerch(true)
+        }
+    }
+
     return (
         <>
             <Navbar />
@@ -50,8 +80,10 @@ export const Facturacion = () => {
                                         <h2 className="h2">Facturación</h2>
                                     </div>
                                     <div className="d-flex">
-                                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                                        <button className="btn btn-outline-success" type="submit">Search</button>
+                                        <SearchField
+                                            placeholder="Buscar por Usuario"
+                                            onChange={onChangeHandler}
+                                        />
                                     </div>
                                 </div>
 
@@ -67,24 +99,53 @@ export const Facturacion = () => {
                                                 <th scope="col">Subtotales</th>
                                             </tr>
                                         </thead>
+                                        {verSerch === false ?
+                                            (
+                                                <tbody>
+                                                    {currentFact &&
+                                                        currentFact.map((f, index) => (
+                                                            <tr key={index}>
+                                                                <td style={{ textTransform: 'capitalize' }}>{f.numero}</td>
+                                                                <td >{f.fecha.slice(0, 10)}</td>
+                                                                <td>
+                                                                    <button className="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onClick={() => handleFactura(f._id)}>
+                                                                        <i className="bi bi-person-fill" />
+                                                                        <i className="bi bi-printer-fill" />
+                                                                    </button>
+                                                                </td>
+                                                                <td >$ {f.total}</td>
+                                                            </tr>
+                                                        ))
+                                                    }
+                                                </tbody>
+                                            )
+                                            :
+                                            (
+                                                <tbody>
+                                                    {search.length > 0 ?
+                                                        (
+                                                            search.map((f, index) => (
+                                                                <tr key={index}>
+                                                                    <td style={{ textTransform: 'capitalize' }}>{f.numero}</td>
+                                                                    <td >{f.fecha.slice(0, 10)}</td>
+                                                                    <td>
+                                                                        <button className="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onClick={() => handleFactura(f._id)}>
+                                                                            <i className="bi bi-person-fill" />
+                                                                            <i className="bi bi-printer-fill" />
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            ))) :
+                                                        (
+                                                            <tr >
+                                                                <td colspan="6" className="table-active">No se encontraron elementos con ese nombre.</td>
 
-                                        <tbody>
-                                            {facturas &&
-                                                facturas.map((f, index) => (
-                                                    <tr key={index}>
-                                                        <td style={{ textTransform: 'capitalize' }}>{f.numero}</td>
-                                                        <td >{f.fecha.slice(0, 10)}</td>
-                                                        <td>
-                                                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onClick={() => handleFactura(f._id)}>
-                                                                <i class="bi bi-person-fill" />
-                                                                <i class="bi bi-printer-fill" />
-                                                            </button>
-                                                        </td>
-                                                        <td >$ {f.total}</td>
-                                                    </tr>
-                                                ))
-                                            }
-                                        </tbody>
+                                                            </tr>
+                                                        )
+                                                    }
+                                                </tbody>
+                                            )
+                                        }
 
                                         <tfoot>
                                             <tr>
@@ -96,53 +157,65 @@ export const Facturacion = () => {
                                         </tfoot>
                                     </table>
 
-                                    <div class="collapse" id="collapseExample">
-                                        <div class="container">
-                                            <div class="card">
-                                                <div class="card-header bg-warning"></div>
-                                                <div class="card card-body">
-                                                    <div class="div">
-                                                        <div class="row mb-3">
-                                                            <div class="col">
-                                                                <h3 class="fw-bold">
-                                                                    <img src={process.env.PUBLIC_URL + "/assets/img/go.png"} width="70" class="img-fluid" alt="" /> &nbsp;&nbsp;&nbsp;Go Art
+                                    <div className="pagination justify-content-center mt-2">
+                                        <Pagination
+                                            itemClass="page-item"
+                                            linkClass="page-link"
+                                            activePage={activePage}
+                                            itemsCountPerPage={5}
+                                            totalItemsCount={facturas.length}
+                                            pageRangeDisplayed={5}
+                                            onChange={handlePageChange}
+                                        />
+                                    </div>
+
+                                    <div className="collapse" id="collapseExample">
+                                        <div className="container">
+                                            <div className="card">
+                                                <div className="card-header bg-warning"></div>
+                                                <div className="card card-body">
+                                                    <div className="div">
+                                                        <div className="row mb-3">
+                                                            <div className="col">
+                                                                <h3 className="fw-bold">
+                                                                    <img src={process.env.PUBLIC_URL + "/assets/img/go.png"} width="70" className="img-fluid" alt="" /> &nbsp;&nbsp;&nbsp;Go Art
                                                                 </h3>
                                                                 <br />
-                                                                <span class="h6 fw-bold">Ciudad de Mendoza &nbsp; CP:5530
+                                                                <span className="h6 fw-bold">Ciudad de Mendoza &nbsp; CP:5530
                                                                     <br />
                                                                     Telefono:(261)4251095
                                                                 </span>
                                                             </div>
 
-                                                            <div class="col-md-auto"><span class="h2">X</span></div>
+                                                            <div className="col-md-auto"><span className="h2">X</span></div>
 
-                                                            <div class="col">
-                                                                <h5 class="fw-bold">Factura N°: {oneFact.numero} </h5>
-                                                                <h5 class="fw-bold">Fecha: {oneFact.fecha?.slice(0, 10)} </h5>
+                                                            <div className="col">
+                                                                <h5 className="fw-bold">Factura N°: {oneFact.numero} </h5>
+                                                                <h5 className="fw-bold">Fecha: {oneFact.fecha?.slice(0, 10)} </h5>
                                                             </div>
 
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col text-left">
-                                                                <span className="text-muted">Cliente:</span> <span class="card-text fw-bold">{oneFact.user?.nombre} {oneFact.user?.apellido}</span>
+                                                        <div className="row">
+                                                            <div className="col text-left">
+                                                                <span className="text-muted">Cliente:</span> <span className="card-text fw-bold">{oneFact.user?.nombre} {oneFact.user?.apellido}</span>
                                                                 <br />
-                                                                <span className="text-muted">Email:</span> <span class="card-text fw-bold">{oneFact.user?.email}</span>
+                                                                <span className="text-muted">Email:</span> <span className="card-text fw-bold">{oneFact.user?.email}</span>
                                                                 <br />
-                                                                <span className="text-muted">Contacto:</span> <span class="card-text fw-bold">{oneFact.user?.telefono}</span>
+                                                                <span className="text-muted">Contacto:</span> <span className="card-text fw-bold">{oneFact.user?.telefono}</span>
                                                             </div>
-                                                            <div class="col">
-                                                                <span className="text-muted">Domicilio:</span> <span class="card-text fw-bold">{oneFact.user?.domicilio?.calle}</span>
+                                                            <div className="col">
+                                                                <span className="text-muted">Domicilio:</span> <span className="card-text fw-bold">{oneFact.user?.domicilio?.calle}</span>
                                                                 <br />
-                                                                <span className="text-muted">N°:</span> <span class="card-text fw-bold">{oneFact.user?.domicilio?.numero}</span> <span className="text-muted ms-2">CP:</span> <span class="card-text fw-bold">{oneFact.user?.domicilio?.cp}</span>
+                                                                <span className="text-muted">N°:</span> <span className="card-text fw-bold">{oneFact.user?.domicilio?.numero}</span> <span className="text-muted ms-2">CP:</span> <span className="card-text fw-bold">{oneFact.user?.domicilio?.cp}</span>
                                                                 <br />
-                                                                <span className="text-muted">Localidad:</span> <span class="card-text fw-bold">{oneFact.user?.domicilio?.localidad}</span>
+                                                                <span className="text-muted">Localidad:</span> <span className="card-text fw-bold">{oneFact.user?.domicilio?.localidad}</span>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class=" table-responsive mt-3">
-                                                        <div class="div" id='table'>
-                                                            <table class="table table-info table-striped text-center">
-                                                                <thead class="thead-dark">
+                                                    <div className=" table-responsive mt-3">
+                                                        <div className="div" id='table'>
+                                                            <table className="table table-info table-striped text-center">
+                                                                <thead className="thead-dark">
                                                                     <tr>
                                                                         <th scope="col">Articulo</th>
                                                                         <th scope="col">Precio Unitario</th>
@@ -169,13 +242,13 @@ export const Facturacion = () => {
                                                                         <td></td>
                                                                         <td></td>
                                                                         <td>Total</td>
-                                                                        <td>${oneFact.total}</td>
+                                                                        <td>${totalPrice}</td>
                                                                     </tr>
                                                                 </tfoot>
                                                             </table>
                                                         </div>
-                                                        <div class="col-12 text-center">
-                                                            <span className="text-muted">Orden:</span> <span class="card-text fw-bold">{oneFact.pedido?.preferenceId.slice(-3)}</span>
+                                                        <div className="col-12 text-center">
+                                                            <span className="text-muted">Orden:</span> <span className="card-text fw-bold">{oneFact.pedido?.preferenceId.slice(-3)}</span>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -27,7 +27,7 @@ export const getOneUser = (user) => {
     }
 }
 
-export const startAddUser = (user) => {
+export const startEditByEmail = (user) => {
     return async (dispatch) => {
         dispatch(startLoadingRedux());
         await axios.put(`user/email/${user.email}`, user);
@@ -35,11 +35,42 @@ export const startAddUser = (user) => {
     }
 }
 
+export const startEditUser = (data) => {
+    return async (dispatch) => {
+        console.log(data)
+        const { _id, apellido, calle, cp, email, localidad, nombre, numero, provincia, telefono, tipo } = data
+        const user = {
+            apellido: apellido,
+            nombre: nombre,
+            telefono: telefono,
+            tipo: [tipo],
+            email: email,
+            domicilio: {
+                localidad: localidad,
+                calle: calle,
+                numero: numero,
+                cp: cp,
+                provincia: provincia
+            }
+        }
+        dispatch(startLoadingRedux());
+        await axios.put(`user/${_id}`, user);
+        dispatch(getAllUser())
+        dispatch(finishLoadingRedux())
+    }
+}
+
+
+
+
+
+
+
 export const startDeleteUser = (id) => {
     return async (dispatch) => {
 
         dispatch(startLoadingRedux());
-        await axios.delete(`User/${id}`);
+        await axios.delete(`user/${id}`);
         dispatch(getAllUser())
         dispatch(finishLoadingRedux())
     }

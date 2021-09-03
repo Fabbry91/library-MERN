@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import axios from '../../services/AxiosConection'
 import { useDispatch, useSelector } from 'react-redux';
-import { getOneUser, startAddUser } from '../../redux/actions/userAction';
+import { getOneUser, startEditByEmail } from '../../redux/actions/userAction';
 import { Footer } from '../ui/Footer'
 import { Loading } from '../ui/Loading';
 import { Navbar } from '../ui/Navbar'
@@ -32,7 +32,7 @@ export const User = () => {
     const onSubmit = (data, e) => {
         //console.log(data)
         const us = { ...data }
-        dispatch(startAddUser(us))
+        dispatch(startEditByEmail(us))
         e.target.reset();
     }
 

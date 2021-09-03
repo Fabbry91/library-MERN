@@ -19,6 +19,13 @@ export const userReducer = (state = initialState, action) => {
                 user: [action.payload, ...state.user]
             }
 
+
+        case types.setOneUser:
+            return {
+                ...state,
+                user: state.user.filter(us => us._id === action.payload)
+            }
+
         case types.editUser:
             return {
                 ...state,
