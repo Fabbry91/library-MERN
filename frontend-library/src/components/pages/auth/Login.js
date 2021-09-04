@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
-import { startFacebookLogin, startGoogleLogin, startLoginEmailPassword } from '../../redux/actions/authAction'
+import { startFacebookLogin, startGoogleLogin, startLoginEmailPassword } from '../../../redux/actions/authAction'
 
 export const Login = ({history}) => {
 

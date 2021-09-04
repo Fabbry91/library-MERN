@@ -4,18 +4,18 @@ import { finishLoadingRedux, startLoadingRedux } from './uiActions';
 
 
 
-export const getAllUser = () => {
+export const startGetAllUsers = () => {
     return async (dispatch) => {
 
         dispatch(startLoadingRedux());
         const { data } = await axios.get('user');
-        dispatch(setUser(data));
+        dispatch(setUsers(data));
         dispatch(finishLoadingRedux())
 
     }
 }
 
-export const getOneUser = (user) => {
+export const startGetOneUser = (user) => {
     return async (dispatch) => {
 
         dispatch(startLoadingRedux());
@@ -37,7 +37,7 @@ export const startEditByEmail = (user) => {
 
 export const startEditUser = (data) => {
     return async (dispatch) => {
-        console.log(data)
+        
         const { _id, apellido, calle, cp, email, localidad, nombre, numero, provincia, telefono, tipo } = data
         const user = {
             apellido: apellido,
@@ -55,28 +55,26 @@ export const startEditUser = (data) => {
         }
         dispatch(startLoadingRedux());
         await axios.put(`user/${_id}`, user);
-        dispatch(getAllUser())
+        dispatch(startGetAllUsers())
         dispatch(finishLoadingRedux())
     }
 }
-
-
-
-
-
-
 
 export const startDeleteUser = (id) => {
     return async (dispatch) => {
 
         dispatch(startLoadingRedux());
         await axios.delete(`user/${id}`);
-        dispatch(getAllUser())
+        dispatch(startGetAllUsers())
         dispatch(finishLoadingRedux())
     }
 }
 
-export const setUser = (us) => ({
+
+
+//FUNCIONES CON TYPE
+
+export const setUsers = (us) => ({
     type: types.loadUser,
     payload: us,
 })

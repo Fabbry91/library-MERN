@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
-import { Footer } from '../../ui/Footer'
-import { Navbar } from '../../ui/Navbar'
-import { HomeBanner } from './HomeBanner'
-import { HomeInformation } from './HomeInformation'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllArticulo } from '../../../redux/actions/articuloActions'
-import { Products } from '../Products'
+
+import { HomeBanner } from './HomeBanner'
+import { HomeInformation } from './HomeInformation'
+import { Products } from '../products/Products'
+import { Footer } from '../../ui/Footer'
+import { Navbar } from '../../ui/Navbar'
 import { Loading } from '../../ui/Loading'
 import { MsgError } from '../../ui/MsgError'
 
@@ -19,6 +20,8 @@ export const Home = () => {
     useEffect(() => {
         dispatch(getAllArticulo())
     }, [dispatch])
+
+    console.log(productList)
 
     return (
         <div>

@@ -1,7 +1,11 @@
+import axios from '../services/AxiosConection'
 
-export const orderGrafics = async (order) => {
 
-    const facturados = order.map((f) => {
+export const orderGrafics = async () => {
+
+    const { data } = await axios.get('facturacion')
+
+    const facturados = data.map((f) => {
         const obj = {
             fecha: parseInt(f.fecha.slice(5, 7)),
             total: f.total
@@ -31,7 +35,10 @@ export const orderGrafics = async (order) => {
         return [...acc, valorAcr]
     }, []);
 
-    const ordenado = ordenSduplicate.sort(o => o.fecha)
-    //console.log(ordenSduplicate)
-    return ordenado
+    const ordenado = ordenSduplicate.sort((a, b) => a.fecha - b.fecha)
+    //console.log(ordenado)
+    const meses = ordenado.map(r => r.fecha)
+    const total = ordenado.map(r => r.total)
+
+    return [meses,total]
 }

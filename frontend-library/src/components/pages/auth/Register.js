@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { startRegisterEmailPassword } from '../../redux/actions/authAction'
+import { startRegisterEmailPassword } from '../../../redux/actions/authAction'
 
 
 export const Register = ({ history }) => {

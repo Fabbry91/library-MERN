@@ -13,7 +13,7 @@ import { Dashboard } from './Dashboard'
 export const Facturacion = () => {
 
     const dispatch = useDispatch();
-    const facturas = useSelector(state => state.fact.facturas)
+    const facturas = useSelector((state) => state.fact.facturas)
     const [totalPrice, setTotalPrice] = useState()
     const [oneFact, setOneFact] = useState({})
     const [verSerch, setVerSerch] = useState(false);
@@ -31,18 +31,19 @@ export const Facturacion = () => {
     };
 
     useEffect(() => {
-        if (Object.keys(facturas).length === 0) {
-            dispatch(getAllFacturas())
-        }
-    }, [facturas])
+        dispatch(getAllFacturas())
+    }, [dispatch])
 
     useEffect(() => {
         let totals = 0
+
         facturas.forEach(fact => {
             totals += fact.total
         });
         setTotalPrice(totals)
-    }, [totalPrice, setTotalPrice])
+
+    }, [facturas,totalPrice, setTotalPrice])
+
 
     const handleFactura = (id) => {
         const factura = facturas.find((f) => f._id === id);
@@ -65,10 +66,8 @@ export const Facturacion = () => {
 
     return (
         <>
-            <Navbar />
-
             <div className="container-fluid">
-                <div className="row">
+                <div className="row flex-nowrap">
                     <Dashboard />
 
                     <div className="col-md-9 ms-sm-auto col-lg-10 px-md-4">

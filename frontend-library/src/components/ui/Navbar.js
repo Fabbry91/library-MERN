@@ -40,18 +40,6 @@ export const Navbar = () => {
                         <li className="nav-item">
                             <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                         </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/admin">Articulos</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/admin/pedido">Pedido</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/admin/rubro">Rubro</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/404">Error</Link>
-                        </li>
                     </ul>
 
                     <div className="d-flex">

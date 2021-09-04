@@ -1,33 +1,51 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
-import axios from '../../services/AxiosConection'
+import axios from '../../../services/AxiosConection'
 import { useDispatch, useSelector } from 'react-redux';
-import { getOneUser, startEditByEmail } from '../../redux/actions/userAction';
-import { Footer } from '../ui/Footer'
-import { Loading } from '../ui/Loading';
-import { Navbar } from '../ui/Navbar'
-import { getOrderByEmail } from '../../redux/actions/orderAction';
-import { ViewOrder } from './ViewOrder';
+import { startGetOneUser, startEditByEmail } from '../../../redux/actions/userAction';
+import { Footer } from '../../ui/Footer'
+import { Loading } from '../../ui/Loading';
+import { Navbar } from '../../ui/Navbar'
+import { getOrderByEmail } from '../../../redux/actions/orderAction';
+import { ViewOrder } from '../client/ViewOrder';
 
 export const User = () => {
 
     const dispatch = useDispatch()
-    const auth = useSelector(state => state.auth)
+    const auth = useSelector((state) => state.auth)
 
     const { loading } = useSelector((state) => state.ui)
     const { register, formState: { errors }, handleSubmit, setValue } = useForm();
     const [edit, setEdit] = useState(false)
+    const [user, setUser] = useState()
 
 
     useEffect(() => {
         const getUser = async () => {
             const { data } = await axios.get(`user/email/${auth.email}`);
-            precarga(data)
-            dispatch(getOneUser(data))
+            setUser(data)
+            dispatch(startGetOneUser(data))
             dispatch(getOrderByEmail(data.email))
         }
         getUser()
-    }, [])
+    }, [dispatch, auth.email])
+
+    useEffect(() => {
+
+        const precarga = (data) => {
+            setValue("nombre", `${data?.nombre}`)
+            setValue("apellido", `${data?.apellido}`)
+            setValue("telefono", `${data?.telefono}`)
+            setValue("email", `${data?.email}`)
+            setValue("calle", `${data?.domicilio?.calle}`)
+            setValue("numero", `${data?.domicilio?.numero}`)
+            setValue("cp", `${data?.domicilio?.cp}`)
+            setValue("localidad", `${data?.domicilio?.localidad}`)
+            setValue("provincia", `${data?.domicilio?.provincia}`)
+        }
+
+        precarga(user)
+    }, [user, setValue])
 
     const onSubmit = (data, e) => {
         //console.log(data)
@@ -40,19 +58,6 @@ export const User = () => {
         setEdit(!edit)
     }
 
-
-
-    const precarga = (data) => {
-        setValue("nombre", `${data.nombre}`)
-        setValue("apellido", `${data.apellido}`)
-        setValue("telefono", `${data.telefono}`)
-        setValue("email", `${data.email}`)
-        setValue("calle", `${data.domicilio.calle}`)
-        setValue("numero", `${data.domicilio.numero}`)
-        setValue("cp", `${data.domicilio.cp}`)
-        setValue("localidad", `${data.domicilio.localidad}`)
-        setValue("provincia", `${data.domicilio.provincia}`)
-    }
 
     return (
         <>

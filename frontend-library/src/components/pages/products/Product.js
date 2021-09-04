@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link} from 'react-router-dom';
-import { getOneArticulo } from '../../redux/actions/articuloActions'
-import { addToCart } from '../../redux/actions/cartAction';
-import { Footer } from '../ui/Footer';
-import { Loading } from '../ui/Loading';
-import { Navbar } from '../ui/Navbar';
+import { Link } from 'react-router-dom';
+
+import { getOneArticulo } from '../../../redux/actions/articuloActions'
+import { addToCart } from '../../../redux/actions/cartAction';
+import { Footer } from '../../ui/Footer';
+import { Loading } from '../../ui/Loading';
+import { Navbar } from '../../ui/Navbar';
 
 export const Product = (props) => {
 
     const dispatch = useDispatch();
     const articulo = useSelector(state => state.art.articulos[0])
-    const { loading, msgError } = useSelector((state) => state.ui)
+    const { loading } = useSelector((state) => state.ui)
     const prodId = props.match.params.id;
 
     useEffect(() => {
@@ -43,33 +44,33 @@ export const Product = (props) => {
                                     <Loading />
                                 </div>
                             ) : (
-                                <img src={articulo.url} className="img-fluid fit-image border border-dark rounded-2" alt="imagen-1"></img>
+                                <img src={articulo?.url} className="img-fluid fit-image border border-dark rounded-2" alt="imagen-1"></img>
                             )}
                         </div>
 
                         <div className="col-lg-5 p-3 d-flex flex-column position-static">
                             <span className="d-inline-block mb-2 text-primary h6">Articulo</span>
-                            <strong className="mb-0 card-title h3" style={{ textTransform: 'capitalize' }}>{articulo.nameArticulo}</strong>
+                            <strong className="mb-0 card-title h3" style={{ textTransform: 'capitalize' }}>{articulo?.nameArticulo}</strong>
                             <br />
-                            <p className="mb-1 text-muted"><span className="badge rounded-pill bg-success"> {articulo.rubros}</span></p>
+                            <p className="mb-1 text-muted"><span className="badge rounded-pill bg-success"> {articulo?.rubros}</span></p>
                             <br />
-                            <span className="h1 card-text price">${articulo.precioVenta}</span>
+                            <span className="h1 card-text price">${articulo?.precioVenta}</span>
                         </div>
 
                         <div className="col p-3 me-3 d-flex flex-column border border-info rounded-3">
                             <p><span className="text-muted h5">Vendido por </span><strong className="card-text">GO</strong>.</p>
                             <br />
-                            <strong className="card-text h-5">Stock disponible </strong><span className="text-muted">{articulo.stock} un.</span>
+                            <strong className="card-text h-5">Stock disponible </strong><span className="text-muted">{articulo?.stock} un.</span>
                             <br />
                             <div className="d-grid gap-2 mt-3">
 
                                 {
-                                    articulo.stock <= 0
+                                    articulo?.stock <= 0
                                         ? (<button className="btn btn-secondary btn-sm" type="button" disable >Sin Stock</button>)
                                         : (
                                             <>
-                                                <Link to={`/shopping-cart/${articulo._id}`} className="btn btn-sm btn-primary" onClick={() => addToCartHandler(articulo._id)}>Comprar</Link>
-                                                <button className="btn btn-outline-primary btn-sm" type="button" disable onClick={() => addToCartHandler(articulo._id)}>Agregar al carrito</button>
+                                                <Link to={`/shopping-cart/${articulo?._id}`} className="btn btn-sm btn-primary" onClick={() => addToCartHandler(articulo?._id)}>Comprar</Link>
+                                                <button className="btn btn-outline-primary btn-sm" type="button" disable onClick={() => addToCartHandler(articulo?._id)}>Agregar al carrito</button>
                                             </>
                                         )
 
@@ -89,8 +90,8 @@ export const Product = (props) => {
                     <div className="col-8 p-4 align-items-center rounded-3 border border-info shadow-lg position-relative">
                         <h4 className="fw-bold modal-title">Detalles de productos.</h4>
                         <br />
-                        {articulo.description !== "" ?
-                            (<span className="h5 text-muted">{articulo.description}</span>) :
+                        {articulo?.description !== "" ?
+                            (<span className="h5 text-muted">{articulo?.description}</span>) :
                             (<span className="h2 text-muted center-text">No tiene descripción.</span>)
                         }
 

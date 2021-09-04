@@ -3,7 +3,7 @@ import Pagination from "react-js-pagination"
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { startRegisterEmailPassword } from '../../../redux/actions/authAction'
-import { getAllUser, startDeleteUser, startEditUser } from '../../../redux/actions/userAction'
+import { startGetAllUsers, startDeleteUser, startEditUser } from '../../../redux/actions/userAction'
 import { Loading } from '../../ui/Loading'
 import { Navbar } from '../../ui/Navbar'
 import { Dashboard } from './Dashboard'
@@ -11,11 +11,9 @@ import { Dashboard } from './Dashboard'
 export const Users = () => {
 
     const dispatch = useDispatch()
-    const user = useSelector(state => state.user.user)
+    const user = useSelector((state) => state.user.user)
     const { loading } = useSelector((state) => state.ui)
     const [useId, setUseId] = useState()
-
-
 
     //Paginación
     const orderXuser = 6;
@@ -29,13 +27,11 @@ export const Users = () => {
     };
 
     useEffect(() => {
-        if (user !== null) {
-            dispatch(getAllUser())
-        }
-    }, [])
+        dispatch(startGetAllUsers())
+    }, [dispatch])
 
     const { register, formState: { errors }, handleSubmit, setValue } = useForm();
-    const [passError, setPassError] = useState();
+    const [passError] = useState();
 
     const onSubmit = (data, e) => {
 
@@ -89,10 +85,8 @@ export const Users = () => {
 
     return (
         <>
-            <Navbar />
-
             <div className="container-fluid">
-                <div className="row">
+                <div className="row flex-nowrap">
                     <Dashboard />
 
                     <div className="col-md-9 ms-sm-auto col-lg-10 px-md-4">

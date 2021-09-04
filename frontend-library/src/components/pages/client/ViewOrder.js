@@ -1,14 +1,26 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { startDeleteOrder } from '../../redux/actions/orderAction'
-import { Loading } from '../ui/Loading'
+import { startDeleteOrder } from '../../../redux/actions/orderAction'
+import Pagination from "react-js-pagination"
+import { Loading } from '../../ui/Loading'
 
 export const ViewOrder = () => {
 
     const dispatch = useDispatch()
     const { loading } = useSelector((state) => state.ui)
     const order = useSelector(state => state.ord.order)
+
+    //Paginación
+    const orderXpag = 7;
+    const [activePage, setCurrentPage] = useState(1);
+    const indexOfLastOrder = activePage * orderXpag;
+    const indexOfFirstOrd = indexOfLastOrder - orderXpag;
+    const currentOrd = order.slice(indexOfFirstOrd, indexOfLastOrder);
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber)
+    };
 
     const [preference, setPreference] = useState({})
 
@@ -42,33 +54,34 @@ export const ViewOrder = () => {
 
                                 (
                                     <ul className="list-group mt-2">
-                                        {order.map((ord) => (
-                                            <div key={ord._id}>
-                                                {ord.status !== "approved" ?
-                                                    (<li className="list-group-item d-flex justify-content-between align-items-start">
-                                                        <div className="ms-2 me-auto">
-                                                            <div className="fw-bold">Orden: <span style={{ textTransform: 'uppercase' }}>{ord.preferenceId.slice(-3)}</span> </div>
-                                                            <span>Fecha: {ord.date.slice(0, 10)}</span> &nbsp;&nbsp;
-                                                            <span>Total: <span className="fw-bold">$ {ord.total}</span></span>
-                                                        </div>
-                                                        <span className="badge bg-warning text-dark me-1 rounded-pill">{ord.status}</span>
-                                                        <button className="btn btn-sm btn-danger me-1"><i className="bi bi-trash-fill" onClick={(() => hadleDeleteOrder(ord._id, ord.user))} /></button>
-                                                        <Link to={{ pathname: "/viewPay", state: { preferenceId: `${ord.preferenceId}` } }} className="btn btn-success btn-sm"><i className="bi bi-currency-dollar" /></Link>
-                                                    </li>) :
-                                                    (<li className="list-group-item d-flex justify-content-between align-items-start ">
-                                                        <div className="ms-2 me-auto">
-                                                            <div className="fw-bold">Orden: <span style={{ textTransform: 'uppercase' }}>{ord.preferenceId.slice(-3)}</span> </div>
-                                                            <span>Fecha: {ord.date.slice(0, 10)}</span> &nbsp;&nbsp;
-                                                            <span>Total: <span className="fw-bold">$ {ord.total}</span></span>
-                                                        </div>
-                                                        <span className="badge bg-success me-1 rounded-pill">Aprobada</span>
-                                                        <button className="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => setPreference(ord)}><i className="bi bi-eye" style={{ fontSize: 20 }} /></button>
-                                                    </li>)
+                                        {
+                                            (currentOrd.map((ord) => (
+                                                <div key={ord._id}>
+                                                    {ord.status !== "approved" ?
+                                                        (<li className="list-group-item d-flex justify-content-between align-items-start">
+                                                            <div className="ms-2 me-auto">
+                                                                <div className="fw-bold">Orden: <span style={{ textTransform: 'uppercase' }}>{ord.preferenceId.slice(-3)}</span> </div>
+                                                                <span>Fecha: {ord.date.slice(0, 10)}</span> &nbsp;&nbsp;
+                                                                <span>Total: <span className="fw-bold">$ {ord.total}</span></span>
+                                                            </div>
+                                                            <span className="badge bg-warning text-dark me-1 rounded-pill">{ord.status}</span>
+                                                            <button className="btn btn-sm btn-danger me-1"><i className="bi bi-trash-fill" onClick={(() => hadleDeleteOrder(ord._id, ord.user))} /></button>
+                                                            <Link to={{ pathname: "/viewPay", state: { preferenceId: `${ord.preferenceId}` } }} className="btn btn-success btn-sm"><i className="bi bi-currency-dollar" /></Link>
+                                                        </li>) :
+                                                        (<li className="list-group-item d-flex justify-content-between align-items-start ">
+                                                            <div className="ms-2 me-auto">
+                                                                <div className="fw-bold">Orden: <span style={{ textTransform: 'uppercase' }}>{ord.preferenceId.slice(-3)}</span> </div>
+                                                                <span>Fecha: {ord.date.slice(0, 10)}</span> &nbsp;&nbsp;
+                                                                <span>Total: <span className="fw-bold">$ {ord.total}</span></span>
+                                                            </div>
+                                                            <span className="badge bg-success me-1 rounded-pill">Aprobada</span>
+                                                            <button className="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => setPreference(ord)}><i className="bi bi-eye" style={{ fontSize: 20 }} /></button>
+                                                        </li>)
 
-                                                }
-                                            </div>
+                                                    }
+                                                </div>
 
-                                        ))
+                                            )))
                                         }
                                     </ul>
                                 )
@@ -76,6 +89,18 @@ export const ViewOrder = () => {
                         </>
                     )
                 }
+
+                <div className="pagination justify-content-center mt-2">
+                    <Pagination
+                        itemClass="page-item"
+                        linkClass="page-link"
+                        activePage={activePage}
+                        itemsCountPerPage={7}
+                        totalItemsCount={order.length}
+                        pageRangeDisplayed={7}
+                        onChange={handlePageChange}
+                    />
+                </div>
             </div>
 
             <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">

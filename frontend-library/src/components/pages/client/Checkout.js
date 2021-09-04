@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
-import { Navbar } from '../ui/Navbar'
-import { useMercadopago } from 'react-sdk-mercadopago/lib'
 import { useSelector } from 'react-redux'
-import { Loading } from '../ui/Loading'
+
+import { Navbar } from '../../ui/Navbar'
 import { useLocation } from 'react-router-dom'
+import { useMercadopago } from 'react-sdk-mercadopago/lib'
+
+import { Loading } from '../../ui/Loading'
 
 export const Checkout = () => {
 
@@ -31,7 +33,7 @@ export const Checkout = () => {
             })
         }
 
-    }, [mercadopago])
+    }, [mercadopago, preferenceId])
 
 
     return (

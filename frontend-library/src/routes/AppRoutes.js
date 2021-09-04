@@ -1,26 +1,35 @@
-import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { Rubro } from '../components/pages/admin/Rubro'
-import { StoreGo } from '../components/pages/admin/StoreGo'
-import { User } from '../components/pages/User'
-import { Checkout } from '../components/pages/Checkout'
-import { Error404 } from '../components/pages/Error404'
-import { Home } from '../components/pages/home/Home'
-import { Login } from '../components/pages/Login'
-import { Product } from '../components/pages/Product'
-import { Register } from '../components/pages/Register'
-import { ShoppingCart } from '../components/pages/ShoppingCart'
-import { Loading } from '../components/ui/Loading'
 import { firebase } from '../firebase/firebase'
-import { login } from '../redux/actions/authAction'
+import React, { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+
+import { AdminRoute } from './AdminRoute'
 import { PrivateRoute } from './PrivateRoute'
-import { Dashboard } from '../components/pages/admin/Dashboard'
-import { Facturacion } from '../components/pages/admin/Facturacion'
-import { Ordenes } from '../components/pages/admin/Ordenes'
-import { Informes } from '../components/pages/admin/Informes'
+
+import axios from '../services/AxiosConection'
+import { login } from '../redux/actions/authAction'
+import { startGetOneUser } from '../redux/actions/userAction'
+
 import { Users } from '../components/pages/admin/Users'
-import { ViewPay } from '../components/pages/ViewPay'
+import { Rubro } from '../components/pages/admin/Rubro'
+import { Ordenes } from '../components/pages/admin/Ordenes'
+import { StoreGo } from '../components/pages/admin/StoreGo'
+import { Informes } from '../components/pages/admin/Informes'
+import { Facturacion } from '../components/pages/admin/Facturacion'
+
+import { Home } from '../components/pages/home/Home'
+import { Product } from '../components/pages/products/Product'
+
+import { Login } from '../components/pages/auth/Login'
+import { Register } from '../components/pages/auth/Register'
+
+import { User } from '../components/pages/client/User'
+import { Checkout } from '../components/pages/client/Checkout'
+import { ShoppingCart } from '../components/pages/client/ShoppingCart'
+import { ViewPay } from '../components/pages/client/ViewPay'
+
+import { Loading } from '../components/ui/Loading'
+import { Error404 } from '../components/ui/Error404'
 
 export const AppRoutes = () => {
 
@@ -28,11 +37,16 @@ export const AppRoutes = () => {
 
     const [checking, setChecking] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isAdmin, setIsAdmin] = useState('');
 
     useEffect(() => {
-        firebase.auth().onAuthStateChanged((user) => {
+
+        firebase.auth().onAuthStateChanged(async (user) => {
             if (user?.uid) {
+                const { data } = await axios.get(`user/email/${user.email}`)
+                dispatch(startGetOneUser(data))
                 dispatch(login(user.uid, user.displayName, user.email));
+                setIsAdmin(data.tipo[0])
                 setIsLoggedIn(true);
             } else {
                 setIsLoggedIn(false);
@@ -52,34 +66,105 @@ export const AppRoutes = () => {
         <Router>
             <Switch>
 
+                {/*Rutas Publicas*/}
+                <Route
+                    exact
+                    path="/"
+                    component={Home} />
+
+                <Route
+                    exact
+                    path="/login"
+                    component={Login} />
+
+                <Route
+                    exact
+                    path="/register"
+                    component={Register} />
+
+                <Route
+                    path=
+                    "/producto/:id"
+                    component={Product} />
+
+                <Route
+                    exact
+                    path="/404"
+                    component={Error404} />
+
+
+                {/*Rutas Privadas*/}
+
                 <PrivateRoute
                     exact
                     isAuthenticated={isLoggedIn}
                     path="/shopping-cart"
                     component={ShoppingCart} />
+
                 <PrivateRoute
                     exact
                     isAuthenticated={isLoggedIn}
                     path="/user"
                     component={User} />
 
-                <Route exact path="/" component={Home} />
-                <Route exact path="/404" component={Error404} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/register" component={Register} />
-                <Route path="/producto/:id" component={Product} />
+                <PrivateRoute
+                    exact
+                    isAuthenticated={isLoggedIn}
+                    path="/shopping-cart/:id?"
+                    component={ShoppingCart} />
 
-                <PrivateRoute exact path="/shopping-cart/:id?" isAuthenticated={isLoggedIn} component={ShoppingCart} />
-                <PrivateRoute exact path="/pay" isAuthenticated={isLoggedIn} component={Checkout} />
-                
-                <Route exact path="/admin" component={Informes} />
-                <Route exact path="/admin/rubro" component={Rubro} />
-                <Route exact path="/admin/articles" component={StoreGo} />
-                <Route exact path="/admin/ordenes" component={Ordenes} />
-                <Route exact path="/admin/facturacion" component={Facturacion} />
-                <Route exact path="/admin/personas" component={Users} />
-                <Route exact path="/viewPay" component={ViewPay} />
-                
+                <PrivateRoute
+                    exact
+                    isAuthenticated={isLoggedIn}
+                    path="/pay"
+                    component={Checkout} />
+
+                <PrivateRoute
+                    exact
+                    isAuthenticated={isLoggedIn}
+                    path="/viewPay"
+                    component={ViewPay} />
+
+
+                {/*Rutas Administrador*/}
+                <AdminRoute
+                    exact
+                    isAuthenticated={[isLoggedIn, isAdmin]}
+                    path="/admin"
+                    component={Informes}
+                />
+
+                <AdminRoute
+                    exact
+                    isAuthenticated={[isLoggedIn, isAdmin]}
+                    path="/admin/rubro"
+                    component={Rubro} />
+
+                <AdminRoute
+                    exact
+                    isAuthenticated={[isLoggedIn, isAdmin]}
+                    path="/admin/articles"
+                    component={StoreGo} />
+
+                <AdminRoute
+                    exact
+                    isAuthenticated={[isLoggedIn, isAdmin]}
+                    path="/admin/ordenes"
+                    component={Ordenes} />
+
+                <AdminRoute
+                    exact
+                    isAuthenticated={[isLoggedIn, isAdmin]}
+                    path="/admin/facturacion"
+                    component={Facturacion} />
+
+                <AdminRoute
+                    exact
+                    isAuthenticated={[isLoggedIn, isAdmin]}
+                    path="/admin/personas"
+                    component={Users} />
+
+                <Redirect path to="/404" />
 
             </Switch>
         </Router>

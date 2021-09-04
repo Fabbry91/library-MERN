@@ -21,10 +21,8 @@ export const Ordenes = () => {
     const [search, setSearch] = useState([]);
 
     useEffect(() => {
-        if (Object.keys(order).length === 0) {
-            dispatch(getAllOrder())
-        }
-    }, [order])
+        dispatch(getAllOrder())
+    }, [dispatch])
 
     //Paginación
     const orderXpag = 6;
@@ -36,7 +34,6 @@ export const Ordenes = () => {
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber)
     };
-
 
     const handleOrder = (orden) => {
         dispatch(startAddFactura(orden))
@@ -58,10 +55,8 @@ export const Ordenes = () => {
 
     return (
         <>
-            <Navbar />
-
             <div className="container-fluid">
-                <div className="row">
+                <div className="row flex-nowrap">
                     <Dashboard />
 
                     <div className="col-md-9 ms-sm-auto col-lg-10 px-md-4">

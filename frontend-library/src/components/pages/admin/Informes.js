@@ -6,49 +6,54 @@ import { Line } from 'react-chartjs-2'
 import { orderGrafics } from '../../../helper/facturas'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllFacturas } from '../../../redux/actions/facturasAction'
+import { Loading } from '../../ui/Loading'
 
 export const Informes = () => {
 
     const dispatch = useDispatch()
 
     const [chartData, setChartData] = useState({})
-    const facturas = useSelector(state => state.fact.facturas)
-
-    useEffect(() => {
-        window.scroll(0, 0);
-    }, []);
+    const [mes, setMes] = useState();
+    const [total, setTotal] = useState();
+    //const facturas = useSelector((state) => state.fact.facturas)
+    const { loading } = useSelector((state) => state.ui)
 
     useEffect(() => {
         dispatch(getAllFacturas())
-        chart()
+
+        const resp = async () => {
+            const resp = await orderGrafics();
+            const [m, t] = resp
+            setMes(m)
+            setTotal(t)
+        }
+        resp()
     }, [dispatch])
 
+    useEffect(() => {
 
+        const chart = () => {
+            setChartData({
+                labels: mes,
+                datasets: [{
+                    label: 'Ventas Diarias',
+                    data: total,
+                    backgroundColor: [
+                        'rgba(75,192,192,0.6)'
+                    ],
+                    borderWhidt: 4
+                }]
+            })
+        }
+        chart()
+    }, [mes, total])
 
-    const chart = async () => {
-        const respuesta = await orderGrafics(facturas)
-        const meses = respuesta.map(r => r.fecha)
-        const total = respuesta.map(r => r.total)
-
-        setChartData({
-            labels: meses,
-            datasets: [{
-                label: 'Ventas Diarias',
-                data: total,
-                backgroundColor: [
-                    'rgba(75,192,192,0.6)'
-                ],
-                borderWhidt: 4
-            }]
-        })
-    }
 
     return (
         <>
-            <Navbar />
-
+            
             <div className="container-fluid">
-                <div className="row">
+                <div className="row flex-nowrap">
                     <Dashboard />
 
                     <div className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -68,9 +73,15 @@ export const Informes = () => {
                                 <hr />
 
                                 <div className="col-12 col-md-8 col-lg-8">
-
-                                    <Line data={chartData} option={{ responsive: true }} />
-
+                                    {
+                                        loading ? (
+                                            <div className="position-absolute top-50 start-50 translate-middle">
+                                                <Loading />
+                                            </div>
+                                        ) : (
+                                            <Line data={chartData} option={{ responsive: true }} />
+                                        )
+                                    }
                                 </div>
 
                                 <div className="col-md-4 col-lg-4">

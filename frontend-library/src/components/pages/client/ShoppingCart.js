@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Navbar } from '../ui/Navbar'
-import { adjustItemQty, removeFromCart } from '../../redux/actions/cartAction'
+import { adjustItemQty, removeFromCart } from '../../../redux/actions/cartAction'
+import { Footer } from '../../ui/Footer'
+import { Navbar } from '../../ui/Navbar'
 import { Order } from './Order'
-import { Footer } from '../ui/Footer'
+
 
 export const ShoppingCart = ({ history }) => {
 

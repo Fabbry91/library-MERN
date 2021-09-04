@@ -40,7 +40,7 @@ export const Rubro = () => {
 
     useEffect(() => {
         dispatch(getAllRubro())
-    }, [])
+    }, [dispatch])
 
     const handleDelete = (id) => {
         //console.log(id);
@@ -63,10 +63,8 @@ export const Rubro = () => {
 
     return (
         <>
-            <Navbar />
-
             <div className="container-fluid">
-                <div className="row">
+                <div className="row flex-nowraps">
                     <Dashboard />
 
                     <div className="col-md-9 ms-sm-auto col-lg-10 px-md-4">

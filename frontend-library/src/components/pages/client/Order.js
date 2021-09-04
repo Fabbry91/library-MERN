@@ -1,8 +1,8 @@
-import axios from '../../services/AxiosConection'
+import axios from '../../../services/AxiosConection'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
-import { startAddOrder } from '../../redux/actions/orderAction'
+import { startAddOrder } from '../../../redux/actions/orderAction'
 import { Link } from 'react-router-dom'
 
 export const Order = (prop) => {
@@ -11,12 +11,12 @@ export const Order = (prop) => {
     const [history, total] = props
 
     const dispatch = useDispatch()
-    const cart = useSelector(state => state.cart.cart)
-    const emailUser = useSelector(state => state.auth.email)
+    const cart = useSelector((state) => state.cart.cart)
+    const emailUser = useSelector((state) => state.auth.email)
 
     const [userEmail, setUserEmail] = useState("")
-    const [user, setUser] = useState({})
     const [mostrar, setMostrar] = useState(false)
+    const [user, setUser] = useState()
 
     const { register, formState: { errors }, handleSubmit, setValue } = useForm();
 
@@ -24,10 +24,27 @@ export const Order = (prop) => {
         const getUser = async () => {
             const { data } = await axios.get(`user/email/${emailUser}`);
             setUser(data)
-            precarga(data)
         }
         getUser()
-    }, [])
+    }, [emailUser])
+
+    useEffect(() => {
+        const precarga = (data) => {
+
+            setValue("nombre", `${data?.nombre}`)
+            setValue("apellido", `${data?.apellido}`)
+            setValue("telefono", `${data?.telefono}`)
+            setValue("email", `${data?.email}`)
+            setValue("calle", `${data?.domicilio?.calle}`)
+            setValue("numero", `${data?.domicilio?.numero}`)
+            setValue("cp", `${data?.domicilio?.cp}`)
+            setValue("localidad", `${data?.domicilio?.localidad}`)
+            setValue("provincia", `${data?.domicilio?.provincia}`)
+            setUserEmail(data?.email)
+
+        }
+        precarga(user)
+    }, [user, setValue])
 
     const onSubmit = async () => {
 
@@ -49,21 +66,6 @@ export const Order = (prop) => {
         const respuesta = await dispatch(startAddOrder(order))
         //console.log(respuesta)
         history.replace({ pathname: "/pay", state: { preferenceId: `${respuesta}` } })
-    }
-
-    const precarga = (data) => {
-
-        setValue("nombre", `${data.nombre}`)
-        setValue("apellido", `${data.apellido}`)
-        setValue("telefono", `${data.telefono}`)
-        setValue("email", `${data.email}`)
-        setValue("calle", `${data.domicilio.calle}`)
-        setValue("numero", `${data.domicilio.numero}`)
-        setValue("cp", `${data.domicilio.cp}`)
-        setValue("localidad", `${data.domicilio.localidad}`)
-        setValue("provincia", `${data.domicilio.provincia}`)
-        setUserEmail(data.email)
-
     }
 
     return (

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import { Navbar } from '../ui/Navbar'
+import { Navbar } from '../../ui/Navbar'
 import { useMercadopago } from 'react-sdk-mercadopago/lib'
 import { useDispatch, useSelector } from 'react-redux'
-import { Loading } from '../ui/Loading'
+import { Loading } from '../../ui/Loading'
 import { useLocation } from 'react-router-dom'
-import { startDeleteOrder } from '../../redux/actions/orderAction'
+import { startDeleteOrder } from '../../../redux/actions/orderAction'
 
 export const ViewPay = ({ history }) => {
 
@@ -34,7 +34,7 @@ export const ViewPay = ({ history }) => {
             })
         }
 
-    }, [mercadopago])
+    }, [mercadopago, preferenceId])
 
     const hadleDeleteOrder = (id, user) => {
         dispatch(startDeleteOrder(id, user))

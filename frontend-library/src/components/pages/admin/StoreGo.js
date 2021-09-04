@@ -43,7 +43,7 @@ export const StoreGo = () => {
     useEffect(() => {
         dispatch(getAllArticulo())
         dispatch(getAllRubro())
-    }, [])
+    }, [dispatch])
 
     const handleDelete = (id) => {
         dispatch(startDeleteArticulo(id))
@@ -103,10 +103,8 @@ export const StoreGo = () => {
 
     return (
         <>
-            <Navbar />
-
             <div className="container-fluid">
-                <div className="row">
+                <div className="row flex-nowrap">
                     <Dashboard />
 
 
