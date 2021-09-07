@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { Route, Redirect } from 'react-router-dom';
 
@@ -9,20 +8,16 @@ export const PublicRoute = ({
     component: Component,
     ...rest
 }) => {
+    const [isAdmin] = isAuthenticated
+    console.log(isAdmin)
 
     return (
         <Route {...rest}
             component={(props) => (
-                (isAuthenticated)
-                    ? (<Redirect to="/" />)
-                    : (<Component {...props} />)
+                (isAdmin === 'cliente')
+                    ? (<Component {...props} />)
+                    : (<Redirect to="/" />)
             )}
-
         />
     )
-}
-
-PublicRoute.propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired,
-    component: PropTypes.func.isRequired
 }

@@ -6,7 +6,6 @@ import Pagination from "react-js-pagination"
 import SearchField from "react-search-field"
 
 import { getAllFacturas } from '../../../redux/actions/facturasAction'
-import { Navbar } from '../../ui/Navbar'
 import { AboutGo } from './AboutGo'
 import { Dashboard } from './Dashboard'
 
@@ -89,6 +88,8 @@ export const Facturacion = () => {
                                 <hr />
 
                                 <div className="col-12 col-md-8 col-lg-8">
+                                <div className="table-responsive">
+
                                     <table className="table table-info table-striped text-center">
                                         <thead>
                                             <tr>
@@ -137,7 +138,7 @@ export const Facturacion = () => {
                                                             ))) :
                                                         (
                                                             <tr >
-                                                                <td colspan="6" className="table-active">No se encontraron elementos con ese nombre.</td>
+                                                                <td colspan={6} className="table-active">No se encontraron elementos con ese nombre.</td>
 
                                                             </tr>
                                                         )
@@ -155,11 +156,12 @@ export const Facturacion = () => {
                                             </tr>
                                         </tfoot>
                                     </table>
+                                </div>
 
                                     <div className="pagination justify-content-center mt-2">
                                         <Pagination
-                                            itemClass="page-item"
-                                            linkClass="page-link"
+                                            itemclassName="page-item"
+                                            linkclassName="page-link"
                                             activePage={activePage}
                                             itemsCountPerPage={5}
                                             totalItemsCount={facturas.length}
@@ -212,7 +214,7 @@ export const Facturacion = () => {
                                                         </div>
                                                     </div>
                                                     <div className=" table-responsive mt-3">
-                                                        <div className="div" id='table'>
+                                                        <div className="table-responsive">
                                                             <table className="table table-info table-striped text-center">
                                                                 <thead className="thead-dark">
                                                                     <tr>
@@ -241,7 +243,7 @@ export const Facturacion = () => {
                                                                         <td></td>
                                                                         <td></td>
                                                                         <td>Total</td>
-                                                                        <td>${totalPrice}</td>
+                                                                        <td>${oneFact.total}</td>
                                                                     </tr>
                                                                 </tfoot>
                                                             </table>

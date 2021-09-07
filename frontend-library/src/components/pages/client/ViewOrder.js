@@ -92,8 +92,8 @@ export const ViewOrder = () => {
 
                 <div className="pagination justify-content-center mt-2">
                     <Pagination
-                        itemClass="page-item"
-                        linkClass="page-link"
+                        itemclassName="page-item"
+                        linkclassName="page-link"
                         activePage={activePage}
                         itemsCountPerPage={7}
                         totalItemsCount={order.length}
@@ -121,43 +121,45 @@ export const ViewOrder = () => {
                         <div className="modal-body">
 
                             <div className="col-12 fw-bold text-center mb-3">{preference.user}</div>
-                            <table className="table table-info table-striped text-center">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Articulo</th>
-                                        <th scope="col">Precio Unitario</th>
-                                        <th scope="col">Cantidad</th>
-                                        <th scope="col">Subtotal</th>
-                                    </tr>
-                                </thead>
+                            <div className="table-responsive">
+                                <table className="table table-info table-striped text-center">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Articulo</th>
+                                            <th scope="col">Precio Unitario</th>
+                                            <th scope="col">Cantidad</th>
+                                            <th scope="col">Subtotal</th>
+                                        </tr>
+                                    </thead>
 
-                                {!preference ?
-                                    (
-                                        <tbody>
-                                            <td colspan="4" className="table-active"><Loading /></td>
-                                        </tbody>
-                                    ) :
-                                    (
+                                    {!preference ?
+                                        (
+                                            <tbody>
+                                                <td colspan={4} className="table-active"><Loading /></td>
+                                            </tbody>
+                                        ) :
+                                        (
 
-                                        <tbody>
-                                            {preference.items?.map((oi) => (
-                                                <tr key={oi._id}>
-                                                    <td style={{ textTransform: 'capitalize' }}>{oi.title}</td>
-                                                    <td>${oi.unit_price}</td>
-                                                    <td>{oi.quantity} un</td>
-                                                    <td>${oi.quantity * oi.unit_price}</td>
+                                            <tbody>
+                                                {preference.items?.map((oi) => (
+                                                    <tr key={oi._id}>
+                                                        <td style={{ textTransform: 'capitalize' }}>{oi.title}</td>
+                                                        <td>${oi.unit_price}</td>
+                                                        <td>{oi.quantity} un</td>
+                                                        <td>${oi.quantity * oi.unit_price}</td>
+                                                    </tr>
+                                                ))}
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>Total:</td>
+                                                    <td>${preference.total}</td>
                                                 </tr>
-                                            ))}
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td>Total:</td>
-                                                <td>${preference.total}</td>
-                                            </tr>
-                                        </tbody>
-                                    )
-                                }
-                            </table>
+                                            </tbody>
+                                        )
+                                    }
+                                </table>
+                            </div>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>

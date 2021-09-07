@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { startRegisterEmailPassword } from '../../../redux/actions/authAction'
 import { startGetAllUsers, startDeleteUser, startEditUser } from '../../../redux/actions/userAction'
 import { Loading } from '../../ui/Loading'
-import { Navbar } from '../../ui/Navbar'
 import { Dashboard } from './Dashboard'
 
 export const Users = () => {
@@ -147,8 +146,8 @@ export const Users = () => {
 
                                             <div className="pagination justify-content-center mt-2">
                                                 <Pagination
-                                                    itemClass="page-item"
-                                                    linkClass="page-link"
+                                                    itemclassName="page-item"
+                                                    linkclassName="page-link"
                                                     activePage={activePage}
                                                     itemsCountPerPage={6}
                                                     totalItemsCount={user?.length}
@@ -200,8 +199,8 @@ export const Users = () => {
 
                                             <div className="pagination justify-content-center mt-2">
                                                 <Pagination
-                                                    itemClass="page-item"
-                                                    linkClass="page-link"
+                                                    itemclassName="page-item"
+                                                    linkclassName="page-link"
                                                     activePage={activePage}
                                                     itemsCountPerPage={6}
                                                     totalItemsCount={user?.length}

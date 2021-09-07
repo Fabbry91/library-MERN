@@ -8,7 +8,6 @@ import { getAllArticulo, startAddArticulo, startDeleteArticulo } from '../../../
 import { getAllRubro } from '../../../redux/actions/rubroAction'
 
 import { Loading } from '../../ui/Loading'
-import { Navbar } from '../../ui/Navbar'
 import { AboutGo } from './AboutGo'
 import { Dashboard } from './Dashboard'
 
@@ -135,87 +134,88 @@ export const StoreGo = () => {
                                         :
                                         (
                                             <>
-                                                <table className="table table-info table-striped mt-4 text-center">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">Articulo</th>
-                                                            <th scope="col">P Compra</th>
-                                                            <th scope="col">P Venta</th>
-                                                            <th scope="col">Stock</th>
-                                                            <th scope="col">Rubro</th>
-                                                            <th scope="col">Accion</th>
-                                                        </tr>
-                                                    </thead>
-                                                    {verSerch === false ?
-                                                        (<tbody>
-                                                            {currentArt &&
-                                                                currentArt.map((a, index) => (
-                                                                    <tr key={index}>
-                                                                        <td style={{ textTransform: 'capitalize' }}>{a.nameArticulo}</td>
-                                                                        <td>$ {a.precioCompra}</td>
-                                                                        <td>$ {a.precioVenta}</td>
-                                                                        <td>{a.stock} und.</td>
-                                                                        <td style={{ textTransform: 'capitalize' }}>{a.rubros}</td>
-                                                                        <td>
-                                                                            <div className="row">
-                                                                                <div>
-                                                                                    <button className="w-50 btn btn-sm btn-danger" onClick={() => { handleDelete(a._id) }} >
-                                                                                        <i className="bi bi-trash-fill" />
-                                                                                    </button>
+                                                <div className=" table-responsive mt-3">
+                                                    <table className="table table-info table-striped mt-4 text-center">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Articulo</th>
+                                                                <th scope="col">P Compra</th>
+                                                                <th scope="col">P Venta</th>
+                                                                <th scope="col">Stock</th>
+                                                                <th scope="col">Rubro</th>
+                                                                <th scope="col">Accion</th>
+                                                            </tr>
+                                                        </thead>
+                                                        {verSerch === false ?
+                                                            (<tbody>
+                                                                {currentArt &&
+                                                                    currentArt.map((a, index) => (
+                                                                        <tr key={index}>
+                                                                            <td style={{ textTransform: 'capitalize' }}>{a.nameArticulo}</td>
+                                                                            <td>$ {a.precioCompra}</td>
+                                                                            <td>$ {a.precioVenta}</td>
+                                                                            <td>{a.stock} und.</td>
+                                                                            <td style={{ textTransform: 'capitalize' }}>{a.rubros}</td>
+                                                                            <td>
+                                                                                <div className="row">
+                                                                                    <div>
+                                                                                        <button className="w-50 btn btn-sm btn-danger" onClick={() => { handleDelete(a._id) }} >
+                                                                                            <i className="bi bi-trash-fill" />
+                                                                                        </button>
 
-                                                                                    <button className="w-50 btn btn-sm btn-warning" onClick={() => { handleEdit(a) }} >
-                                                                                        <i className="bi bi-pencil-fill" />
-                                                                                    </button>
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                ))
-                                                            }
-                                                        </tbody>
-                                                        ) : (
-                                                            <tbody>
-                                                                {search.length > 0 ?
-                                                                    (
-                                                                        search.map((a, index) => (
-                                                                            <tr key={index}>
-                                                                                <td style={{ textTransform: 'capitalize' }}>{a.nameArticulo}</td>
-                                                                                <td>$ {a.precioCompra}</td>
-                                                                                <td>$ {a.precioVenta}</td>
-                                                                                <td>{a.stock} und.</td>
-                                                                                <td style={{ textTransform: 'capitalize' }}>{a.rubros}</td>
-                                                                                <td>
-                                                                                    <div className="row">
-                                                                                        <div>
-                                                                                            <button className="w-50 btn btn-sm btn-danger" onClick={() => { handleDelete(a._id) }} >
-                                                                                                <i className="bi bi-trash-fill" />
-                                                                                            </button>
-
-                                                                                            <button className="w-50 btn btn-sm btn-warning" onClick={() => { handleEdit(a) }} >
-                                                                                                <i className="bi bi-pencil-fill" />
-                                                                                            </button>
-                                                                                        </div>
+                                                                                        <button className="w-50 btn btn-sm btn-warning" onClick={() => { handleEdit(a) }} >
+                                                                                            <i className="bi bi-pencil-fill" />
+                                                                                        </button>
                                                                                     </div>
-                                                                                </td>
-                                                                            </tr>
-                                                                        ))) :
-                                                                    (
-                                                                        <tr >
-                                                                            <td colspan="6" className="table-active">No se encontraron elementos con ese nombre.</td>
-
+                                                                                </div>
+                                                                            </td>
                                                                         </tr>
-                                                                    )
+                                                                    ))
                                                                 }
                                                             </tbody>
-                                                        )
-                                                    }
-                                                </table>
+                                                            ) : (
+                                                                <tbody>
+                                                                    {search.length > 0 ?
+                                                                        (
+                                                                            search.map((a, index) => (
+                                                                                <tr key={index}>
+                                                                                    <td style={{ textTransform: 'capitalize' }}>{a.nameArticulo}</td>
+                                                                                    <td>$ {a.precioCompra}</td>
+                                                                                    <td>$ {a.precioVenta}</td>
+                                                                                    <td>{a.stock} und.</td>
+                                                                                    <td style={{ textTransform: 'capitalize' }}>{a.rubros}</td>
+                                                                                    <td>
+                                                                                        <div className="row">
+                                                                                            <div>
+                                                                                                <button className="w-50 btn btn-sm btn-danger" onClick={() => { handleDelete(a._id) }} >
+                                                                                                    <i className="bi bi-trash-fill" />
+                                                                                                </button>
 
+                                                                                                <button className="w-50 btn btn-sm btn-warning" onClick={() => { handleEdit(a) }} >
+                                                                                                    <i className="bi bi-pencil-fill" />
+                                                                                                </button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            ))) :
+                                                                        (
+                                                                            <tr >
+                                                                                <td colspan={6} className="table-active">No se encontraron elementos con ese nombre.</td>
+
+                                                                            </tr>
+                                                                        )
+                                                                    }
+                                                                </tbody>
+                                                            )
+                                                        }
+                                                    </table>
+                                                </div>
 
                                                 <div className="pagination justify-content-center">
                                                     <Pagination
-                                                        itemClass="page-item"
-                                                        linkClass="page-link"
+                                                        itemclassName="page-item"
+                                                        linkclassName="page-link"
                                                         activePage={activePage}
                                                         itemsCountPerPage={7}
                                                         totalItemsCount={articulos.length}

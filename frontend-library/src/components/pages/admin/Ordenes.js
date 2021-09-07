@@ -7,7 +7,6 @@ import SearchField from "react-search-field"
 import { startAddFactura } from '../../../redux/actions/facturasAction'
 import { getAllOrder } from '../../../redux/actions/orderAction'
 import { Loading } from '../../ui/Loading'
-import { Navbar } from '../../ui/Navbar'
 import { AboutGo } from './AboutGo'
 import { Dashboard } from './Dashboard'
 
@@ -211,8 +210,8 @@ export const Ordenes = () => {
 
                                     <div className="pagination justify-content-center mt-2">
                                         <Pagination
-                                            itemClass="page-item"
-                                            linkClass="page-link"
+                                            itemclassName="page-item"
+                                            linkclassName="page-link"
                                             activePage={activePage}
                                             itemsCountPerPage={6}
                                             totalItemsCount={order.length}

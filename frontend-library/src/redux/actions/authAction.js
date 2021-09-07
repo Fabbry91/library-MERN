@@ -7,11 +7,14 @@ import axios from '../../services/AxiosConection'
 export const startLoginEmailPassword = (email, password) => {
     return async (dispatch) => {
 
+        const { data } = await axios.get(`user/email/${email}`);
+        const tipo = data.tipo[0]
+
         dispatch(startLoadingRedux());
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(async ({ user }) => {
                 dispatch(
-                    login(user.uid, user.displayName, email)
+                    login(user.uid, user.displayName, email, tipo)
                 );
                 dispatch(finishLoadingRedux());
             })
@@ -20,6 +23,7 @@ export const startLoginEmailPassword = (email, password) => {
                 dispatch(finishLoadingRedux());
                 Swal.fire('Error', e.message, 'error')
             })
+        return tipo;
     }
 }
 
@@ -83,13 +87,14 @@ export const startFacebookLogin = () => {
     }
 }
 
-export const login = (uid, displayName, email) => ({
+export const login = (uid, displayName, email, tipo) => ({
 
     type: types.login,
     payload: {
         uid,
         displayName,
-        email
+        email,
+        tipo
     }
 
 })

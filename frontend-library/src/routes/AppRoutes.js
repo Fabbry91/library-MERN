@@ -37,7 +37,7 @@ export const AppRoutes = () => {
 
     const [checking, setChecking] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isAdmin, setIsAdmin] = useState('');
+    const [isAdmin, setIsAdmin] = useState();
 
     useEffect(() => {
 
@@ -45,11 +45,12 @@ export const AppRoutes = () => {
             if (user?.uid) {
                 const { data } = await axios.get(`user/email/${user.email}`)
                 dispatch(startGetOneUser(data))
-                dispatch(login(user.uid, user.displayName, user.email));
+                dispatch(login(user.uid, user.displayName, user.email, data.tipo[0]));
                 setIsAdmin(data.tipo[0])
                 setIsLoggedIn(true);
             } else {
                 setIsLoggedIn(false);
+                setIsAdmin('cliente')
             }
             setChecking(false);
         });
@@ -97,31 +98,31 @@ export const AppRoutes = () => {
 
                 <PrivateRoute
                     exact
-                    isAuthenticated={isLoggedIn}
+                    isAuthenticated={[isLoggedIn, isAdmin]}
                     path="/shopping-cart"
                     component={ShoppingCart} />
 
                 <PrivateRoute
                     exact
-                    isAuthenticated={isLoggedIn}
+                    isAuthenticated={[isLoggedIn, isAdmin]}
                     path="/user"
                     component={User} />
 
                 <PrivateRoute
                     exact
-                    isAuthenticated={isLoggedIn}
+                    isAuthenticated={[isLoggedIn, isAdmin]}
                     path="/shopping-cart/:id?"
                     component={ShoppingCart} />
 
                 <PrivateRoute
                     exact
-                    isAuthenticated={isLoggedIn}
+                    isAuthenticated={[isLoggedIn, isAdmin]}
                     path="/pay"
                     component={Checkout} />
 
                 <PrivateRoute
                     exact
-                    isAuthenticated={isLoggedIn}
+                    isAuthenticated={[isLoggedIn, isAdmin]}
                     path="/viewPay"
                     component={ViewPay} />
 

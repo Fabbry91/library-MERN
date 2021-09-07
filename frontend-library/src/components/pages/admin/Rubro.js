@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllRubro, startAddRubro, startDeleteRubro } from '../../../redux/actions/rubroAction';
 
-import { Navbar } from '../../ui/Navbar'
 import { AboutGo } from './AboutGo'
 import { Loading } from '../../ui/Loading';
 import { Dashboard } from './Dashboard';
@@ -184,8 +183,8 @@ export const Rubro = () => {
 
                                     <div className="pagination justify-content-center">
                                         <Pagination
-                                            itemClass="page-item"
-                                            linkClass="page-link"
+                                            itemclassName="page-item"
+                                            linkclassName="page-link"
                                             activePage={activePage}
                                             itemsCountPerPage={5}
                                             totalItemsCount={rubro.length}

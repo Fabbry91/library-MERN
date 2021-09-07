@@ -40,34 +40,49 @@ export const Navbar = () => {
                         <li className="nav-item">
                             <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                         </li>
+                        {user.tipo === 'admin' &&
+                            (<Link className="nav-link position-relative text-dark" to="/admin">
+                                Panel Principal
+                            </Link>)
+                        }
                     </ul>
 
                     <div className="d-flex">
                         {Object.keys(user).length !== 0 ?
                             (
                                 <>
-                                    <Link className="nav-link position-relative text-dark" to="/user">
-                                        <i className="bi bi-person-circle text-dark p-2 position-absolute top-50 start-0 translate-middle" style={{ fontSize: 30 }} />
-                                        {user.name}
-                                    </Link>
-                                    <Link className="nav-link position-relative" to="/shopping-cart">
-                                        <i className="bi bi-cart3 text-dark position-absolute top-50 start-0 translate-middle-y" style={{ fontSize: 25 }}>
-                                            {totalItems > 0 &&
-                                                <span className="badge-up position-absolute center-0 start-100 translate-middle badge rounded-circle" style={{ fontSize: 12 }}>
-                                                    {totalItems}
-                                                </span>
-                                            }
-                                        </i>
-                                    </Link>
+                                    {user.tipo === 'admin' ?
+                                        (<Link className="nav-link position-relative text-dark" to="/admin">
+                                            <i className="bi bi-person-circle text-dark p-2 position-absolute top-50 start-0 translate-middle" style={{ fontSize: 30 }} />
+                                            {user.name} (Administrador)
+                                        </Link>)
+                                        :
+                                        (<Link className="nav-link position-relative text-dark" to="/user">
+                                            <i className="bi bi-person-circle text-dark p-2 position-absolute top-50 start-0 translate-middle" style={{ fontSize: 30 }} />
+                                            {user.name}
+                                        </Link>)
+                                    }
+                                    {user.tipo === 'cliente' &&
+                                        <Link className="nav-link position-relative" to="/client/shopping-cart">
+                                            <i className="bi bi-cart3 text-dark position-absolute top-50 start-0 translate-middle-y" style={{ fontSize: 25 }}>
+                                                {totalItems > 0 &&
+                                                    <span className="badge-up position-absolute center-0 start-100 translate-middle badge rounded-circle" style={{ fontSize: 12 }}>
+                                                        {totalItems}
+                                                    </span>
+                                                }
+                                            </i>
+                                        </Link>
+                                    }
                                 </>) :
                             (
                                 <>
                                     <Link className="nav-link position-relative text-dark" to="/login">Ingresar</Link>
                                     <Link className="nav-link position-relative" to="/login">
                                         <i className="bi bi-cart3 text-dark position-absolute top-50 start-0 translate-middle-y" style={{ fontSize: 25 }}>
-                                       </i>
+                                        </i>
                                     </Link>
-                                </>)
+                                </>
+                            )
                         }
 
                         {Object.keys(user).length !== 0 &&

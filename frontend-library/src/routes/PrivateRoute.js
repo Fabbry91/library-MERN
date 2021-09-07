@@ -9,20 +9,16 @@ export const PrivateRoute = ({
     component: Component,
     ...rest
 }) => {
-    
+    const [isAut, isAdmin] = isAuthenticated
+    console.log(isAut,isAdmin)
     return (
         <Route { ...rest }
             component={ (props) => (
-                ( isAuthenticated )
+                (isAut === true & isAdmin === 'cliente')
                     ? ( <Component { ...props } /> )
                     : ( <Redirect to="/" /> )
             )}
         
         />
     )
-}
-
-PrivateRoute.propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired,
-    component: PropTypes.func.isRequired
 }

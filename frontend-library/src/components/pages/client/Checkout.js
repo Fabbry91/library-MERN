@@ -48,43 +48,45 @@ export const Checkout = () => {
                     <div className="col-7 p-3 align-items-center rounded-3 border border-info shadow-lg">
                         <div className="card-header h5 text-center"><span className="">Orden de Pago</span></div>
                         <br />
-                        <table className="table table-info table-striped text-center">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Articulo</th>
-                                    <th scope="col">Precio Unitario</th>
-                                    <th scope="col">Cantidad</th>
-                                    <th scope="col">Subtotal</th>
-                                </tr>
-                            </thead>
+                        <div className="table-responsive">
+                            <table className="table table-info table-striped text-center">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Articulo</th>
+                                        <th scope="col">Precio Unitario</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Subtotal</th>
+                                    </tr>
+                                </thead>
 
-                            {!orden?.items ?
-                                (
-                                    <tbody>
-                                        <td colspan="4" className="table-active"><Loading /></td>
-                                    </tbody>
-                                ) :
-                                (
+                                {!orden?.items ?
+                                    (
+                                        <tbody>
+                                            <td colspan={4} className="table-active"><Loading /></td>
+                                        </tbody>
+                                    ) :
+                                    (
 
-                                    <tbody>
-                                        {orden?.items.map((oi, index) => (
-                                            <tr key={index}>
-                                                <td style={{ textTransform: 'capitalize' }}>{oi.title}</td>
-                                                <td>${oi.unit_price}</td>
-                                                <td>{oi.quantity} un</td>
-                                                <td>${oi.quantity * oi.unit_price}</td>
+                                        <tbody>
+                                            {orden?.items.map((oi, index) => (
+                                                <tr key={index}>
+                                                    <td style={{ textTransform: 'capitalize' }}>{oi.title}</td>
+                                                    <td>${oi.unit_price}</td>
+                                                    <td>{oi.quantity} un</td>
+                                                    <td>${oi.quantity * oi.unit_price}</td>
+                                                </tr>
+                                            ))}
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td>Total:</td>
+                                                <td>${orden?.total}</td>
                                             </tr>
-                                        ))}
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td>Total:</td>
-                                            <td>${orden?.total}</td>
-                                        </tr>
-                                    </tbody>
-                                )
-                            }
-                        </table>
+                                        </tbody>
+                                    )
+                                }
+                            </table>
+                        </div>
                     </div>
 
                     <div className="col-5">

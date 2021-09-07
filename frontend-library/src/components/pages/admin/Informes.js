@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Navbar } from '../../ui/Navbar'
 import { AboutGo } from './AboutGo'
 import { Dashboard } from './Dashboard'
 import { Line } from 'react-chartjs-2'
@@ -7,6 +6,7 @@ import { orderGrafics } from '../../../helper/facturas'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllFacturas } from '../../../redux/actions/facturasAction'
 import { Loading } from '../../ui/Loading'
+import { Statistics } from './Statistics'
 
 export const Informes = () => {
 
@@ -36,12 +36,14 @@ export const Informes = () => {
             setChartData({
                 labels: mes,
                 datasets: [{
-                    label: 'Ventas Diarias',
+                    label: 'Ventas Mensuales',
+                    lineTension: 0.2,
+                    pointBorderColor: '#111',
+                    pointBackgroundColor: '#ff4000',
+                    pointBorderWidth: 2,
+                    backgroundColor: 'rgba(52, 152, 219, 0.75)',
                     data: total,
-                    backgroundColor: [
-                        'rgba(75,192,192,0.6)'
-                    ],
-                    borderWhidt: 4
+                    borderWhidt: 6
                 }]
             })
         }
@@ -51,7 +53,7 @@ export const Informes = () => {
 
     return (
         <>
-            
+
             <div className="container-fluid">
                 <div className="row flex-nowrap">
                     <Dashboard />
@@ -64,10 +66,6 @@ export const Informes = () => {
                                     <div className="d-grid gap-2 d-md-flex justify-content-md-start">
                                         <h2 className="h2">Informes</h2>
                                     </div>
-                                    <div className="d-flex">
-                                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                                        <button className="btn btn-outline-success" type="submit">Search</button>
-                                    </div>
                                 </div>
 
                                 <hr />
@@ -79,9 +77,13 @@ export const Informes = () => {
                                                 <Loading />
                                             </div>
                                         ) : (
-                                            <Line data={chartData} option={{ responsive: true }} />
+                                            <>
+                                                <Line data={chartData} option={{ responsive: true }} />
+                                                <h6 className="text-center mb-3">Meses</h6>
+                                            </>
                                         )
                                     }
+                                    <Statistics />
                                 </div>
 
                                 <div className="col-md-4 col-lg-4">

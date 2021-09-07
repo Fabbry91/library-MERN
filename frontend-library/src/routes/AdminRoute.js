@@ -9,14 +9,18 @@ export const AdminRoute = ({
     ...rest
 }) => {
     const [isAut, isAdmin] = isAuthenticated
+    console.log(isAut, isAdmin)
 
     return (
-        <Route {...rest}
+        <>
+
+            {<Route {...rest}
             component={(props) => (
                 (isAut === true & isAdmin === 'admin')
                     ? (<Component {...props} />)
                     : (<Redirect to="/" />)
             )}
-        />
+            />}
+        </>
     )
 }

@@ -40,5 +40,5 @@ export const orderGrafics = async () => {
     const meses = ordenado.map(r => r.fecha)
     const total = ordenado.map(r => r.total)
 
-    return [meses,total]
+    return [meses, total]
 }

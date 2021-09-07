@@ -4,18 +4,24 @@ import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { startFacebookLogin, startGoogleLogin, startLoginEmailPassword } from '../../../redux/actions/authAction'
 
-export const Login = ({history}) => {
+export const Login = ({ history }) => {
 
     const dispatch = useDispatch();
     const { loading } = useSelector(state => state.ui);
 
     const { register, formState: { errors }, handleSubmit } = useForm();
 
-    const onSubmit = (data, e) => {
+    const onSubmit = async (data, e) => {
         const { email, password } = data;
-        dispatch(startLoginEmailPassword(email, password));
-        history.replace("/")
-        e.target.reset();
+
+        const resp = await dispatch(startLoginEmailPassword(email, password));
+        if (resp === 'admin') {
+            console.log(resp)
+            history.push("/admin")
+        } else {
+            history.replace("/")
+        }
+        //e.target.reset();
     }
 
     const handleGoogleLogin = () => {
