@@ -67,7 +67,7 @@ export const Dashboard = () => {
                         <span className="d-none d-sm-inline mx-1">Administrador</span>
                     </Link>
                     <ul className="dropdown-menu dropdown-menu-dark text-small" aria-labelledby="dropdownUser1">
-                        <li><Link className="dropdown-item" onClick={handleLogout}>Log out</Link></li>
+                        <li><Link to="/" className="dropdown-item" onClick={handleLogout}>Log out</Link></li>
                     </ul>
                 </div>
             </div>

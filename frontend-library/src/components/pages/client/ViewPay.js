@@ -55,7 +55,14 @@ export const ViewPay = ({ history }) => {
 
                         {oneOrder &&
                             <>
-                                <div className="card-header h5 text-center">Orden de Pago</div>
+                                <div className="card-header d-flex justify-content-between">
+                                    <h5 className="text-center"> Orden de Pago</h5>
+                                    <button type="button" className="btn btn-md btn-danger me-1"
+                                        onClick={(() => hadleDeleteOrder(oneOrder._id, oneOrder.user))} >
+                                        <i className="bi bi-trash-fill" />
+                                    </button>
+
+                                </div>
                                 <br />
                                 <div className="table-responsive">
                                     <table className="table table-info table-striped text-center">
@@ -88,8 +95,8 @@ export const ViewPay = ({ history }) => {
                                                     <tr>
                                                         <td></td>
                                                         <td></td>
-                                                        <td>Total:</td>
-                                                        <td>${oneOrder.total}</td>
+                                                        <td className="fw-bold">Total:</td>
+                                                        <td className="fw-bold">${oneOrder.total}</td>
                                                     </tr>
                                                 </tbody>
                                             )
@@ -103,12 +110,12 @@ export const ViewPay = ({ history }) => {
 
                     <div className="col-5">
                         <div className="p-3 align-items-center rounded-3 border border-warning shadow-lg">
-                            <div className="card-header h5 text-center"><span className="text-muted">Articulos vendido por</span> <span className="strong h4">GO!</span></div>
+                            <div className="card-header h5 text-center">
+                                <span className="text-muted">Articulos vendido por</span>
+                                <span className="strong h4">GO!</span>
+                            </div>
                             <br />
                             <div className="text-center">
-                                <div className="d-grid pe-3 ps-3 p-1">
-                                    <button type="button" className="btn btn-sm btn-danger me-1" onClick={(() => hadleDeleteOrder(oneOrder._id, oneOrder.user))} ><i className="bi bi-x-lg" /></button>
-                                </div>
                                 <div className="cho-container" />
                             </div>
                         </div>

@@ -41,7 +41,7 @@ const getOrderByEmail = async (req, res = response) => {
     console.log(req.params.email)
     try {
         const order = await Order.find({ user: req.params.email });
-        
+
         if (!order) {
             return res.status(404).json({
                 ok: false,
@@ -71,15 +71,15 @@ const updateOrder = async (req, res = response) => {
             });
         }
 
-        const ordenActualizada = await Order.findByIdAndUpdate(orderId, { $set: { statusFactura: "facturado" }}, { new: true });
+        const ordenActualizada = await Order.findByIdAndUpdate(orderId, { $set: { statusFactura: "facturado" } }, { new: true });
 
-    res.status(200).json({msg:"Facturacion exitosa",orden:ordenActualizada});
-} catch (error) {
-    res.status(500).json({
-        ok: false,
-        msg: "comuniquese con el administrador",
-    });
-}
+        res.status(200).json({ msg: "Facturacion exitosa", orden: ordenActualizada });
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: "comuniquese con el administrador",
+        });
+    }
 };
 
 const deleteOrder = async (req, res = response) => {
@@ -95,6 +95,7 @@ const deleteOrder = async (req, res = response) => {
         await Order.findByIdAndDelete(req.params.id);
 
         res.status(200).json({ msg: 'Orden eliminada exitosamente' });
+
     } catch (error) {
         res.status(500).json({
             ok: false,
@@ -148,7 +149,7 @@ const insertOrder = async (req, res = response) => {
         const saveOrder = await order.save();
         //console.log(saveOrder)
 
-        res.status(201).json(saveOrder);
+        res.status(201).json({ msg: 'Orden creada con exito', orden: saveOrder });
     } catch {
         res.status(404);
     }

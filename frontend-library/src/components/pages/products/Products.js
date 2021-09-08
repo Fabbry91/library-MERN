@@ -43,7 +43,7 @@ export const Products = (props) => {
                                             {
                                                 Object.keys(user).length !== 0 ?
                                                     (<>
-                                                        <Link onClick={() => addToCartHandler(product._id)}>
+                                                        <Link to="#" onClick={() => addToCartHandler(product._id)}>
                                                             <i className="bi bi-cart3" style={{ fontSize: 21 }}></i>
                                                             <i className="bi bi-plus-circle-fill" style={{ fontSize: 22 }}></i></Link>
 

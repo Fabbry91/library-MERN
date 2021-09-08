@@ -1,6 +1,7 @@
 import axios from '../../services/AxiosConection'
 import { types } from '../types';
 import { finishLoadingRedux, startLoadingRedux } from './uiActions';
+import Swal from 'sweetalert2'
 
 
 
@@ -27,21 +28,51 @@ export const getOrderByEmail = (email) => {
 
 export const startAddOrder = (order) => {
     return async (dispatch) => {
-        
-        dispatch(startLoadingRedux());
-        const { data } = await axios.post('order', order).then(res => res)
-        dispatch(createOrden(data));
-        dispatch(finishLoadingRedux());
-        return data.preferenceId
+
+        try {
+            dispatch(startLoadingRedux());
+            const { data } = await axios.post('order', order).then(res => res)
+            const { msg, orden } = data
+            dispatch(createOrden(orden));
+            Swal.fire({
+                icon: 'success',
+                title: `${msg}`,
+                showConfirmButton: false,
+                timer: 2000
+            })
+            dispatch(finishLoadingRedux());
+            console.log(msg)
+            return orden.preferenceId
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: `No se pudo crear Orden`,
+            })
+        }
     }
 }
 
 export const startDeleteOrder = (id, user) => {
     return async (dispatch) => {
 
-        await axios.delete(`order/${id}`);
-        dispatch(deleteOrder(id));
-        dispatch(getOrderByEmail(user))
+        try {
+            const { data } = await axios.delete(`order/${id}`).then(res => res);
+            Swal.fire({
+                icon: 'success',
+                title: `${data.msg}`,
+                showConfirmButton: false,
+                timer: 2000
+            })
+            dispatch(deleteOrder(id));
+            dispatch(getOrderByEmail(user))
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: `No se pudo eliminar Orden`,
+            })
+        }
+
+
     }
 }
 
