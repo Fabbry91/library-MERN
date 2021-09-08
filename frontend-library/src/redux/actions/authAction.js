@@ -23,7 +23,6 @@ export const startLoginEmailPassword = (email, password) => {
                 dispatch(finishLoadingRedux());
                 Swal.fire('Error', e.message, 'error')
             })
-        return tipo;
     }
 }
 

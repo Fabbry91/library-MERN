@@ -16,8 +16,8 @@ const getFeedback = async (req, res = response) => {
 
             const { items } = orden;
             items.forEach(async (i) => {
-                const articulos = await Articulo.findById(i.product);
-                await Articulo.findByIdAndUpdate(i.product, { stock: articulos.stock - i.quantity })
+                const articulo = await Articulo.findById({ _id: i.product });
+                await Articulo.findByIdAndUpdate({ _id: i.product }, { stock: articulo.stock - i.quantity })
             })
 
         } else {

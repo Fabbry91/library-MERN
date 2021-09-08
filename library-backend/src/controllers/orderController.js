@@ -114,6 +114,7 @@ const insertOrder = async (req, res = response) => {
         const arts = repuesta.map(p => { return { title: p.nameArticulo, unit_price: p.precioVenta, quantity: p.qty } })
         //console.log(arts)
         const artOrder = repuesta.map(p => { return { title: p.nameArticulo, unit_price: p.precioVenta, quantity: p.qty, product: p.producto } })
+        //console.log(artOrder)
 
         for (const q of repuesta) {
             if (q.stock < 0) {
@@ -142,7 +143,6 @@ const insertOrder = async (req, res = response) => {
             total: total,
             statusFactura: "sin facturar"
         }
-
         //console.log(orden)
 
         const order = new Order(orden);

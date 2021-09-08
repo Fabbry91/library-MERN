@@ -16,7 +16,7 @@ export const Login = ({ history }) => {
 
         await dispatch(startLoginEmailPassword(email, password));
         history.replace("/")
-        //e.target.reset();
+        e.target.reset();
     }
 
     const handleGoogleLogin = () => {

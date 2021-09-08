@@ -37,7 +37,7 @@ export const Products = (props) => {
                             <div className="col">
                                 {
                                     product.stock <= 0
-                                        ? (<span className="btn btn-sm btn-outline-secondary" disable >Sin Stock</span>)
+                                        ? (<span className="btn btn-sm btn-outline-secondary" disabled >Sin Stock</span>)
                                         : (
                                         <>
                                             {

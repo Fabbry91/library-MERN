@@ -66,11 +66,11 @@ export const Product = (props) => {
 
                                 {
                                     articulo?.stock <= 0
-                                        ? (<button className="btn btn-secondary btn-sm" type="button" disable >Sin Stock</button>)
+                                        ? (<button className="btn btn-secondary btn-sm" type="button" disabled >Sin Stock</button>)
                                         : (
                                             <>
                                                 <Link to={`/shopping-cart/${articulo?._id}`} className="btn btn-sm btn-primary" onClick={() => addToCartHandler(articulo?._id)}>Comprar</Link>
-                                                <button className="btn btn-outline-primary btn-sm" type="button" disable onClick={() => addToCartHandler(articulo?._id)}>Agregar al carrito</button>
+                                                <button className="btn btn-outline-primary btn-sm" type="button" disabled onClick={() => addToCartHandler(articulo?._id)}>Agregar al carrito</button>
                                             </>
                                         )
 
