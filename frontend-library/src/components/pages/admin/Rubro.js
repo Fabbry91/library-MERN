@@ -183,8 +183,8 @@ export const Rubro = () => {
 
                                     <div className="pagination justify-content-center">
                                         <Pagination
-                                            itemclassName="page-item"
-                                            linkclassName="page-link"
+                                            itemClass="page-item"
+                                            linkClass="page-link"
                                             activePage={activePage}
                                             itemsCountPerPage={5}
                                             totalItemsCount={rubro.length}

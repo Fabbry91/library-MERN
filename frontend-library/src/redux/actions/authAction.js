@@ -19,7 +19,7 @@ export const startLoginEmailPassword = (email, password) => {
                 dispatch(finishLoadingRedux());
             })
             .catch(e => {
-                console.log(e);
+                //console.log(e);
                 dispatch(finishLoadingRedux());
                 Swal.fire('Error', e.message, 'error')
             })
@@ -60,7 +60,7 @@ export const startRegisterEmailPassword = (user) => {
                 await axios.post('user', Usuario);
             })
             .catch(e => {
-                console.log(e);
+                //console.log(e);
                 Swal.fire('Error', e.message, 'error')
             })
     }

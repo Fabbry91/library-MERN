@@ -33,3 +33,9 @@ export const addCart = (art) => ({
 })
 
 
+
+export const clearCart=()=>({
+    type: types.clearItemCart
+})
+
+

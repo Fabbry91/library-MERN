@@ -41,7 +41,7 @@ export const Facturacion = () => {
         });
         setTotalPrice(totals)
 
-    }, [facturas,totalPrice, setTotalPrice])
+    }, [facturas, totalPrice, setTotalPrice])
 
 
     const handleFactura = (id) => {
@@ -88,80 +88,81 @@ export const Facturacion = () => {
                                 <hr />
 
                                 <div className="col-12 col-md-8 col-lg-8">
-                                <div className="table-responsive">
+                                    <div className="table-responsive">
 
-                                    <table className="table table-info table-striped text-center">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">N° Factura</th>
-                                                <th scope="col">Fecha</th>
-                                                <th scope="col">Factura</th>
-                                                <th scope="col">Subtotales</th>
-                                            </tr>
-                                        </thead>
-                                        {verSerch === false ?
-                                            (
-                                                <tbody>
-                                                    {currentFact &&
-                                                        currentFact.map((f, index) => (
-                                                            <tr key={index}>
-                                                                <td style={{ textTransform: 'capitalize' }}>{f.numero}</td>
-                                                                <td >{f.fecha.slice(0, 10)}</td>
-                                                                <td>
-                                                                    <button className="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onClick={() => handleFactura(f._id)}>
-                                                                        <i className="bi bi-person-fill" />
-                                                                        <i className="bi bi-printer-fill" />
-                                                                    </button>
-                                                                </td>
-                                                                <td >$ {f.total}</td>
-                                                            </tr>
-                                                        ))
-                                                    }
-                                                </tbody>
-                                            )
-                                            :
-                                            (
-                                                <tbody>
-                                                    {search.length > 0 ?
-                                                        (
-                                                            search.map((f, index) => (
-                                                                <tr key={index}>
-                                                                    <td style={{ textTransform: 'capitalize' }}>{f.numero}</td>
-                                                                    <td >{f.fecha.slice(0, 10)}</td>
-                                                                    <td>
-                                                                        <button className="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onClick={() => handleFactura(f._id)}>
-                                                                            <i className="bi bi-person-fill" />
-                                                                            <i className="bi bi-printer-fill" />
-                                                                        </button>
-                                                                    </td>
-                                                                </tr>
-                                                            ))) :
-                                                        (
-                                                            <tr >
-                                                                <td colspan={6} className="table-active">No se encontraron elementos con ese nombre.</td>
+                                        <table className="table table-info table-striped text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">N° Factura</th>
+                                                    <th scope="col">Fecha</th>
+                                                    <th scope="col">Factura</th>
+                                                    <th scope="col">Subtotales</th>
+                                                </tr>
+                                            </thead>
+                                            <>
+                                                {verSerch === false ?
+                                                    (
+                                                        <tbody>
+                                                            {currentFact &&
+                                                                currentFact.map((f, index) => (
+                                                                    <tr key={index}>
+                                                                        <td style={{ textTransform: 'capitalize' }}>{f.numero}</td>
+                                                                        <td >{f.fecha.slice(0, 10)}</td>
+                                                                        <td>
+                                                                            <button className="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onClick={() => handleFactura(f._id)}>
+                                                                                <i className="bi bi-person-fill" />
+                                                                                <i className="bi bi-printer-fill" />
+                                                                            </button>
+                                                                        </td>
+                                                                        <td >$ {f.total}</td>
+                                                                    </tr>
+                                                                ))
+                                                            }
+                                                        </tbody>
+                                                    )
+                                                    :
+                                                    (
+                                                        <tbody>
+                                                            {search.length > 0 ?
+                                                                (
+                                                                    search.map((f, index) => (
+                                                                        <tr key={index}>
+                                                                            <td style={{ textTransform: 'capitalize' }}>{f.numero}</td>
+                                                                            <td >{f.fecha.slice(0, 10)}</td>
+                                                                            <td>
+                                                                                <button className="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onClick={() => handleFactura(f._id)}>
+                                                                                    <i className="bi bi-person-fill" />
+                                                                                    <i className="bi bi-printer-fill" />
+                                                                                </button>
+                                                                            </td>
+                                                                        </tr>
+                                                                    ))) :
+                                                                (
+                                                                    <tr >
+                                                                        <td colSpan={6} className="table-active">No se encontraron elementos con ese nombre.</td>
 
-                                                            </tr>
-                                                        )
-                                                    }
-                                                </tbody>
-                                            )
-                                        }
-
-                                        <tfoot>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td>Total</td>
-                                                <td>${totalPrice}</td>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
+                                                                    </tr>
+                                                                )
+                                                            }
+                                                        </tbody>
+                                                    )
+                                                }
+                                            </>
+                                            <tfoot>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>Total</td>
+                                                    <td>${totalPrice}</td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
 
                                     <div className="pagination justify-content-center mt-2">
                                         <Pagination
-                                            itemclassName="page-item"
-                                            linkclassName="page-link"
+                                            itemClass="page-item"
+                                            linkClass="page-link"
                                             activePage={activePage}
                                             itemsCountPerPage={5}
                                             totalItemsCount={facturas.length}
@@ -225,6 +226,7 @@ export const Facturacion = () => {
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
+                                                                    <>
                                                                     {oneFact?.pedido &&
                                                                         oneFact?.pedido?.items.map((p, index) => (
                                                                             <tr key={index}>
@@ -237,6 +239,7 @@ export const Facturacion = () => {
                                                                         )
 
                                                                     }
+                                                                    </>
                                                                 </tbody>
                                                                 <tfoot>
                                                                     <tr>

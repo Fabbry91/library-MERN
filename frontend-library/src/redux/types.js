@@ -25,6 +25,7 @@ export const types = {
     deleteCart:'[CART] Delete Item',
     loadCart:'[CART] Load Current Item',
     adjusItemCart:'[CART] Adjust Item Qty',
+    clearItemCart:'[CART] Clear Item',
 
     setUserOrder:'[ORD] Set Order',
     addUserOrder:'[ORD] Add Order',

@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { startAddOrder } from '../../../redux/actions/orderAction'
 import { Link } from 'react-router-dom'
+import { clearCart } from '../../../redux/actions/cartAction'
 
 export const Order = (prop) => {
 
@@ -62,8 +63,9 @@ export const Order = (prop) => {
             user: userEmail,
             total: total
         }
-        //console.log(order)
+        console.log(order)
         const respuesta = await dispatch(startAddOrder(order))
+        dispatch(clearCart())
         //console.log(respuesta)
         history.replace({ pathname: "/pay", state: { preferenceId: `${respuesta}` } })
     }

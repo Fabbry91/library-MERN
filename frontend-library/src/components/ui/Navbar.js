@@ -63,7 +63,7 @@ export const Navbar = () => {
                                         </Link>)
                                     }
                                     {user.tipo === 'cliente' &&
-                                        <Link className="nav-link position-relative" to="/client/shopping-cart">
+                                        <Link className="nav-link position-relative" to="/shopping-cart">
                                             <i className="bi bi-cart3 text-dark position-absolute top-50 start-0 translate-middle-y" style={{ fontSize: 25 }}>
                                                 {totalItems > 0 &&
                                                     <span className="badge-up position-absolute center-0 start-100 translate-middle badge rounded-circle" style={{ fontSize: 12 }}>

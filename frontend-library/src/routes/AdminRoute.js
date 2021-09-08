@@ -9,7 +9,7 @@ export const AdminRoute = ({
     ...rest
 }) => {
     const [isAut, isAdmin] = isAuthenticated
-    console.log(isAut, isAdmin)
+    //console.log(isAut, isAdmin)
 
     return (
         <>

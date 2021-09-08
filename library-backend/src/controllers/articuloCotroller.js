@@ -78,7 +78,7 @@ const updateArticulo = async (req, res = response) => {
             res.status(200).json(articuloActualizado);
 
         } else {
-            console.log('no entro')
+            //console.log('no entro')
             const nuevoArticulo = {
                 ...req.body,
             }
@@ -98,7 +98,7 @@ const deleteArticulo = async (req, res = response) => {
     const id = req.params.id;
     try {
         const articulo = await Articulo.findById(id);
-        console.log(articulo)
+        //console.log(articulo)
         if (!articulo) {
             return res.status(404).json({
                 ok: false,

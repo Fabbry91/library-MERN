@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { Route, Redirect } from 'react-router-dom';
 
@@ -10,7 +9,7 @@ export const PrivateRoute = ({
     ...rest
 }) => {
     const [isAut, isAdmin] = isAuthenticated
-    console.log(isAut,isAdmin)
+    //console.log(isAut,isAdmin)
     return (
         <Route { ...rest }
             component={ (props) => (

@@ -21,7 +21,7 @@ export const Home = () => {
         dispatch(getAllArticulo())
     }, [dispatch])
 
-    console.log(productList)
+    //console.log(productList)
 
     return (
         <div>

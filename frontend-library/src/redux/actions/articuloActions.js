@@ -61,7 +61,7 @@ export const startAddArticulo = (art) => {
 export const startDeleteArticulo = (id) => {
     return async (dispatch) => {
 
-        console.log(id)
+        //console.log(id)
 
         dispatch(startLoadingRedux());
         await axios.delete(`articulo/${id}`);

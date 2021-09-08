@@ -16,7 +16,7 @@ export const getAllOrder = () => {
 
 export const getOrderByEmail = (email) => {
     return async (dispatch) => {
-        console.log(email)
+        //console.log(email)
         dispatch(startLoadingRedux());
         const { data } = await axios.get(`order/email/${email}`);
         dispatch(setAllOrder(data));

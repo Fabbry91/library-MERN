@@ -71,7 +71,7 @@ export const ViewPay = ({ history }) => {
                                         {!oneOrder?.items < 0 ?
                                             (
                                                 <tbody>
-                                                    <td colspan={6} className="table-active"><Loading /></td>
+                                                    <td colSpan={6} className="table-active"><Loading /></td>
                                                 </tbody>
                                             ) :
                                             (

@@ -92,8 +92,8 @@ export const ViewOrder = () => {
 
                 <div className="pagination justify-content-center mt-2">
                     <Pagination
-                        itemclassName="page-item"
-                        linkclassName="page-link"
+                        itemClass="page-item"
+                        linkClass="page-link"
                         activePage={activePage}
                         itemsCountPerPage={7}
                         totalItemsCount={order.length}
@@ -135,7 +135,7 @@ export const ViewOrder = () => {
                                     {!preference ?
                                         (
                                             <tbody>
-                                                <td colspan={4} className="table-active"><Loading /></td>
+                                                <td colSpan={4} className="table-active"><Loading /></td>
                                             </tbody>
                                         ) :
                                         (

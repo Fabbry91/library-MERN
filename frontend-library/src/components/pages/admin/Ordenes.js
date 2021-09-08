@@ -210,8 +210,8 @@ export const Ordenes = () => {
 
                                     <div className="pagination justify-content-center mt-2">
                                         <Pagination
-                                            itemclassName="page-item"
-                                            linkclassName="page-link"
+                                            itemClass="page-item"
+                                            linkClass="page-link"
                                             activePage={activePage}
                                             itemsCountPerPage={6}
                                             totalItemsCount={order.length}

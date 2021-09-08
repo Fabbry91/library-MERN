@@ -61,7 +61,7 @@ export const Users = () => {
     }
 
     const handleEdit = (us) => {
-        console.log("el art", us);
+        //console.log("el art", us);
         //setMostrar(true)
         setValue("apellido", `${us.apellido}`)
         setValue("creacion", `${us.creacion}`)
@@ -146,8 +146,8 @@ export const Users = () => {
 
                                             <div className="pagination justify-content-center mt-2">
                                                 <Pagination
-                                                    itemclassName="page-item"
-                                                    linkclassName="page-link"
+                                                    itemClass="page-item"
+                                                    linkClass="page-link"
                                                     activePage={activePage}
                                                     itemsCountPerPage={6}
                                                     totalItemsCount={user?.length}
@@ -199,8 +199,8 @@ export const Users = () => {
 
                                             <div className="pagination justify-content-center mt-2">
                                                 <Pagination
-                                                    itemclassName="page-item"
-                                                    linkclassName="page-link"
+                                                    itemClass="page-item"
+                                                    linkClass="page-link"
                                                     activePage={activePage}
                                                     itemsCountPerPage={6}
                                                     totalItemsCount={user?.length}

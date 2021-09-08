@@ -14,13 +14,8 @@ export const Login = ({ history }) => {
     const onSubmit = async (data, e) => {
         const { email, password } = data;
 
-        const resp = await dispatch(startLoginEmailPassword(email, password));
-        if (resp === 'admin') {
-            console.log(resp)
-            history.push("/admin")
-        } else {
-            history.replace("/")
-        }
+        await dispatch(startLoginEmailPassword(email, password));
+        history.replace("/")
         //e.target.reset();
     }
 

@@ -36,6 +36,11 @@ export const cartReducer = (state = initialState, action) => {
                     : item),
             }
 
+        case types.clearItemCart:
+            return {
+                cart: [],
+            }
+
         default:
             return state;
 

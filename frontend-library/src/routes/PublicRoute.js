@@ -9,7 +9,7 @@ export const PublicRoute = ({
     ...rest
 }) => {
     const [isAdmin] = isAuthenticated
-    console.log(isAdmin)
+    //console.log(isAdmin)
 
     return (
         <Route {...rest}

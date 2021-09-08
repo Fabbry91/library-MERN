@@ -38,13 +38,14 @@ const getOneOrder = async (req, res = response) => {
 };
 
 const getOrderByEmail = async (req, res = response) => {
-    //console.log(req.params.email)
+    console.log(req.params.email)
     try {
-        const order = await Order.find({ email: req.params.id });
+        const order = await Order.find({ user: req.params.email });
+        
         if (!order) {
             return res.status(404).json({
                 ok: false,
-                msg: "El email no existe en ordenes"
+                msg: "No existe orden con este usuario"
             });
         }
 
@@ -72,7 +73,7 @@ const updateOrder = async (req, res = response) => {
 
         const ordenActualizada = await Order.findByIdAndUpdate(orderId, { $set: { statusFactura: "facturado" }}, { new: true });
 
-    res.status(200).json(ordenActualizada);
+    res.status(200).json({msg:"Facturacion exitosa",orden:ordenActualizada});
 } catch (error) {
     res.status(500).json({
         ok: false,

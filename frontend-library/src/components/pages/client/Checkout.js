@@ -62,7 +62,7 @@ export const Checkout = () => {
                                 {!orden?.items ?
                                     (
                                         <tbody>
-                                            <td colspan={4} className="table-active"><Loading /></td>
+                                            <td colSpan={4} className="table-active"><Loading /></td>
                                         </tbody>
                                     ) :
                                     (

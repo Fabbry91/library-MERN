@@ -68,12 +68,12 @@ const insertUsuario = async (req, res = response) => {
         if (user.tipo == 0) {
             user.tipo = ["cliente"];
             const saveuser = await user.save();
-            console.log(saveuser);
+            //console.log(saveuser);
             res.status(201).json(saveuser);
         } else {
 
             const saveuser = await user.save();
-            console.log(saveuser);
+            //console.log(saveuser);
             res.status(201).json(saveuser);
         }
 

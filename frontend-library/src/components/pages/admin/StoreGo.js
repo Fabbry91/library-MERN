@@ -76,7 +76,7 @@ export const StoreGo = () => {
         if (idArt) {
             const editArt = { ...data, _id: idArt }
             dispatch(startAddArticulo(editArt))
-            console.log("editada", editArt)
+            //console.log("editada", editArt)
         } else {
             dispatch(startAddArticulo(data));
         }
@@ -201,7 +201,7 @@ export const StoreGo = () => {
                                                                             ))) :
                                                                         (
                                                                             <tr >
-                                                                                <td colspan={6} className="table-active">No se encontraron elementos con ese nombre.</td>
+                                                                                <td colSpan={6} className="table-active">No se encontraron elementos con ese nombre.</td>
 
                                                                             </tr>
                                                                         )
@@ -214,8 +214,8 @@ export const StoreGo = () => {
 
                                                 <div className="pagination justify-content-center">
                                                     <Pagination
-                                                        itemclassName="page-item"
-                                                        linkclassName="page-link"
+                                                        itemClass="page-item"
+                                                        linkClass="page-link"
                                                         activePage={activePage}
                                                         itemsCountPerPage={7}
                                                         totalItemsCount={articulos.length}

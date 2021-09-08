@@ -66,7 +66,7 @@ export const User = () => {
             <div className="b-example-divider"></div>
             <div className="container my-5">
                 <div className="row">
-                    <div className="col-7 p-4 align-items-center rounded-3 border border-info shadow-lg position-relative">
+                    <div className="col-7 col-md-7 col-sm-12 p-4 mb-3 align-items-center rounded-3 border border-info shadow-lg position-relative">
                         {loading ? (
                             <div className="position-absolute top-50 start-50 translate-middle">
                                 <Loading />
@@ -283,7 +283,7 @@ export const User = () => {
                         }
                     </div>
 
-                    <div className="col-5">
+                    <div className="col-5 col-md-5 col-sm-12">
                         <ViewOrder />
                     </div>
                 </div>
