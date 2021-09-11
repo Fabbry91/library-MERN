@@ -66,24 +66,22 @@ export const Rubro = () => {
                 <div className="row flex-nowraps">
                     <Dashboard />
 
-                    <div className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                    <div className="col py-3">
+                        <div className="d-flex justify-content-between gap-2">
+                            <div className="d-grid gap-2 d-md-flex justify-content-md-start">
+                                <h2 className="h2">Rubros</h2>
+                            </div>
+                            <div className="d-flex">
+                                <SearchField
+                                    placeholder="Buscar..."
+                                    onChange={onChangeHandler}
+                                />
+                            </div>
+                        </div>
+                        <hr />
+
                         <div className="container py-3">
                             <div className="row flex-lg-row g-3">
-
-                                <div className="d-flex justify-content-between gap-2">
-                                    <div className="d-grid gap-2 d-md-flex justify-content-md-start">
-                                        <h2 className="h2">Rubros</h2>
-                                    </div>
-                                    <div className="d-flex">
-                                        <SearchField
-                                            placeholder="Buscar..."
-                                            onChange={onChangeHandler}
-                                        />
-                                    </div>
-                                </div>
-
-                                <hr />
-
                                 <div className="col-12 col-md-8 col-lg-8">
 
 
@@ -180,25 +178,26 @@ export const Rubro = () => {
                                             )
                                         }
                                     </ul>
-
-                                    <div className="pagination justify-content-center">
-                                        <Pagination
-                                            itemClass="page-item"
-                                            linkClass="page-link"
-                                            activePage={activePage}
-                                            itemsCountPerPage={5}
-                                            totalItemsCount={rubro.length}
-                                            pageRangeDisplayed={5}
-                                            onChange={handlePageChange}
-                                        />
-                                    </div>
                                 </div>
 
                                 <div className="col-md-4 col-lg-4">
                                     <AboutGo />
                                 </div>
-                            </div>
 
+                            </div>
+                        </div>
+
+                        <div className="d-flex justify-content-center">
+                            <hr />
+                            <Pagination
+                                itemClass="page-item"
+                                linkClass="page-link"
+                                activePage={activePage}
+                                itemsCountPerPage={5}
+                                totalItemsCount={rubro.length}
+                                pageRangeDisplayed={5}
+                                onChange={handlePageChange}
+                            />
                         </div>
                     </div>
                 </div>

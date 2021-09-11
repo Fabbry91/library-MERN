@@ -60,9 +60,10 @@ const getOrderByEmail = async (req, res = response) => {
 };
 
 const updateOrder = async (req, res = response) => {
-    const orderId = req.params.id;
 
     try {
+        const orderId = req.params.id;
+    
         const orden = await Order.findById(orderId);
         if (!orden) {
             return res.status(404).json({
@@ -70,16 +71,18 @@ const updateOrder = async (req, res = response) => {
                 msg: "La orden no existe"
             });
         }
-
-        const ordenActualizada = await Order.findByIdAndUpdate(orderId, { $set: { statusFactura: "facturado" } }, { new: true });
-
+    
+        const ordenActualizada = await Order.findOneAndUpdate({ _id: orderId }, { $set: { status:'facturado' } }, { new: true });
+        
         res.status(200).json({ msg: "Facturacion exitosa", orden: ordenActualizada });
+        
     } catch (error) {
         res.status(500).json({
             ok: false,
             msg: "comuniquese con el administrador",
         });
     }
+
 };
 
 const deleteOrder = async (req, res = response) => {

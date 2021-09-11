@@ -32,7 +32,7 @@ export const startAddFactura = (orden) => {
 
         const { data } = await axios.post(`facturacion`, orden);
         await axios.put(`order/${orden._id}`);
-        await dispatch(getAllOrder())
+        dispatch(getAllOrder())
         dispatch(createFactura(data))
 
     }

@@ -3,10 +3,11 @@ import { AboutGo } from './AboutGo'
 import { Dashboard } from './Dashboard'
 import { Line } from 'react-chartjs-2'
 import { orderGrafics } from '../../../helper/facturas'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { getAllFacturas } from '../../../redux/actions/facturasAction'
-import { Loading } from '../../ui/Loading'
 import { Statistics } from './Statistics'
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 export const Informes = () => {
 
@@ -15,8 +16,6 @@ export const Informes = () => {
     const [chartData, setChartData] = useState({})
     const [mes, setMes] = useState();
     const [total, setTotal] = useState();
-    //const facturas = useSelector((state) => state.fact.facturas)
-    const { loading } = useSelector((state) => state.ui)
 
     useEffect(() => {
         dispatch(getAllFacturas())
@@ -50,51 +49,52 @@ export const Informes = () => {
         chart()
     }, [mes, total])
 
+    const exportPdf = () => {
+
+        const input = document.getElementById('divToPrint');
+        html2canvas(input)
+            .then((canvas) => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF();
+                pdf.addImage(imgData, 'JPEG', 0, 0);
+                // pdf.output('dataurlnewwindow');
+                pdf.save("Informes.pdf");
+            })
+            ;
+    }
 
     return (
-        <>
+        <div className="container-fluid">
+            <div className="row flex-nowrap">
 
-            <div className="container-fluid">
-                <div className="row flex-nowrap">
-                    <Dashboard />
+                <Dashboard />
 
-                    <div className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                        <div className="container py-3">
-                            <div className="row flex-lg-row g-3">
+                <div className="col py-3">
 
-                                <div className="d-flex justify-content-between gap-2">
-                                    <div className="d-grid gap-2 d-md-flex justify-content-md-start">
-                                        <h2 className="h2">Informes</h2>
-                                    </div>
-                                </div>
+                    <div className="d-flex justify-content-between">
+                        <h2 className="h2">Informes</h2>
+                        <button className="btn btn-success" onClick={() => exportPdf()}> <i className="bi bi-printer-fill" /></button>
 
-                                <hr />
+                    </div>
+                    <hr />
 
-                                <div className="col-12 col-md-8 col-lg-8">
-                                    {
-                                        loading ? (
-                                            <div className="position-absolute top-50 start-50 translate-middle">
-                                                <Loading />
-                                            </div>
-                                        ) : (
-                                            <>
-                                                <Line data={chartData} option={{ responsive: true }} />
-                                                <h6 className="text-center mb-3">Meses</h6>
-                                            </>
-                                        )
-                                    }
-                                    <Statistics />
-                                </div>
+                    <div className="container py-3">
+                        <div className="row flex-lg-row g-3">
 
-                                <div className="col-md-4 col-lg-4">
-                                    <AboutGo />
-                                </div>
+                            <div className="col-12 col-md-8 col-lg-8" id="divToPrint">
+                                <Line data={chartData} option={{ responsive: true }} />
+                                <h6 className="text-center mb-3">Meses</h6>
+                                <Statistics />
                             </div>
 
+                            <div className="col-md-4 col-lg-4">
+                                <AboutGo />
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }

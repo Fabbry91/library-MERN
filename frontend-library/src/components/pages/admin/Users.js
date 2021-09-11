@@ -86,140 +86,148 @@ export const Users = () => {
         <>
             <div className="container-fluid">
                 <div className="row flex-nowrap">
+
                     <Dashboard />
 
-                    <div className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                    <div className="col py-3">
+
+                        <div className="d-flex justify-content-between gap-2">
+                            <div className="d-grid gap-2 d-md-flex justify-content-md-start">
+                                <h2 className="h2">Personas</h2>
+                            </div>
+                        </div>
+
+                        <hr />
+
                         <div className="container py-3">
-                            <div className="row flex-lg-row g-3">
 
-                                <div className="d-flex justify-content-between gap-2">
-                                    <div className="d-grid gap-2 d-md-flex justify-content-md-start">
-                                        <h2 className="h2">Personas</h2>
-                                    </div>
-                                </div>
-
-                                <hr />
-
-                                <div className="col-12 col-md-8 col-lg-8">
-                                    <div className="row">
-                                        <div className="col-6">
-                                            <div className="d-flex bd-highlight">
-                                                <div className="p-2 w-100 bd-highlight">
-                                                    <h5 className="fw-bold text-center">Administradores</h5>
-                                                </div>
-                                                <div className="p-2 flex-shrink-1 bd-highlight">
-                                                    <button className="btn btn-success" onClick={() => handleNewButon()}><i className="bi bi-person-plus-fill" /></button>
-                                                </div>
-                                            </div>
-                                            {loading ?
-                                                (<Loading />)
-                                                :
-                                                (
-                                                    <ul className="list-group">
-                                                        {currentUser?.map((ad) =>
-
-                                                        (ad.tipo[0] === 'admin' &&
-
-                                                            (<li key={ad._id} className="list-group-item mb-2">
-
-                                                                <h6 className="text-muted">Nombre: <span className="text-dark fw-bold">{ad.nombre} {ad.apellido}</span></h6>
-                                                                <h6 className="text-muted">Email: <span className="text-dark fw-bold">{ad.email}</span></h6>
-                                                                <h6 className="text-muted">Roll: <span className="text-dark fw-bold" style={{ textTransform: 'capitalize' }}>{ad.tipo[0]}</span></h6>
-
-                                                                <div className="d-flex">
-                                                                    <button className="btn w-50 m-1 btn-sm btn-warning" onClick={() => { handleEdit(ad) }}>
-                                                                        <i className="bi bi-pencil-fill" />
-                                                                    </button>
-                                                                    <button className="btn w-50 m-1 btn-sm btn-danger" onClick={() => { handleDelete(ad._id) }}>
-                                                                        <i className="bi bi-trash-fill" />
-                                                                    </button>
-                                                                </div>
-                                                            </li>
-                                                            )
-                                                        ))
-                                                        }
-
-                                                    </ul>
-
-
-                                                )}
-
-                                            <div className="pagination justify-content-center mt-2">
-                                                <Pagination
-                                                    itemClass="page-item"
-                                                    linkClass="page-link"
-                                                    activePage={activePage}
-                                                    itemsCountPerPage={6}
-                                                    totalItemsCount={user?.length}
-                                                    pageRangeDisplayed={6}
-                                                    onChange={handlePageChange}
-                                                />
-                                            </div>
-
+                            <div className="row">
+                                <div className="col-12 col-md-6">
+                                    <div className="d-flex bd-highlight">
+                                        <div className="p-2 w-100 bd-highlight">
+                                            <h5 className="fw-bold text-center">Administradores</h5>
                                         </div>
-                                        <div className="col-6">
-                                            <div className="d-flex bd-highlight">
-                                                <div className="p-2 w-100 bd-highlight">
-                                                    <h5 className="fw-bold text-center">Clientes</h5>
-                                                </div>
-                                                <div className="p-2 flex-shrink-1 bd-highlight">
-                                                    <button className="btn btn-success"><i className="bi bi-person-plus-fill" /></button>
-                                                </div>
-                                            </div>
-                                            {loading ?
-                                                (<Loading />)
-                                                :
-                                                (
-                                                    <ul className="list-group">
-                                                        {currentUser?.map((cl) =>
-
-                                                        (cl.tipo[0] === 'cliente' &&
-
-                                                            (<li key={cl._id} className="list-group-item mb-2">
-
-                                                                <h6 className="text-muted">Nombre: <span className="text-dark fw-bold">{cl.nombre} {cl.apellido}</span></h6>
-                                                                <h6 className="text-muted">Email: <span className="text-dark fw-bold">{cl.email}</span></h6>
-                                                                <h6 className="text-muted">Roll: <span className="text-dark fw-bold" style={{ textTransform: 'capitalize' }}>{cl.tipo[0]}</span></h6>
-
-                                                                <div className="d-flex">
-                                                                    <button className="btn w-50 m-1 btn-sm btn-warning" onClick={() => { handleEdit(cl) }}>
-                                                                        <i className="bi bi-pencil-fill" />
-                                                                    </button>
-                                                                    <button className="btn w-50 m-1 btn-sm btn-danger" onClick={() => { handleDelete(cl._id) }}>
-                                                                        <i className="bi bi-trash-fill" />
-                                                                    </button>
-                                                                </div>
-                                                            </li>
-                                                            )
-                                                        ))
-                                                        }
-
-                                                    </ul>
-                                                )}
-
-                                            <div className="pagination justify-content-center mt-2">
-                                                <Pagination
-                                                    itemClass="page-item"
-                                                    linkClass="page-link"
-                                                    activePage={activePage}
-                                                    itemsCountPerPage={6}
-                                                    totalItemsCount={user?.length}
-                                                    pageRangeDisplayed={6}
-                                                    onChange={handlePageChange}
-                                                />
-                                            </div>
+                                        <div className="p-2 flex-shrink-1 bd-highlight">
+                                            <button className="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => handleNewButon()}><i className="bi bi-person-plus-fill" /></button>
                                         </div>
                                     </div>
-                                </div>
+                                    {loading ?
+                                        (<Loading />)
+                                        :
+                                        (
+                                            <ul className="list-group">
+                                                {currentUser?.map((ad) =>
 
-                                <div className="col-md-4 col-lg-4">
+                                                (ad.tipo[0] === 'admin' &&
+
+                                                    (<li key={ad._id} className="list-group-item mb-2 border border-info border-top-1">
+
+                                                        <h6 className="text-muted">Nombre: <span className="text-dark fw-bold">{ad.nombre} {ad.apellido}</span></h6>
+                                                        <h6 className="text-muted">Email: <span className="text-dark fw-bold">{ad.email}</span></h6>
+                                                        <h6 className="text-muted">Roll: <span className="text-dark fw-bold" style={{ textTransform: 'capitalize' }}>{ad.tipo[0]}</span></h6>
+
+                                                        <div className="d-flex">
+                                                            <button className="btn w-50 m-1 btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => { handleEdit(ad) }}>
+                                                                <i className="bi bi-pencil-fill" />
+                                                            </button>
+                                                            <button className="btn w-50 m-1 btn-sm btn-danger" onClick={() => { handleDelete(ad._id) }}>
+                                                                <i className="bi bi-trash-fill" />
+                                                            </button>
+                                                        </div>
+                                                    </li>
+                                                    )
+                                                ))
+                                                }
+
+                                            </ul>
+
+
+                                        )}
+
+                                    <div className="pagination justify-content-center mt-2">
+                                        <Pagination
+                                            itemClass="page-item"
+                                            linkClass="page-link"
+                                            activePage={activePage}
+                                            itemsCountPerPage={6}
+                                            totalItemsCount={user?.length}
+                                            pageRangeDisplayed={6}
+                                            onChange={handlePageChange}
+                                        />
+                                    </div>
+
+                                </div>
+                                <div className="col">
+                                    <div className="d-flex bd-highlight">
+                                        <div className="p-2 w-100 bd-highlight">
+                                            <h5 className="fw-bold text-center">Clientes</h5>
+                                        </div>
+                                        <div className="p-2 flex-shrink-1 bd-highlight">
+                                            <button className="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => handleNewButon()}><i className="bi bi-person-plus-fill" /></button>
+                                        </div>
+                                    </div>
+                                    {loading ?
+                                        (<Loading />)
+                                        :
+                                        (
+                                            <ul className="list-group">
+                                                {currentUser?.map((cl) =>
+
+                                                (cl.tipo[0] === 'cliente' &&
+
+                                                    (<li key={cl._id} className="list-group-item mb-2 border border-info border-top-1">
+
+                                                        <h6 className="text-muted">Nombre: <span className="text-dark fw-bold">{cl.nombre} {cl.apellido}</span></h6>
+                                                        <h6 className="text-muted">Email: <span className="text-dark fw-bold">{cl.email}</span></h6>
+                                                        <h6 className="text-muted">Roll: <span className="text-dark fw-bold" style={{ textTransform: 'capitalize' }}>{cl.tipo[0]}</span></h6>
+
+                                                        <div className="d-flex">
+                                                            <button className="btn w-50 m-1 btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => { handleEdit(cl) }}>
+                                                                <i className="bi bi-pencil-fill" />
+                                                            </button>
+                                                            <button className="btn w-50 m-1 btn-sm btn-danger" onClick={() => { handleDelete(cl._id) }}>
+                                                                <i className="bi bi-trash-fill" />
+                                                            </button>
+                                                        </div>
+                                                    </li>
+                                                    )
+                                                ))
+                                                }
+
+                                            </ul>
+                                        )}
+
+                                    <div className="pagination justify-content-center mt-2">
+                                        <Pagination
+                                            itemClass="page-item"
+                                            linkClass="page-link"
+                                            activePage={activePage}
+                                            itemsCountPerPage={6}
+                                            totalItemsCount={user?.length}
+                                            pageRangeDisplayed={6}
+                                            onChange={handlePageChange}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" ria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div className="modal-dialog">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    {
+                                        useId === null ?
+                                            (<h5 className="fw-bold">Crear Usuario</h5>) :
+                                            (<h5 className="fw-bold">Editar Usuario</h5>)
+                                    }
+                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div className="modal-body">
+
+
                                     <div className="container">
-                                        {
-                                            useId === null ?
-                                                (<h5 className="fw-bold">Crear Usuario</h5>) :
-                                                (<h5 className="fw-bold">Editar Usuario</h5>)
-                                        }
-                                        <hr />
                                         <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
 
                                             <div className="mb-3">
@@ -470,18 +478,21 @@ export const Users = () => {
 
                                                 </div>
                                             </div>
-
-                                            <div className="d-grid">
-                                                <button type="submit" className="btn btn-primary" disabled={loading}> Registrarse </button>
+                                            <div className="modal-footer">
+                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                {
+                                                    useId === null ?
+                                                        (<button type="submit" className="btn btn-primary" disabled={loading} data-bs-dismiss="modal"> Registrarse </button>) :
+                                                        (<button type="submit" className="btn btn-primary" disabled={loading} data-bs-dismiss="modal"> Guardar </button>)
+                                                }
                                             </div>
-
                                         </form>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
+
                 </div>
             </div>
         </>
