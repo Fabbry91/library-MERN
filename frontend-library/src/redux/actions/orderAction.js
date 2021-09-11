@@ -41,8 +41,9 @@ export const startAddOrder = (order) => {
                 timer: 2000
             })
             dispatch(finishLoadingRedux());
-            console.log(msg)
+
             return orden.preferenceId
+            
         } catch (error) {
             Swal.fire({
                 icon: 'error',

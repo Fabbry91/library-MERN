@@ -11,7 +11,6 @@ import { Loading } from '../../ui/Loading'
 import { AboutGo } from './AboutGo'
 import { Dashboard } from './Dashboard'
 import ReactHtmlTableToExcel from 'react-html-table-to-excel'
-import Swal from 'sweetalert2'
 
 export const StoreGo = () => {
 
@@ -22,7 +21,6 @@ export const StoreGo = () => {
     const { rubro } = useSelector(state => state.rub);
 
     const [verSerch, setVerSerch] = useState(false);
-    const [lowStock, setLowStock] = useState([]);
     const [mostrar, setMostrar] = useState(false);
     const [search, setSearch] = useState([]);
     const [idArt, setIdArt] = useState(null)

@@ -41,7 +41,8 @@ const insertArticulo = async (req, res = response) => {
 
         const articulo = new Articulo(req.body);
         const saveArticulo = await articulo.save();
-        res.status(201).json(saveArticulo);
+
+        res.status(201).json({ msg: 'Articulo creado con exito', articulo: saveArticulo });
 
     } catch (error) {
         res.status(400).json({
@@ -75,7 +76,7 @@ const updateArticulo = async (req, res = response) => {
                 }
             }, { new: true });
 
-            res.status(200).json(articuloActualizado);
+            res.status(200).json({ msg: 'Articulo editado con exito', articulo: articuloActualizado });
 
         } else {
             //console.log('no entro')

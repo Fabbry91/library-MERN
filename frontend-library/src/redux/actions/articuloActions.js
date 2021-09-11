@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { fileUpload } from '../../helper/fileUpload';
 import axios from '../../services/AxiosConection'
 import { types } from '../types';
@@ -29,31 +30,71 @@ export const getOneArticulo = (id) => {
 
 export const startAddArticulo = (art) => {
     return async (dispatch) => {
+        try {
 
-        if (art.url.length === 1) {
-            const arti = art.url[0];
-            const fileUrl = await fileUpload(arti);
-            const newArt = { ...art, url: fileUrl }
-            dispatch(startLoadingRedux());
-            if (!art._id) {
-                await axios.post('articulo', newArt);
-                dispatch(createArticulo(newArt));
+
+            if (art.url.length === 1) {
+                const arti = art.url[0];
+                const fileUrl = await fileUpload(arti);
+                const newArt = { ...art, url: fileUrl }
+                dispatch(startLoadingRedux());
+                if (!art._id) {
+
+                    const { data } = await axios.post('articulo', newArt).then(resp => resp);
+                    const { msg } = data
+                    Swal.fire({
+                        icon: 'success',
+                        title: `${msg}`,
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    dispatch(createArticulo(newArt));
+
+                } else {
+                    const { data } = await axios.put(`articulo/${newArt._id}`, newArt).then(resp => resp);
+                    const { msg } = data
+                    Swal.fire({
+                        icon: 'success',
+                        title: `${msg}`,
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    dispatch(editarArticulo(newArt._id, newArt));
+                }
             } else {
-                await axios.put(`articulo/${newArt._id}`, newArt);
-                dispatch(editarArticulo(newArt._id, newArt));
+
+                dispatch(startLoadingRedux());
+                if (!art._id) {
+                    const { data } = await axios.post('articulo', art).then(resp => resp);
+                    const { msg } = data
+                    Swal.fire({
+                        icon: 'success',
+                        title: `${msg}`,
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    dispatch(createArticulo(art));
+                } else {
+                    const { data } = await axios.put(`articulo/${art._id}`, art).then(resp => resp);
+                    const { msg } = data
+                    Swal.fire({
+                        icon: 'success',
+                        title: `${msg}`,
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    dispatch(editarArticulo(art._id, art));
+                }
+
             }
-        } else {
-            dispatch(startLoadingRedux());
-            if (!art._id) {
-                await axios.post('articulo', art);
-                dispatch(createArticulo(art));
-            } else {
-                await axios.put(`articulo/${art._id}`, art);
-                dispatch(editarArticulo(art._id, art));
-            }
+
+            dispatch(getAllArticulo());
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: `Hubo un error al cargar el Articulo`,
+            })
         }
-
-        dispatch(getAllArticulo());
 
     }
 }
@@ -62,11 +103,25 @@ export const startDeleteArticulo = (id) => {
     return async (dispatch) => {
 
         //console.log(id)
+        try {
+            dispatch(startLoadingRedux());
+            const { data } = await axios.delete(`articulo/${id}`);
+            const { msg } = data
+            Swal.fire({
+                icon: 'success',
+                title: `${msg}`,
+                showConfirmButton: false,
+                timer: 2000
+            })
+            dispatch(deleteArticulo(id));
+            dispatch(getAllArticulo())
 
-        dispatch(startLoadingRedux());
-        await axios.delete(`articulo/${id}`);
-        dispatch(deleteArticulo(id));
-        dispatch(getAllArticulo())
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: `Hubo un error al eliminar el Articulo`,
+            })
+        }
     }
 }
 

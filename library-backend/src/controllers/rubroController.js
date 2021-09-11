@@ -40,7 +40,7 @@ const insertRubro = async (req, res = response) => {
     try {
         const rubro = new Rubro(req.body);
         const saveRubro = await rubro.save();
-        res.status(201).json(saveRubro);
+        res.status(201).json({ msg: 'Creado exitosamente', rubro: saveRubro });
 
     } catch (error) {
         res.status(400).json({
@@ -58,9 +58,9 @@ const deleteRubro = async (req, res = response) => {
                 msg: "El articulo no existe"
             });
         }
-        await Rubro.findOneAndDelete(req.params.id);
+        await Rubro.findByIdAndDelete(req.params.id);
 
-        res.status(200).json({ msg: 'Producto eliminado exitosamente'});
+        res.status(200).json({ msg: 'Producto eliminado exitosamente' });
     } catch (error) {
         res.status(500).json({
             ok: false,

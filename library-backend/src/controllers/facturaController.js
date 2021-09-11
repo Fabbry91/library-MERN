@@ -5,8 +5,8 @@ const User = require('../model/user');
 const getAll = async (req, res = response) => {
     try {
         const factura = await Factura.find({}).populate({ path: "user", populate: { path: "User" } })
-                                                .populate({ path: "pedido", populate: { path: "Order" } }).exec();
-        
+            .populate({ path: "pedido", populate: { path: "Order" } }).exec();
+
         res.status(200).json(factura);
 
     } catch (error) {
@@ -55,7 +55,7 @@ const insertFactura = async (req, res = response) => {
 
         const fact = new Factura(factura);
         const saveFactura = await fact.save();
-        res.status(201).json(saveFactura);
+        res.status(201).json({ msg: 'Factura creada con exito', fact: saveFactura });
 
     } catch (error) {
         res.status(400).json({

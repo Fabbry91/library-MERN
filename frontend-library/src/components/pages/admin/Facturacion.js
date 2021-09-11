@@ -206,7 +206,7 @@ export const Facturacion = () => {
                                                         <div className="col">
                                                             <div className="d-flex justify-content-between">
                                                                 <h5 className="fw-bold">Factura N°: {oneFact.numero} </h5>
-                                                                <button className="btn btn-success" onClick={() => exportPdf()}> Print</button>
+                                                                <button className="btn btn-success" onClick={() => exportPdf()}> <i className="bi bi-printer-fill" /></button>
                                                             </div>
                                                             <h5 className="fw-bold">Fecha: {oneFact.fecha?.slice(0, 10)} </h5>
                                                         </div>

@@ -6,6 +6,7 @@ import { startRegisterEmailPassword } from '../../../redux/actions/authAction'
 import { startGetAllUsers, startDeleteUser, startEditUser } from '../../../redux/actions/userAction'
 import { Loading } from '../../ui/Loading'
 import { Dashboard } from './Dashboard'
+import Swal from 'sweetalert2'
 
 export const Users = () => {
 
@@ -39,6 +40,13 @@ export const Users = () => {
             dispatch(startEditUser(user))
         } else {
             dispatch(startRegisterEmailPassword(data));
+            Swal.fire({
+                icon: 'success',
+                title: `Usted se registro con exito`,
+                showConfirmButton: false,
+                timer: 2000
+            })
+            dispatch(startGetAllUsers())
         }
         setUseId(null)
         e.target.reset()

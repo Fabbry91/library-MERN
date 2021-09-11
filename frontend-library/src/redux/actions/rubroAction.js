@@ -1,27 +1,56 @@
 import { types } from "../types"
 import axios from '../../services/AxiosConection'
 import { finishLoadingRedux, startLoadingRedux } from "./uiActions";
+import Swal from "sweetalert2";
 
 
 
 export const startAddRubro = (newRubro) => {
     return async (dispatch) => {
+        try {
+            dispatch(startLoadingRedux());
+            const { data } = await axios.post('rubro', newRubro);
+            const { msg } = data
+            dispatch(addRubro(newRubro));
+            Swal.fire({
+                icon: 'success',
+                title: `${msg}`,
+                showConfirmButton: false,
+                timer: 2000
+            })
+            dispatch(getAllRubro());
 
-        dispatch(startLoadingRedux());
-        await axios.post('rubro', newRubro);
-        dispatch(addRubro(newRubro));
-        dispatch(getAllRubro());
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: `No se pudo crear Rubro`,
+            })
+        }
 
     }
 }
 
 export const startDeleteRubro = (id) => {
     return async (dispatch) => {
+        try {
+            dispatch(startLoadingRedux());
+            const { data } = await axios.delete(`rubro/${id}`);
+            const { msg } = data
+            dispatch(deleteRubro(id));
+            Swal.fire({
+                icon: 'success',
+                title: `${msg}`,
+                showConfirmButton: false,
+                timer: 2000
+            })
+            dispatch(getAllRubro());
 
-        dispatch(startLoadingRedux());
-        await axios.delete(`rubro/${id}`);
-        dispatch(deleteRubro(id));
-        dispatch(getAllRubro());
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: `No se pudo eliminar Rubro`,
+            })
+        }
 
     }
 }
@@ -33,7 +62,7 @@ export const getAllRubro = () => {
         const { data } = await axios.get('rubro');
         dispatch(setRubro(data))
         dispatch(finishLoadingRedux());
-        
+
     }
 }
 

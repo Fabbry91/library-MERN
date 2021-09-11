@@ -66,15 +66,17 @@ const insertUsuario = async (req, res = response) => {
     try {
 
         if (user.tipo == 0) {
+
             user.tipo = ["cliente"];
             const saveuser = await user.save();
             //console.log(saveuser);
             res.status(201).json(saveuser);
+
         } else {
 
             const saveuser = await user.save();
             //console.log(saveuser);
-            res.status(201).json(saveuser);
+            res.status(201).json({ msg: 'Usuario creado con exito', user: saveuser });
         }
 
     } catch (error) {
@@ -97,22 +99,22 @@ const updateUsuario = async (req, res = response) => {
         }
         const userActualizado = await User.findByIdAndUpdate(userId, {
             $set: {
-                apellido:req.body.apellido,
-                nombre:req.body.nombre,
-                telefono:req.body.telefono,
-                tipo:req.body.tipo,
-                email:req.body.email,
+                apellido: req.body.apellido,
+                nombre: req.body.nombre,
+                telefono: req.body.telefono,
+                tipo: req.body.tipo,
+                email: req.body.email,
                 domicilio: {
-                    localidad:req.body.domicilio.localidad,
-                    calle:req.body.domicilio.calle,
-                    numero:req.body.domicilio.numero,
-                    cp:req.body.domicilio.cp,
-                    provincia:req.body.domicilio.provincia,
+                    localidad: req.body.domicilio.localidad,
+                    calle: req.body.domicilio.calle,
+                    numero: req.body.domicilio.numero,
+                    cp: req.body.domicilio.cp,
+                    provincia: req.body.domicilio.provincia,
                 }
             }
         }, { new: true });
 
-        res.status(200).json(userActualizado);
+        res.status(200).json({ msg: 'Usuario editado con exito', user: userActualizado });
 
     } catch (error) {
         res.status(500).json({
@@ -147,7 +149,7 @@ const updateUserByEmail = async (req, res = response) => {
             }
         }, { new: true });
 
-        res.status(200).json(userActualizado);
+        res.status(200).json({ msg: 'Usuario editado con exito', user: userActualizado });
 
     } catch (error) {
         res.status(500).json({
@@ -166,9 +168,9 @@ const deleteUsuario = async (req, res = response) => {
                 msg: "El user no existe"
             });
         }
-        await User.findOneAndDelete(req.params.id);
+        await User.findByIdAndDelete(req.params.id);
 
-        res.status(200).json({ msg: 'user eliminado exitosamente' });
+        res.status(200).json({ msg: 'Usuario eliminado exitosamente' });
     } catch (error) {
         res.status(500).json({
             ok: false,

@@ -119,12 +119,12 @@ export const Ordenes = () => {
 
                                                                 {o.status === 'approved' ?
                                                                     (<div className="text-center mt-2">
-                                                                        <button type="button" className="btn btn-success" onClick={() => handleOrder(o)}> Facturar &nbsp;<i class="bi bi-check-lg" /> </button>
+                                                                        <button type="button" className="btn btn-success" onClick={() => handleOrder(o)}> Facturar &nbsp;<i className="bi bi-check-lg" /> </button>
                                                                     </div>) :
                                                                     (
                                                                         <div className="text-center mt-2">
                                                                             <button type="button" className="btn btn-secondary" disabled> Facturar
-                                                                                &nbsp; <i class="bi bi-x-lg" />
+                                                                                &nbsp; <i className="bi bi-x-lg" />
                                                                             </button>
                                                                         </div>
                                                                     )

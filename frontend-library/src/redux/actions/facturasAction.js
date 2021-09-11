@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import axios from '../../services/AxiosConection'
 import { types } from '../types';
 import { getAllOrder } from './orderAction';
@@ -29,11 +30,26 @@ export const getOneFactura = (id) => {
 
 export const startAddFactura = (orden) => {
     return async (dispatch) => {
+        try {
+            const { data } = await axios.post(`facturacion`, orden).then(res => res);
+            const { msg, fact } = data
+            await axios.put(`order/${orden._id}`);
 
-        const { data } = await axios.post(`facturacion`, orden);
-        await axios.put(`order/${orden._id}`);
-        dispatch(getAllOrder())
-        dispatch(createFactura(data))
+            Swal.fire({
+                icon: 'success',
+                title: `${msg}`,
+                showConfirmButton: false,
+                timer: 2000
+            })
+            dispatch(getAllOrder())
+            dispatch(createFactura(fact))
+
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: `No se pudo crear Factura`,
+            })
+        }
 
     }
 }

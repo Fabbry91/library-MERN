@@ -8,7 +8,6 @@ export const Statistics = () => {
     const dispatch = useDispatch()
 
     const order = useSelector(state => state.ord.order)
-    const facturas = useSelector((state) => state.fact.facturas)
 
     useEffect(() => {
         dispatch(getAllArticulo())
