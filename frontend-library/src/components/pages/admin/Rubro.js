@@ -132,7 +132,7 @@ export const Rubro = () => {
 
                                                                 <li className="card mb-2" key={index}>
                                                                     <div className="d-flex flex-row p-1 justify-content-between">
-                                                                        <span className="h4 bd-highlight">{rub.nameRubro}</span>
+                                                                        <span className="h4 bd-highlight" style={{textTransform:'capitalize'}}>{rub.nameRubro}</span>
                                                                         <div className="p-1 bd-highlights">
                                                                             <button className="btn btn-danger" onClick={() => { handleDelete(rub.id) }}>
                                                                                 <i className="bi bi-trash-fill" />

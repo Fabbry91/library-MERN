@@ -44,9 +44,9 @@ export const Footer = () => {
                         <h6 className="fw-bold text-center m-0" style={{ fontSize: 18 }}>Redes Sociales</h6>
 
                         <ul className="list mt-2">
-                            <li><Link to="" className="a text-muted">Registrase</Link></li>
-                            <li><Link to="" className="a text-muted">Ingresar</Link></li>
-                            <li><Link to="" className="a text-muted">Sobre mi</Link></li>
+                            <li><Link to="" className="a text-muted"><i class="bi bi-facebook"/>Facebook</Link></li>
+                            <li><Link to="" className="a text-muted"><i class="bi bi-instagram"/>Instagram</Link></li>
+                            <li><Link to="" className="a text-muted"><i class="bi bi-youtube"/>Youtube</Link></li>
                         </ul>
                     </div>
 

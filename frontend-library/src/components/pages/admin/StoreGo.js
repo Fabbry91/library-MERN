@@ -400,7 +400,7 @@ export const StoreGo = () => {
                                                     {
                                                         rubro &&
                                                         rubro.map(r => (
-                                                            <option key={r.id} value={r.nameRubro}>{r.nameRubro}</option>
+                                                            <option key={r.id} value={r.nameRubro} style={{textTransform:'capitalize'}}>{r.nameRubro}</option>
                                                         ))
                                                     }
                                                 </select>
