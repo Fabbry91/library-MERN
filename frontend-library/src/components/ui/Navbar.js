@@ -86,7 +86,7 @@ export const Navbar = () => {
                         }
 
                         {Object.keys(user).length !== 0 &&
-                            <button className="a btn" onClick={handleLogout} >Logout</button>
+                            <button className="btn" onClick={handleLogout} ><span className="nav-link">Logout</span></button>
                         }
                     </div>
 

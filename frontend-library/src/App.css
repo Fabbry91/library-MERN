@@ -99,6 +99,7 @@
 }
 
 .nav-item .nav-link:hover,
+.btn .nav-link:hover 
 .d-flex .nav-link:hover  {
   font-size: 18px;
   text-shadow: black 2px 5px 10px;
