@@ -57,7 +57,7 @@ export const ViewOrder = () => {
                                         {
                                             (currentOrd.map((ord) => (
                                                 <div key={ord._id}>
-                                                    {ord.status !== "approved" ?
+                                                    {ord.status !== "facturado" ?
                                                         (<li className="list-group-item d-flex justify-content-between align-items-start">
                                                             <div className="ms-2 me-auto">
                                                                 <div className="fw-bold">Orden: <span style={{ textTransform: 'uppercase' }}>{ord.preferenceId.slice(-3)}</span> </div>

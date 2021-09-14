@@ -34,7 +34,7 @@ export const Footer = () => {
                                     <li><Link to="/login" className="a text-muted">Ingresar</Link></li>
                                 </>
                             }
-                            <li><Link to="" className="a text-muted">Sobre mi</Link></li>
+                            <li><Link to="/user" className="a text-muted">Sobre mi</Link></li>
                         </ul>
                     </div>
                 </div>
@@ -44,8 +44,8 @@ export const Footer = () => {
                         <h6 className="fw-bold text-center m-0" style={{ fontSize: 18 }}>Redes Sociales</h6>
 
                         <ul className="list mt-2">
-                            <li><Link to="" className="a text-muted"><i class="bi bi-facebook"/>Facebook</Link></li>
-                            <li><Link to="" className="a text-muted"><i class="bi bi-instagram"/>Instagram</Link></li>
+                            <li><Link to="https://www.facebook.com/GoArtMendoza" className="a text-muted"><i class="bi bi-facebook"/>Facebook</Link></li>
+                            <li><Link to="https://www.instagram.com/goart.mza" className="a text-muted"><i class="bi bi-instagram"/>Instagram</Link></li>
                             <li><Link to="" className="a text-muted"><i class="bi bi-youtube"/>Youtube</Link></li>
                         </ul>
                     </div>
