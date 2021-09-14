@@ -19,6 +19,9 @@ export const User = () => {
     const [edit, setEdit] = useState(false)
     const [user, setUser] = useState()
 
+    useEffect(() => {
+        window.scroll(0, 0);
+    }, []);
 
     useEffect(() => {
         const getUser = async () => {

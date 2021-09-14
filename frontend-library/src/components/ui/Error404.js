@@ -6,7 +6,7 @@ export const Error404 = () => {
         <>
             <div className="container my-5">
                 <div className="col-12 rounded-3 border border-info shadow-lg position-relative">
-                    <img src={process.env.PUBLIC_URL + "/assets/img/404.png"} className="img-fluid error404" alt="imagen-1" />
+                    <img src={process.env.PUBLIC_URL+"/assets/img/404.png"} className="img-fluid error404" alt="imagen-1" />
                     <div className="h2 text-center fw-bold position-absolute bottom-0 start-50 translate-middle-x">
                         <span className="h2 fw-bold badge bg-light text-dark">Oh esta pagina no existe!!!</span>
                         <br />

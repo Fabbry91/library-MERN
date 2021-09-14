@@ -44,8 +44,8 @@ export const Footer = () => {
                         <h6 className="fw-bold text-center m-0" style={{ fontSize: 18 }}>Redes Sociales</h6>
 
                         <ul className="list mt-2">
-                            <li><Link to="https://www.facebook.com/GoArtMendoza" className="a text-muted"><i class="bi bi-facebook"/>Facebook</Link></li>
-                            <li><Link to="https://www.instagram.com/goart.mza" className="a text-muted"><i class="bi bi-instagram"/>Instagram</Link></li>
+                            <li><a href="https://www.facebook.com/GoArtMendoza" target="_blank" className="a text-muted"><i class="bi bi-facebook"/>Facebook</a></li>
+                            <li><a href="https://www.instagram.com/goart.mza" target="_blank" className="a text-muted"><i class="bi bi-instagram"/>Instagram</a></li>
                             <li><Link to="" className="a text-muted"><i class="bi bi-youtube"/>Youtube</Link></li>
                         </ul>
                     </div>
