@@ -29,7 +29,7 @@ export const Navbar = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-info border border-info rounded-2 p-3 sticky-top">
             <div className="container-fluid">
-                <Link to="/"className="navbar-brand" >
+                <Link to="/" className="navbar-brand" >
                     <img src={process.env.PUBLIC_URL + "/assets/img/go.png"} alt="logo" width="70 px" />
                 </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,7 +86,7 @@ export const Navbar = () => {
                         }
 
                         {Object.keys(user).length !== 0 &&
-                            <button className="btn" onClick={handleLogout} ><span className="nav-link">Logout</span></button>
+                            <button className="btn" onClick={handleLogout} >Logout</button>
                         }
                     </div>
 

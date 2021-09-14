@@ -66,7 +66,7 @@ export const Rubro = () => {
                 <div className="row flex-nowraps">
                     <Dashboard />
 
-                    <div className="col py-3">
+                    <div className="col-9 col-md-10 py-3">
                         <div className="d-flex justify-content-between gap-2">
                             <div className="d-grid gap-2 d-md-flex justify-content-md-start">
                                 <h2 className="h2">Rubros</h2>
