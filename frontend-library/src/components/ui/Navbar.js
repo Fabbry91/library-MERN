@@ -41,9 +41,9 @@ export const Navbar = () => {
                             <Link to="/" className="nav-link active" aria-current="page" >Home</Link>
                         </li>
                         {user.tipo === 'admin' &&
-                            (<Link to="/admin" className="nav-link position-relative text-dark" >
-                                Panel Principal
-                            </Link>)
+                            (<li className="nav-item">
+                                <Link to="/admin" className="nav-link text-dark" >Panel Principal</Link>
+                            </li>)
                         }
                     </ul>
 

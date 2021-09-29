@@ -158,13 +158,6 @@ const insertOrder = async (req, res = response) => {
     }
 };
 
-const feedback = (req, res = response) => {
-
-    res.json({
-        Status: req.query.status
-    })
-
-};
 
 
 module.exports = {
@@ -174,5 +167,4 @@ module.exports = {
     updateOrder,
     deleteOrder,
     getOrderByEmail,
-    feedback
 }

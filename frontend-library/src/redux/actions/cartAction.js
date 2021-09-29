@@ -1,10 +1,19 @@
+import Swal from 'sweetalert2';
 import axios from '../../services/AxiosConection'
 import { types } from '../types';
 
 export const addToCart = (id) => {
-    return async (dispatch) => {        
+    return async (dispatch) => {
         const { data } = await axios.get(`articulo/${id}`);
         dispatch(addCart(data));
+        Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: 'Se añadio al carrito',
+            showConfirmButton: false,
+            toast:true,
+            timer: 2000
+        })
     }
 }
 
@@ -34,7 +43,7 @@ export const addCart = (art) => ({
 
 
 
-export const clearCart=()=>({
+export const clearCart = () => ({
     type: types.clearItemCart
 })
 

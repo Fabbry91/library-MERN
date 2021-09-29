@@ -163,7 +163,7 @@ export const ViewOrder = () => {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            {preference.status === "approved" ?
+                            {preference.status === "approved" || preference.status === "facturado" ?
                                 (<button type="button" className="btn btn-success" data-bs-dismiss="modal" >Pagado</button>)
                                 :
                                 (<Link to={{ pathname: "/viewPay", state: { prefernceId: `${preference.preferenceId}` } }} type="button" className="btn btn-info text-light">Pagar</Link>)

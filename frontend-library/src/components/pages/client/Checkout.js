@@ -45,7 +45,7 @@ export const Checkout = () => {
 
                 <div className="row">
 
-                    <div className="col-7 p-3 align-items-center rounded-3 border border-info shadow-lg">
+                    <div className="col-12 col-md-7 p-3 align-items-center rounded-3 border border-info shadow-lg mb-3">
                         <div className="card-header h5 text-center"><span className="">Orden de Pago</span></div>
                         <br />
                         <div className="table-responsive">
@@ -89,7 +89,7 @@ export const Checkout = () => {
                         </div>
                     </div>
 
-                    <div className="col-5">
+                    <div className="col-12 col-md-5">
                         <div className="p-3 align-items-center rounded-3 border border-warning shadow-lg">
                             <div className="card-header h5 text-center"><span className="text-muted">Articulos vendido por</span> <span className="strong h4">GO!</span></div>
                             <br />

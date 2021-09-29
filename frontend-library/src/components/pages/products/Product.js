@@ -38,17 +38,17 @@ export const Product = (props) => {
 
                     <div className="row">
 
-                        <div className="col-lg-4 ms-3 d-none d-sm-block position-relative">
+                        <div className="col-lg-4 p-3 position-relative">
                             {loading ? (
                                 <div className="position-absolute top-50 start-50 translate-middle">
                                     <Loading />
                                 </div>
                             ) : (
-                                <img src={articulo?.url} className="img-fluid fit-image border border-dark rounded-2" alt="imagen-1"></img>
+                                <img src={articulo?.url} className="fit-image border border-dark rounded-2" alt="imagen-1"></img>
                             )}
                         </div>
 
-                        <div className="col-lg-5 p-3 d-flex flex-column position-static">
+                        <div className="col-lg-5 p-3 d-flex flex-column">
                             <span className="d-inline-block mb-2 text-primary h6">Articulo</span>
                             <strong className="mb-0 card-title h3" style={{ textTransform: 'capitalize' }}>{articulo?.nameArticulo}</strong>
                             <br />
@@ -57,7 +57,7 @@ export const Product = (props) => {
                             <span className="h1 card-text price">${articulo?.precioVenta}</span>
                         </div>
 
-                        <div className="col p-3 me-3 d-flex flex-column border border-info rounded-3">
+                        <div className="col p-3 m-3 d-flex flex-column border border-info rounded-3">
                             <p><span className="text-muted h5">Vendido por </span><strong className="card-text">GO</strong>.</p>
                             <br />
                             <strong className="card-text h-5">Stock disponible </strong><span className="text-muted">{articulo?.stock} un.</span>
@@ -87,17 +87,17 @@ export const Product = (props) => {
                 <hr />
 
                 <div className="row">
-                    <div className="col-8 p-4 align-items-center rounded-3 border border-info shadow-lg position-relative">
+                    <div className="col-12 col-md-8 p-4 align-items-center rounded-3 border border-info shadow-lg position-relative mb-3">
                         <h4 className="fw-bold modal-title">Detalles de productos.</h4>
                         <br />
                         {articulo?.description !== "" ?
                             (<span className="h5 text-muted">{articulo?.description}</span>) :
-                            (<span className="h2 text-muted center-text">No tiene descripción.</span>)
+                            (<span className="h2 text-muted center-text pt-5">No tiene descripción.</span>)
                         }
 
                     </div>
 
-                    <div className="col-4">
+                    <div className="col-12 col-md-4">
                         <div className="p-3  p-2 align-items-center rounded-3 border border-info shadow-lg">
                             <div className="d-flex bd-highlight">
                                 <div className="p-2 w-100 bd-highlight">
