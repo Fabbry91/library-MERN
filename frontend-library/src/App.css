@@ -241,7 +241,6 @@
   height: 390px;
   border: 0px solid transparent !important;
   box-shadow: 8px 12px 24px 0 rgba(0, 0, 0, 0.2), -12px -12px 24px 0 rgba(255, 255, 255, 0.5);
-  cursor: pointer;
   border-radius: 10px;
   background-color: #ececec;
 }
@@ -269,6 +268,7 @@
   left: 0;
   padding: 0.5em;
   object-fit: contain;
+  cursor: pointer;
 }
 
 .card-products .body-card {
@@ -327,6 +327,7 @@
   position: relative;
   height: 25px;
   margin-left: 0.7em;
+  cursor: pointer;
 }
 
 .ver-mas::before {
@@ -409,10 +410,11 @@
 .navigation {
   position: relative;
   display: flex;
+  height: 40px;
+  align-items: center;
   padding: 0 !important;
   margin: 0 !important;
 }
-
 .list {
   margin: 0 !important;
 }
@@ -438,26 +440,111 @@
   padding: 8px 7px;
 }
 
-.companies-container.bg-footer {
-  background: #00d8e0;
-}
-
-.fit-image {
-  width: 100%;
-  object-fit: cover;
-  height: 100%;
-}
-
 .bg-footer ul {
   list-style: none;
 }
-
+.bg-footer ul li {
+  margin-bottom: 0.7em;
+  color: #646464 !important;
+}
 .bg-footer ul li .a {
   text-decoration: none;
-  color: black !important;
+  color: #646464 !important;
+  font-size: 15px;
+  font-weight: 400;
 }
 
 .bg-footer ul li .a:hover {
-  font-size: 18px;
-  text-shadow: black 2px 5px 10px;
+  color: #000000 !important;
+}
+
+.bg-footer input {
+  margin-bottom: 1em !important;
+}
+.bg-footer .titles {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 1em auto !important;
+}
+
+.bg-footer input {
+  width: 70%;
+  border: 0.5px solid #aaaaaa;
+  padding: 0 5px 0 5px;
+}
+
+.bg-footer input:focus {
+  outline: none !important;
+  border-color: #808080;
+  box-shadow: 0 0 3px #808080;
+}
+
+.input-containter {
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  padding-left: 2em;
+  align-items: center;
+}
+
+.input-containter .send {
+  position: relative;
+  width: 24px;
+  height: 26px;
+  border: 1px solid #aeaeae;
+  background: #aeaeae;
+  margin-bottom: 1em;
+}
+.input-containter .send .arrow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: contain;
+}
+
+/*Pagos*/
+
+.container-pagos {
+  margin: 4em auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  border-radius: 5px;
+  background-color: #eaeaea;
+}
+.pagos {
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
+  place-items: center;
+  margin: 0 auto;
+  min-height: 130px;
+}
+
+.box-img {
+  position: relative;
+  height: 100%;
+  min-width: 100%;
+  margin-bottom: 1em;
+}
+
+.box-img img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: contain;
+}
+
+.img-login {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
 }

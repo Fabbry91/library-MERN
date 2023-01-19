@@ -9,6 +9,7 @@ import { Footer } from '../../ui/Footer'
 import { Navbar } from '../../ui/Navbar'
 import { Loading } from '../../ui/Loading'
 import { MsgError } from '../../ui/MsgError'
+import MethodPays from '../../ui/MethodPays'
 
 
 export const Home = () => {
@@ -51,6 +52,7 @@ export const Home = () => {
                     }
 
                 </div>
+                <MethodPays />
                 <Footer />
             </div>
         </>

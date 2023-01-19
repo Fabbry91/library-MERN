@@ -34,7 +34,7 @@ export const Login = ({ history }) => {
 
             <div className="row align-items-stretch">
 
-                <div className="col bg d-none d-md-block d-lg-block col-md-5 col-lg-5 col-xl-6 rounded align-items-center">
+                <div style={{position:'relative'}} className="col bg d-none d-md-block d-lg-block col-md-5 col-lg-5 col-xl-6 rounded align-items-center">
                     <img src="./assets/img/imagen-1.jpg" className="img-login" alt="imagen-1"></img>
                 </div>
 

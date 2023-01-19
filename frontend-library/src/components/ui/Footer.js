@@ -8,7 +8,7 @@ export const Footer = () => {
 
     return (
 
-        <div className="container-fluid py-5 bg-footer">
+        <div className="container-fluid bg-footer">
             <div className="row">
 
                 <div className="col align-items-center me-2">
@@ -20,7 +20,6 @@ export const Footer = () => {
                             <li>San Juan 816, M5500 Mendoza</li>
                             <li>+59 4 261 123456</li>
                             <li><Link to="" className="a text-muted">go_libreria@mail.com</Link></li>
-                            <li><Link to="" className="a a text-muted">Terminos y condiciones</Link></li>
                         </ul>
 
                     </div>
@@ -47,18 +46,25 @@ export const Footer = () => {
                 <div className="col align-items-center">
                     <div className="flex-shrink-0">
                         <h6 className="titles text-center m-0">Noticias</h6>
-                        <div className='container-input'>
+                        <div className='input-containter'>
                             <input className='e-mail' placeholder='Ingresa tu e-mail' />
-                            <button className='boton-input'>
-                                <img className='arrow' alt=''/>
+                            <button className='send'>
+                            <img className='arrow' src={`${process.env.PUBLIC_URL}/assets/icons/arrow-rigth.png`} alt="arrow" />
                             </button>
                         </div>
-
                         <ul className="noticias">
-                            <li><Link to="" className="a text-muted">Term & Condiciones</Link></li>
-                            <li><Link to="" className="a text-muted">Politicas</Link></li>
-                            <li><Link to="" className="a text-muted">Ubicación</Link></li>
+                            <li><Link to="/" className="a text-muted">Term & Condiciones</Link></li>
+                            <li><Link to="/" className="a text-muted">Politicas</Link></li>
+                            <li><Link to="/" className="a text-muted">Ubicacion</Link></li>
                         </ul>
+
+
+                        <ul className="navigation">
+                            <li><a href="https://www.facebook.com/GoArtMendoza" target="_blank" className="logo"><i class="bi bi-facebook" /></a></li>
+                            <li><a href="https://www.instagram.com/goart.mza" target="_blank" className="logo"><i class="bi bi-instagram" /></a></li>
+                            <li><Link to="" className="logo"><i className="bi bi-youtube" /></Link></li>
+                        </ul>
+
                     </div>
 
                 </div>
