@@ -24,37 +24,35 @@ export const Home = () => {
     //console.log(productList)
 
     return (
-        <div>
+        <>
             <Navbar />
-            <HomeBanner />
-            <div className="b-example-divider"></div>
-            <HomeInformation />
-            <div className="b-example-divider"></div>
+            <div className='main-container'>
+                <HomeBanner />
+                <HomeInformation />
+                <h2 className='title-about' style={{ textAlign: 'center', padding: '1em' }}> Nuestros Productos </h2>
+                <div className="container-list position-relative">
 
-            <div className="container py-5 position-relative">
+                    {
+                        loading ? (
+                            <div className="position-absolute top-50 start-50 translate-middle">
+                                <Loading />
+                            </div>
+                        ) : msgError ? (
+                            <MsgError />
+                        ) : (
 
-                {
-                    loading ? (
-                        <div className="position-absolute top-50 start-50 translate-middle">
-                            <Loading />
-                        </div>
-                    ) : msgError ? (
-                        <MsgError />
-                    ) : (
+                            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+                                {productList.map((prod) => (
+                                    <Products key={prod._id} product={prod}>
+                                    </Products>
+                                ))}
+                            </div>
+                        )
+                    }
 
-                        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-                            {productList.map((prod) => (
-                                <Products key={prod._id} product={prod}>
-                                </Products>
-                            ))}
-                        </div>
-                    )
-                }
-
+                </div>
+                <Footer />
             </div>
-
-            <div className="b-example-divider"></div>
-            <Footer />
-        </div>
+        </>
     )
 }

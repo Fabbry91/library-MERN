@@ -27,22 +27,19 @@ export const Navbar = () => {
     }
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-info border border-info rounded-2 p-3 sticky-top">
+        <nav className="navbar navbar-expand-lg navbar-light sticky-top">
             <div className="container-fluid">
                 <Link to="/" className="navbar-brand" >
-                    <img src={process.env.PUBLIC_URL + "/assets/img/go.png"} alt="logo" width="70 px" />
+                    <img src={process.env.PUBLIC_URL + "/assets/img/go.png"} alt="logo" width="100 px" />
                 </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <Link to="/" className="nav-link active" aria-current="page" >Home</Link>
-                        </li>
                         {user.tipo === 'admin' &&
                             (<li className="nav-item">
-                                <Link to="/admin" className="nav-link text-dark" >Panel Principal</Link>
+                                <Link to="/admin" className="nav-link" >Panel Principal</Link>
                             </li>)
                         }
                     </ul>
@@ -52,41 +49,47 @@ export const Navbar = () => {
                             (
                                 <>
                                     {user.tipo === 'admin' ?
-                                        (<Link to="/admin" className="nav-link position-relative text-dark" >
-                                            <i className="bi bi-person-circle text-dark p-2 position-absolute top-50 start-0 translate-middle" style={{ fontSize: 30 }} />
-                                            {user.name} (Administrador)
+                                        (<Link to="/admin" className="nav-link position-relative" >
+                                            <span style={{color:'#00d8e0', fontWeight:600, letterSpacing:'1px'}}>{user.name}</span> (Administrador)
+                                            <img className='img-header' style={{ marginLeft: '0.9em' }} src={`${process.env.PUBLIC_URL}/assets/icons/user.png`} alt="user" />
                                         </Link>)
                                         :
-                                        (<Link to="/user" className="nav-link position-relative text-dark" >
-                                            <i className="bi bi-person-circle text-dark p-2 position-absolute top-50 start-0 translate-middle" style={{ fontSize: 30 }} />
-                                            {user.name}
+                                        (<Link to="/user" className="nav-link position-relative" >
+                                            <span style={{color:'#00d8e0', fontWeight:600, letterSpacing:'1px'}}>{user.name}</span>
+                                            <img className='img-header' style={{ marginLeft: '0.9em' }} src={`${process.env.PUBLIC_URL}/assets/icons/user.png`} alt="user" />
                                         </Link>)
                                     }
                                     {user.tipo === 'cliente' &&
                                         <Link to="/shopping-cart" className="nav-link position-relative" >
-                                            <i className="bi bi-cart3 text-dark position-absolute top-50 start-0 translate-middle-y" style={{ fontSize: 25 }}>
+                                            <img className='img-header' src={`${process.env.PUBLIC_URL}/assets/icons/cart.png`} alt="user" />
                                                 {totalItems > 0 &&
-                                                    <span className="badge-up position-absolute center-0 start-100 translate-middle badge rounded-circle" style={{ fontSize: 12 }}>
+                                                    <div className="badge-up position-absolute center-0 start-100 translate-middle badge rounded-circle" style={{ fontSize: 12 }}>
                                                         {totalItems}
-                                                    </span>
+                                                    </div>
                                                 }
-                                            </i>
                                         </Link>
                                     }
                                 </>) :
                             (
                                 <>
-                                    <Link to="/login" className="nav-link position-relative text-dark" >Ingresar</Link>
                                     <Link to="/login" className="nav-link position-relative" >
-                                        <i className="bi bi-cart3 text-dark position-absolute top-50 start-0 translate-middle-y" style={{ fontSize: 25 }}>
-                                        </i>
+                                        <img className='img-header' src={`${process.env.PUBLIC_URL}/assets/icons/user.png`} alt="user" />
+                                    </Link>
+                                    <Link to="/login" className="nav-link position-relative" >
+                                        <img className='img-header' src={`${process.env.PUBLIC_URL}/assets/icons/cart.png`} alt="cart" />
                                     </Link>
                                 </>
                             )
                         }
 
                         {Object.keys(user).length !== 0 &&
-                            <button className="btn" onClick={handleLogout} >Logout</button>
+                            <Link to="/login" className="nav-link position-relative img-exit" >
+                                <img className='img-header' src={`${process.env.PUBLIC_URL}/assets/icons/exit.png`} onClick={handleLogout} alt="exit" />
+
+                                <div className="badge exit" style={{ fontSize: 12 }}>
+                                    Salir
+                                </div>
+                            </Link>
                         }
                     </div>
 
