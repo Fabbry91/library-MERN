@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 import { getOneArticulo } from '../../../redux/actions/articuloActions'
 import { addToCart } from '../../../redux/actions/cartAction';
-import { Footer } from '../../ui/Footer';
 import { Loading } from '../../ui/Loading';
 import { Navbar } from '../../ui/Navbar';
 
