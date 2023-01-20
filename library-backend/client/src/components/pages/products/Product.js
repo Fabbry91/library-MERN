@@ -32,13 +32,12 @@ export const Product = (props) => {
 
         <>
             <Navbar />
-            <div className="b-example-divider"></div>
-            <div className="container my-5">
-                <div className="p-2 align-items-center rounded-3 border border-info shadow-lg">
+            <div className="container cont-product">
+                <div className="align-items-center">
 
                     <div className="row">
 
-                        <div className="col-lg-4 p-3 position-relative">
+                        <div className="col-lg-4 box-cont-img position-relative">
                             {loading ? (
                                 <div className="position-absolute top-50 start-50 translate-middle">
                                     <Loading />
@@ -48,21 +47,21 @@ export const Product = (props) => {
                             )}
                         </div>
 
-                        <div className="col-lg-5 p-3 d-flex flex-column">
-                            <span className="d-inline-block mb-2 text-primary h6">Articulo</span>
+                        <div className="col-lg-5 d-flex flex-column">
+                            <span className="d-inline-block text-primary h6">Articulo</span>
                             <strong className="mb-0 card-title h3" style={{ textTransform: 'capitalize' }}>{articulo?.nameArticulo}</strong>
-                            <br />
+                            
                             <p className="mb-1 text-muted"><span className="badge rounded-pill bg-success"> {articulo?.rubros}</span></p>
-                            <br />
+                            
                             <span className="h1 card-text price">${articulo?.precioVenta}</span>
                         </div>
 
-                        <div className="col p-3 m-3 d-flex flex-column border border-info rounded-3">
+                        <div className="col d-flex flex-column rounded-3">
                             <p><span className="text-muted h5">Vendido por </span><strong className="card-text">GO</strong>.</p>
-                            <br />
+                            
                             <strong className="card-text h-5">Stock disponible </strong><span className="text-muted">{articulo?.stock} un.</span>
-                            <br />
-                            <div className="d-grid gap-2 mt-3">
+                            
+                            <div className="d-grid gap-2">
 
                                 {
                                     articulo?.stock <= 0
@@ -83,51 +82,44 @@ export const Product = (props) => {
                         </div>
                     </div>
                 </div>
-
-                <hr />
-
+                
                 <div className="row">
-                    <div className="col-12 col-md-8 p-4 align-items-center rounded-3 border border-info shadow-lg position-relative mb-3">
+                    <div className="col-12 col-md-8 align-items-center position-relative">
                         <h4 className="fw-bold modal-title">Detalles de productos.</h4>
-                        <br />
+                        
                         {articulo?.description !== "" ?
                             (<span className="h5 text-muted">{articulo?.description}</span>) :
-                            (<span className="h2 text-muted center-text pt-5">No tiene descripción.</span>)
+                            (<span className="h2 text-muted center-text">No tiene descripción.</span>)
                         }
 
                     </div>
 
                     <div className="col-12 col-md-4">
-                        <div className="p-3  p-2 align-items-center rounded-3 border border-info shadow-lg">
+                        <div className="align-items-center">
                             <div className="d-flex bd-highlight">
-                                <div className="p-2 w-100 bd-highlight">
+                                <div className="w-100 bd-highlight">
                                     <h4 className="fw-bold modal-title">Medios de pagos</h4>
                                 </div>
                                 <div className="p-2 flex-shrink-1 bd-highlight">
                                     <img src={process.env.PUBLIC_URL + "/assets/img/mercado-pago.png"} alt="logo" width="120 px" />
                                 </div>
                             </div>
-                            <br />
                             <h5 className="fw-bold">Pagá de la forma que quieras</h5>
                             <span>Podés pagar tus compras con cualquiera de estos medios. Es rápido y seguro, siempre.</span>
-                            <br />
-                            <br />
+                            
                             <h6 className="fw-bold">
-                                <i className="bi bi-credit-card-fill m-1 me-2 text-primary me-1" style={{ fontSize: 18 }} />
+                                <i className="bi bi-credit-card-fill text-primary" style={{ fontSize: 18 }} />
                                 Tarjeta de crédito en hasta 6 cuotas
                             </h6>
                             <img src={process.env.PUBLIC_URL + "/assets/img/credito.png"} alt="logo" width="200 px" />
-                            <br />
-                            <br />
+                            
                             <h6 className="fw-bold">
-                                <i className="bi bi-credit-card-2-front-fill m-1 me-2 text-primary me-1" style={{ fontSize: 18 }} />
+                                <i className="bi bi-credit-card-2-front-fill text-primary " style={{ fontSize: 18 }} />
                                 Tarjeta de débito
                             </h6>
                             <img src={process.env.PUBLIC_URL + "/assets/img/debit.png"} alt="logo" width="130 px" />
-                            <br />
-                            <br />
-                            <h6 className="fw-bold">
-                                <i className="bi bi-cash m-1 me-2 text-primary" style={{ fontSize: 18 }} />
+                                    <h6 className="fw-bold">
+                                <i className="bi bi-cash text-primary" style={{ fontSize: 18 }} />
                                 Pago en Efectivo
                             </h6>
                             <img src={process.env.PUBLIC_URL + "/assets/img/pago-facil-rapi-pago.jpg"} alt="logo" width="100 px" />
@@ -136,8 +128,6 @@ export const Product = (props) => {
                     </div>
                 </div>
             </div>
-            <div className="b-example-divider"></div>
-            <Footer />
         </>
     )
 }
