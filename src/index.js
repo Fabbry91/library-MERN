@@ -24,13 +24,21 @@ mercadopago.configure({
 });
 
 
-app.use('/api/user',require('./routes/userRouter'));
+app.use('/api/user', require('./routes/userRouter'));
 app.use('/api/rubro', require('./routes/rubroRouter'));
 app.use('/api/facturacion', require('./routes/facturaRouter'));
 app.use('/api/articulo', require('./routes/articuloRouter'));
 app.use('/api/order', require('./routes/orderRouter'));
-app.use('/api/feedback',require('./routes/feedbackRoute'));
+app.use('/api/feedback', require('./routes/feedbackRoute'));
 
-app.listen((process.env.PORT), () => {
-    console.log(`Server on port ${process.env.PORT}`);
-})
+//* Serve static assets in production, must be at this location of this file
+if (process.env.NODE_ENV === 'production') {
+    //*Set static folder
+    app.use(express.static('client/build'));
+
+    app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')));
+}
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => console.log(`Server started port ${PORT}`));
