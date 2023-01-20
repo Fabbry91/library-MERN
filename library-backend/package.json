@@ -27,5 +27,9 @@
   "devDependencies": {
     "nodemon": "^2.0.12",
     "concurrently": "^7.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fabbry91/library-MERN/tree/new-desing.git"
   }
 }
