@@ -7,7 +7,7 @@ import { Footer } from '../../ui/Footer'
 import { Loading } from '../../ui/Loading';
 import { Navbar } from '../../ui/Navbar'
 import { getOrderByEmail } from '../../../redux/actions/orderAction';
-import { ViewOrder } from '../client/ViewOrder';
+import { ViewOrder } from './ViewOrder';
 
 export const User = () => {
 
