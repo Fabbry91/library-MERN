@@ -392,7 +392,7 @@
   align-items: center;
 }
 .companies-container .companies {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   transform: translateY(5px);
   color: white !important;
@@ -561,4 +561,12 @@
 
 .cont-product .align-items-center {
   background-color: #aeaeae;
+}
+
+
+
+@media screen and (max-width:905px) {
+  .container .row{
+    display:none;
+  }
 }
