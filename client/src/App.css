@@ -439,7 +439,9 @@
   color: #ff008e;
   padding: 8px 7px;
 }
-
+.bg-footer{
+  margin-bottom: 4em;
+}
 .bg-footer ul {
   list-style: none;
 }
